@@ -15,14 +15,14 @@ import {
 
 export default function ProductPreview() {
   return (
-    <section id="product" className="relative py-28 sm:py-32">
+    <section id="product" className="relative py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
           <span className="text-sm font-medium text-primary-light uppercase tracking-widest">

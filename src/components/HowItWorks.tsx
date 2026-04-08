@@ -32,7 +32,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative py-28 sm:py-32">
+    <section id="how-it-works" className="relative py-16 sm:py-20">
       {/* Subtle background */}
       <div className="absolute inset-0 bg-radial-glow-bottom opacity-50" />
 
@@ -42,7 +42,7 @@ export default function HowItWorks() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-20"
         >
           <span className="text-sm font-medium text-primary-light uppercase tracking-widest">
@@ -69,8 +69,8 @@ export default function HowItWorks() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{
-                  duration: 0.6,
-                  delay: i * 0.15,
+                  duration: 0.8,
+                  delay: i * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className="relative"

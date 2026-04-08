@@ -41,6 +41,7 @@
 /* ===== Base Styles ===== */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -208,6 +209,49 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-secondary);
+}
+
+/* ===== Inquiry Form Inputs ===== */
+.inquiry-input {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.inquiry-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.inquiry-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 0 20px rgba(99, 102, 241, 0.1);
+  background: rgba(15, 23, 42, 1);
+}
+
+.inquiry-input:hover:not(:focus) {
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.inquiry-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.inquiry-select option {
+  background: #0f172a;
+  color: var(--color-text-primary);
+  padding: 0.5rem;
 }
 
 /* ===== Selection ===== */

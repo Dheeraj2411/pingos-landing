@@ -8,7 +8,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden overflow-x-hidden"
     >
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid-pattern" />
@@ -21,12 +21,12 @@ export default function HeroSection() {
         style={{ animationDelay: "3s" }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 text-center">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-subtle bg-surface-glass backdrop-blur-sm mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
@@ -39,8 +39,8 @@ export default function HeroSection() {
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight mb-6"
+          transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="text-[1.75rem] sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6"
         >
           <span className="gradient-text-hero">The Ultimate</span>
           <br />
@@ -53,8 +53,8 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="max-w-2xl mx-auto text-lg sm:text-xl text-text-secondary leading-relaxed mb-10"
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 break-words"
         >
           Automate conversations, manage leads, run campaigns, and unify your
           inbox — all from a single, beautiful dashboard. Built for teams that
@@ -65,10 +65,10 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
+          transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a href="#pricing" className="btn-primary text-base !py-3.5 !px-8">
+          <a href="#inquiry" className="btn-primary text-base !py-3.5 !px-8">
             Start Free Trial
             <ArrowRight className="w-4 h-4" />
           </a>
@@ -82,7 +82,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.9 }}
+          transition={{ duration: 0.9, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-16"
         >
           {[

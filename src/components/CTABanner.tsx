@@ -5,13 +5,13 @@ import { ArrowRight, MessageSquare } from "lucide-react";
 
 export default function CTABanner() {
   return (
-    <section className="relative py-28 sm:py-32">
+    <section className="relative py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="relative overflow-hidden rounded-3xl"
         >
           {/* Gradient Background */}
@@ -35,14 +35,14 @@ export default function CTABanner() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="#"
+                href="#inquiry"
                 className="inline-flex items-center gap-2 bg-white text-primary-dark font-semibold px-8 py-3.5 rounded-xl hover:bg-indigo-50 transition-colors shadow-lg shadow-black/10"
               >
                 Start Your Free Trial
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="#inquiry"
                 className="inline-flex items-center gap-2 border border-white/30 text-white font-medium px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />

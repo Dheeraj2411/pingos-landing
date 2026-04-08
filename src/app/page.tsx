@@ -3,7 +3,8 @@ import HeroSection from "@/components/HeroSection";
 import FeatureGrid from "@/components/FeatureGrid";
 import HowItWorks from "@/components/HowItWorks";
 import ProductPreview from "@/components/ProductPreview";
-import PricingSection from "@/components/PricingSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import InquirySection from "@/components/InquirySection";
 import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
 
@@ -28,7 +29,11 @@ export default function Home() {
 
         <div className="section-divider" />
 
-        <PricingSection />
+        <TestimonialsSection />
+
+        <div className="section-divider" />
+
+        <InquirySection />
 
         <CTABanner />
       </main>
