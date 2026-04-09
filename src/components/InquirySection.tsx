@@ -89,7 +89,7 @@ export default function InquirySection() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl mx-auto"
         >
-          <div className="relative rounded-2xl p-[1px] bg-gradient-to-b from-primary/30 via-primary/10 to-transparent">
+          <div className="relative rounded-2xl p-px bg-linear-to-b from-primary/30 via-primary/10 to-transparent">
             <div className="rounded-2xl bg-surface-card border border-primary/10 p-8 sm:p-10 md:p-12">
               {status === "success" ? (
                 <motion.div

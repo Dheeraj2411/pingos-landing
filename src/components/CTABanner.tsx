@@ -15,7 +15,7 @@ export default function CTABanner() {
           className="relative overflow-hidden rounded-3xl"
         >
           {/* Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-[#3730a3]" />
+          <div className="absolute inset-0 bg-linear-to-br from-primary via-primary-dark to-[#3730a3]" />
           <div className="absolute inset-0 bg-grid-pattern opacity-10" />
 
           {/* Floating Orbs */}

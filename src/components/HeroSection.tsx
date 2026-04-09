@@ -1,10 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Image from "next/image";
 
+const dynamicWords = [
+  { text: "Business Messaging", color: "from-[#ffffff] via-[#c7d2fe] to-[#22d3ee]" },
+  { text: "Lead Generation", color: "from-emerald-300 via-teal-300 to-cyan-400" },
+  { text: "Sales Outreach", color: "from-rose-300 via-pink-300 to-orange-400" },
+  { text: "Customer Support", color: "from-blue-300 via-indigo-400 to-purple-400" },
+];
+
 export default function HeroSection() {
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % dynamicWords.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section
       id="hero"
@@ -44,7 +60,21 @@ export default function HeroSection() {
         >
           <span className="gradient-text-hero">The Ultimate</span>
           <br />
-          <span className="gradient-text-hero">Business Messaging</span>
+          <span className="relative inline-grid" style={{ gridTemplateColumns: "1fr", perspective: "1000px" }}>
+            <AnimatePresence mode="popLayout">
+              <motion.span
+                key={wordIndex}
+                initial={{ y: 40, opacity: 0, rotateX: -90, filter: "blur(4px)" }}
+                animate={{ y: 0, opacity: 1, rotateX: 0, filter: "blur(0px)" }}
+                exit={{ y: -40, opacity: 0, rotateX: 90, filter: "blur(4px)" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className={`bg-linear-to-r ${dynamicWords[wordIndex].color} bg-clip-text text-transparent pb-2 origin-center`}
+                style={{ gridColumn: 1, gridRow: 1, transformStyle: "preserve-3d" }}
+              >
+                {dynamicWords[wordIndex].text}
+              </motion.span>
+            </AnimatePresence>
+          </span>
           <br />
           <span className="gradient-text-primary">Operating System</span>
         </motion.h1>
@@ -54,7 +84,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 break-words"
+          className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 wrap-break-word"
         >
           Automate conversations, manage leads, run campaigns, and unify your
           inbox — all from a single, beautiful dashboard. Built for teams that
@@ -68,11 +98,11 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a href="#inquiry" className="btn-primary text-base !py-3.5 !px-8">
+          <a href="#inquiry" className="btn-primary text-base py-3.5! px-8!">
             Start Free Trial
             <ArrowRight className="w-4 h-4" />
           </a>
-          <button className="btn-secondary text-base !py-3.5 !px-8">
+          <button className="btn-secondary text-base py-3.5! px-8!">
             <Play className="w-4 h-4" />
             Watch Demo
           </button>
@@ -107,7 +137,7 @@ export default function HeroSection() {
           transition={{ duration: 0.9, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
           className="mt-20 relative mx-auto max-w-5xl"
         >
-          <div className="absolute -inset-4 bg-gradient-to-b from-primary/20 via-accent/10 to-transparent rounded-2xl blur-2xl" />
+          <div className="absolute -inset-4 bg-linear-to-b from-primary/20 via-accent/10 to-transparent rounded-2xl blur-2xl" />
           <div className="relative glass-card rounded-2xl p-1.5 animate-pulse-glow">
             <div className="bg-surface-card rounded-xl overflow-hidden border border-border-subtle">
               {/* Mock Dashboard */}
@@ -188,7 +218,7 @@ export default function HeroSection() {
                             : "hover:bg-white/3"
                         }`}
                       >
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center text-sm font-semibold text-text-primary shrink-0">
+                        <div className="w-9 h-9 rounded-full bg-linear-to-br from-primary/30 to-accent/30 flex items-center justify-center text-sm font-semibold text-text-primary shrink-0">
                           {conv.name[0]}
                         </div>
                         <div className="flex-1 min-w-0">

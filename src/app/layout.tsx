@@ -50,6 +50,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${manrope.variable} ${spaceGrotesk.variable} antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-screen bg-surface-primary text-text-primary">
         {children}

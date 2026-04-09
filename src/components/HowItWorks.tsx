@@ -59,7 +59,7 @@ export default function HowItWorks() {
         {/* Steps */}
         <div className="relative">
           {/* Connecting Line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border-subtle to-transparent -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-linear-to-r from-transparent via-border-subtle to-transparent -translate-y-1/2" />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
             {steps.map((step, i) => (
@@ -82,7 +82,7 @@ export default function HowItWorks() {
                   </div>
 
                   {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center mb-5 border border-primary/10">
+                  <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-primary/15 to-accent/15 flex items-center justify-center mb-5 border border-primary/10">
                     <step.icon className="w-6 h-6 text-primary-light" />
                   </div>
 
@@ -90,7 +90,7 @@ export default function HowItWorks() {
                   <h3 className="text-xl font-semibold text-text-primary mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-4 flex-grow">
+                  <p className="text-sm text-text-secondary leading-relaxed mb-4 grow">
                     {step.description}
                   </p>
 

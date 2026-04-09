@@ -93,9 +93,9 @@ export default function PricingSection() {
                 delay: i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className={`relative rounded-2xl p-[1px] ${
+              className={`relative rounded-2xl p-px ${
                 plan.highlight
-                  ? "bg-gradient-to-b from-primary/50 via-primary/20 to-transparent"
+                  ? "bg-linear-to-b from-primary/50 via-primary/20 to-transparent"
                   : ""
               }`}
             >
@@ -149,7 +149,7 @@ export default function PricingSection() {
                 </button>
 
                 {/* Features */}
-                <div className="space-y-3 flex-grow">
+                <div className="space-y-3 grow">
                   {plan.features.map((feature) => (
                     <div
                       key={feature}

@@ -69,7 +69,7 @@ export default function TestimonialsSection() {
                   <Star key={i} className="w-5 h-5 fill-accent text-accent" />
                 ))}
               </div>
-              <p className="text-text-primary text-lg leading-relaxed mb-8 flex-grow">
+              <p className="text-text-primary text-lg leading-relaxed mb-8 grow">
                 &quot;{testimonial.content}&quot;
               </p>
               <div className="flex items-center gap-4 mt-auto">

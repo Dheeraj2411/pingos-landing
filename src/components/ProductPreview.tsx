@@ -49,7 +49,7 @@ export default function ProductPreview() {
             <div className="glass-card overflow-hidden h-full">
               {/* Chat Header */}
               <div className="flex items-center gap-3 p-4 border-b border-border-subtle">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500/30 to-teal-500/30 flex items-center justify-center text-sm font-bold">
+                <div className="w-10 h-10 rounded-full bg-linear-to-br from-emerald-500/30 to-teal-500/30 flex items-center justify-center text-sm font-bold">
                   PS
                 </div>
                 <div className="flex-1">
@@ -211,7 +211,7 @@ export default function ProductPreview() {
             </div>
 
             {/* Activity Chart Mock */}
-            <div className="glass-card p-6 flex-grow">
+            <div className="glass-card p-6 grow">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h4 className="text-sm font-semibold text-text-primary">
@@ -249,11 +249,11 @@ export default function ProductPreview() {
                     className="flex-1 flex items-end gap-1"
                   >
                     <div
-                      className="flex-1 bg-gradient-to-t from-primary/40 to-primary/80 rounded-t-md transition-all duration-500"
+                      className="flex-1 bg-linear-to-t from-primary/40 to-primary/80 rounded-t-md transition-all duration-500"
                       style={{ height: `${day.sent}%` }}
                     />
                     <div
-                      className="flex-1 bg-gradient-to-t from-accent/30 to-accent/60 rounded-t-md transition-all duration-500"
+                      className="flex-1 bg-linear-to-t from-accent/30 to-accent/60 rounded-t-md transition-all duration-500"
                       style={{ height: `${day.recv}%` }}
                     />
                   </div>
