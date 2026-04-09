@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,8 +8,14 @@ const inter = Inter({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-geist-mono",
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
 });
@@ -43,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`${inter.variable} ${manrope.variable} ${spaceGrotesk.variable} antialiased`}
     >
       <body className="min-h-screen bg-surface-primary text-text-primary">
         {children}

@@ -131,6 +131,7 @@ export default function InquirySection() {
                         onChange={handleChange}
                         placeholder="John Doe"
                         className="inquiry-input"
+                        autoComplete="name"
                       />
                     </div>
                     <div className="space-y-2">
@@ -147,6 +148,7 @@ export default function InquirySection() {
                         onChange={handleChange}
                         placeholder="john@company.com"
                         className="inquiry-input"
+                        autoComplete="email"
                       />
                     </div>
                   </div>
@@ -166,6 +168,7 @@ export default function InquirySection() {
                         onChange={handleChange}
                         placeholder="Acme Inc."
                         className="inquiry-input"
+                        autoComplete="organization"
                       />
                     </div>
                     <div className="space-y-2">
@@ -181,6 +184,7 @@ export default function InquirySection() {
                         onChange={handleChange}
                         placeholder="+1 (555) 123-4567"
                         className="inquiry-input"
+                        autoComplete="tel"
                       />
                     </div>
                   </div>
