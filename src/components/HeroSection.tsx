@@ -135,7 +135,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 60, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-20 relative mx-auto max-w-5xl"
+          className="mt-20 relative mx-auto w-full max-w-5xl"
         >
           <div className="absolute -inset-4 bg-linear-to-b from-primary/20 via-accent/10 to-transparent rounded-2xl blur-2xl" />
           <div className="relative glass-card rounded-2xl p-1.5 animate-pulse-glow">
@@ -165,8 +165,8 @@ export default function HeroSection() {
                 </div>
 
                 {/* Main Panel */}
-                <div className="flex-1 p-6">
-                  <div className="flex items-center justify-between mb-6">
+                <div className="flex-1 p-4 sm:p-6 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <div>
                       <h3 className="text-sm font-semibold text-text-primary">
                         Unified Inbox
@@ -175,7 +175,7 @@ export default function HeroSection() {
                         12 unread conversations
                       </p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       <div className="px-3 py-1 rounded-full bg-accent-green/10 text-accent-green text-xs font-medium border border-accent-green/20">
                         WhatsApp
                       </div>
