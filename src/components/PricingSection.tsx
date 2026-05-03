@@ -1,64 +1,211 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Zap, Crown } from "lucide-react";
 
 const plans = [
   {
     name: "Starter",
     price: "Free",
     period: "",
-    description: "Perfect for small teams getting started with messaging.",
+    description: "Perfect for solopreneurs and small teams testing the platform.",
+    icon: Zap,
+    tier: "free",
     features: [
-      "Up to 1,000 messages/month",
-      "2 team members",
-      "WhatsApp integration",
-      "Basic automations",
-      "Email support",
+      {
+        text: "1 User (Admin only)",
+        included: true,
+      },
+      {
+        text: "500 Contacts",
+        included: true,
+      },
+      {
+        text: "~1,000 Messages/month",
+        included: true,
+      },
+      {
+        text: "Basic Shared Inbox",
+        included: true,
+      },
+      {
+        text: "Basic Keyword Auto-replies",
+        included: true,
+      },
+      {
+        text: "Standard Contact Management",
+        included: true,
+      },
+      {
+        text: "Single Broadcast Messages",
+        included: true,
+      },
+      {
+        text: "'Powered by PingOS' Watermark",
+        included: true,
+      },
+      {
+        text: "Community & Documentation",
+        included: true,
+      },
+      {
+        text: "Visual Bot Builder",
+        included: false,
+      },
+      {
+        text: "Drip Campaigns & CTWA Ads",
+        included: false,
+      },
+      {
+        text: "Custom Fields & Segmentation",
+        included: false,
+      },
+      {
+        text: "Priority Support",
+        included: false,
+      },
     ],
-    cta: "Get Started",
+    cta: "Start Free",
+    ctaUrl: "#",
     highlight: false,
   },
   {
-    name: "Professional",
-    price: "$79",
+    name: "Pro",
+    price: "$49",
     period: "/mo",
-    description: "For growing businesses that need power and flexibility.",
+    description: "The revenue driver for growing sales teams and agencies.",
+    icon: Sparkles,
+    tier: "pro",
     features: [
-      "Up to 25,000 messages/month",
-      "10 team members",
-      "All channel integrations",
-      "Advanced automations & AI",
-      "Campaign manager",
-      "Analytics dashboard",
-      "Priority support",
+      {
+        text: "Up to 5 Users",
+        included: true,
+      },
+      {
+        text: "10,000 Contacts",
+        included: true,
+      },
+      {
+        text: "~50,000 Messages/month",
+        included: true,
+      },
+      {
+        text: "Advanced Shared Inbox",
+        included: true,
+      },
+      {
+        text: "Team Notes & Tagging",
+        included: true,
+      },
+      {
+        text: "Visual ReactFlow Bot Builder",
+        included: true,
+      },
+      {
+        text: "Custom Contact Attributes",
+        included: true,
+      },
+      {
+        text: "Multi-step Drip Campaigns",
+        included: true,
+      },
+      {
+        text: "Click-to-WhatsApp (CTWA) Ads",
+        included: true,
+      },
+      {
+        text: "Remove PingOS Branding",
+        included: true,
+      },
+      {
+        text: "Priority Email Support (24h SLA)",
+        included: true,
+      },
+      {
+        text: "AI-Assisted Smart Replies",
+        included: false,
+      },
+      {
+        text: "API Access & Webhooks",
+        included: false,
+      },
     ],
     cta: "Start Free Trial",
+    ctaUrl: "#",
     highlight: true,
   },
   {
     name: "Enterprise",
     price: "$299",
     period: "/mo",
-    description: "For large teams requiring custom solutions and SLAs.",
+    description: "Unlimited scale with dedicated support for large enterprises.",
+    icon: Crown,
+    tier: "enterprise",
     features: [
-      "Unlimited messages",
-      "Unlimited team members",
-      "Custom integrations & API",
-      "Dedicated account manager",
-      "SSO & advanced security",
-      "Custom branding",
-      "99.99% uptime SLA",
+      {
+        text: "Unlimited Users",
+        included: true,
+      },
+      {
+        text: "Role-Based Access Control (RBAC)",
+        included: true,
+      },
+      {
+        text: "Unlimited Contacts",
+        included: true,
+      },
+      {
+        text: "Custom Message Volume",
+        included: true,
+      },
+      {
+        text: "Cross-workspace Inbox",
+        included: true,
+      },
+      {
+        text: "AI-Assisted Smart Replies",
+        included: true,
+      },
+      {
+        text: "Custom Webhooks",
+        included: true,
+      },
+      {
+        text: "API Access",
+        included: true,
+      },
+      {
+        text: "Salesforce Integration",
+        included: true,
+      },
+      {
+        text: "Shopify Integration",
+        included: true,
+      },
+      {
+        text: "Dedicated IP",
+        included: true,
+      },
+      {
+        text: "Custom SLA & 24/7 Support",
+        included: true,
+      },
+      {
+        text: "Dedicated Account Manager",
+        included: true,
+      },
     ],
     cta: "Contact Sales",
+    ctaUrl: "#",
     highlight: false,
   },
 ];
 
 export default function PricingSection() {
   return (
-    <section id="pricing" className="relative py-16 sm:py-20">
-      <div className="absolute inset-0 bg-radial-glow opacity-40" />
+    <section id="pricing" className="relative py-20 sm:py-28">
+      <div className="absolute inset-0 bg-radial-glow opacity-30" />
+      <div className="absolute inset-0 bg-radial-glow-bottom opacity-20" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
@@ -67,105 +214,174 @@ export default function PricingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="text-sm font-medium text-primary-light uppercase tracking-widest">
-            Pricing
+          <span className="inline-block px-3 py-1 rounded-full bg-surface-glass border border-border-subtle text-xs font-semibold text-accent-green mb-4">
+            Simple, Transparent Pricing
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text leading-tight">
-            Transparent Pricing
+          <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+            <span className="gradient-text-hero">Choose Your Plan</span>
           </h2>
-          <p className="mt-4 max-w-xl mx-auto text-text-secondary text-lg">
-            No hidden fees. Start free, upgrade when you&apos;re ready.
+          <p className="mt-6 max-w-2xl mx-auto text-text-secondary text-lg leading-relaxed">
+            Start free and scale as you grow. No hidden fees, no surprises. Upgrade, downgrade, or cancel anytime.
           </p>
         </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{
-                duration: 0.5,
-                delay: i * 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className={`relative rounded-2xl p-px ${
-                plan.highlight
-                  ? "bg-linear-to-b from-primary/50 via-primary/20 to-transparent"
-                  : ""
-              }`}
-            >
-              {/* Popular Badge */}
-              {plan.highlight && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
-                  <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-white text-xs font-semibold shadow-lg shadow-primary/30">
-                    <Sparkles className="w-3 h-3" />
-                    Most Popular
-                  </div>
-                </div>
-              )}
-
-              <div
-                className={`rounded-2xl p-6 sm:p-8 h-full flex flex-col ${
-                  plan.highlight
-                    ? "bg-surface-card border border-primary/20"
-                    : "glass-card"
+        {/* Pricing Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {plans.map((plan, i) => {
+            const Icon = plan.icon;
+            return (
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.5,
+                  delay: i * 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className={`relative h-full group ${
+                  plan.highlight ? "lg:scale-105 lg:z-10" : ""
                 }`}
               >
-                {/* Plan Name */}
-                <h3 className="text-lg font-semibold text-text-primary">
-                  {plan.name}
-                </h3>
-                <p className="text-sm text-text-muted mt-1 mb-5">
-                  {plan.description}
-                </p>
+                {/* Glow Effect for Popular */}
+                {plan.highlight && (
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-primary/30 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
+                )}
 
-                {/* Price */}
-                <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-4xl font-bold text-text-primary">
-                    {plan.price}
-                  </span>
-                  {plan.period && (
-                    <span className="text-text-muted text-sm">
-                      {plan.period}
-                    </span>
-                  )}
-                </div>
+                {/* Popular Badge */}
+                {plan.highlight && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    className="absolute -top-4 left-1/2 -translate-x-1/2 z-20"
+                  >
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary via-primary/80 to-accent text-white text-xs font-bold shadow-xl shadow-primary/40">
+                      <Sparkles className="w-4 h-4" />
+                      Most Popular
+                    </div>
+                  </motion.div>
+                )}
 
-                {/* CTA */}
-                <button
-                  className={`w-full mb-6 flex items-center justify-center gap-2 ${
+                <div
+                  className={`relative h-full rounded-3xl backdrop-blur-xl transition-all duration-500 overflow-hidden ${
                     plan.highlight
-                      ? "btn-primary"
-                      : "btn-secondary"
+                      ? "bg-gradient-to-br from-surface-card/80 to-primary/5 border border-primary/40 shadow-2xl shadow-primary/20"
+                      : "glass-card hover:bg-surface-card/60 hover:border-primary/20"
                   }`}
                 >
-                  {plan.cta}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                  {/* Background Gradient */}
+                  <div
+                    className={`absolute inset-0 opacity-40 ${
+                      plan.highlight
+                        ? "bg-gradient-to-br from-primary/20 to-transparent"
+                        : "bg-none"
+                    }`}
+                  />
 
-                {/* Features */}
-                <div className="space-y-3 grow">
-                  {plan.features.map((feature) => (
-                    <div
-                      key={feature}
-                      className="flex items-start gap-2.5"
-                    >
-                      <Check className="w-4 h-4 text-accent-green shrink-0 mt-0.5" />
-                      <span className="text-sm text-text-secondary">
-                        {feature}
-                      </span>
+                  <div className="relative p-8 sm:p-10 h-full flex flex-col">
+                    {/* Icon & Title */}
+                    <div className="mb-8">
+                      <div
+                        className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
+                          plan.highlight
+                            ? "bg-gradient-to-br from-primary to-accent text-white"
+                            : "bg-surface-elevated text-primary"
+                        }`}
+                      >
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-text-primary">
+                        {plan.name}
+                      </h3>
+                      <p className="text-sm text-text-muted mt-2">
+                        {plan.description}
+                      </p>
                     </div>
-                  ))}
+
+                    {/* Price */}
+                    <div className="mb-8">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-5xl font-bold bg-gradient-to-r from-text-primary to-accent bg-clip-text text-transparent">
+                          {plan.price}
+                        </span>
+                        {plan.period && (
+                          <span className="text-text-muted">
+                            {plan.period}
+                          </span>
+                        )}
+                      </div>
+                      {plan.tier === "free" && (
+                        <p className="text-xs text-accent-green mt-2">
+                          Forever free, no credit card required
+                        </p>
+                      )}
+                    </div>
+
+                    {/* CTA Button */}
+                    <button
+                      className={`w-full mb-8 py-3 px-6 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
+                        plan.highlight
+                          ? "bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/50 hover:shadow-xl hover:shadow-primary/60 hover:-translate-y-0.5"
+                          : "bg-surface-elevated text-text-primary border border-border-subtle hover:border-primary/50 hover:bg-surface-card hover:-translate-y-0.5"
+                      }`}
+                    >
+                      {plan.cta}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+
+                    {/* Features List */}
+                    <div className="space-y-4 flex-1">
+                      {plan.features.map((feature, idx) => (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.05 }}
+                          className="flex items-start gap-3"
+                        >
+                          {feature.included ? (
+                            <Check className="w-5 h-5 text-accent-green shrink-0 mt-0.5" />
+                          ) : (
+                            <div className="w-5 h-5 rounded border border-border-subtle shrink-0 mt-0.5" />
+                          )}
+                          <span
+                            className={`text-sm ${
+                              feature.included
+                                ? "text-text-secondary"
+                                : "text-text-muted line-through opacity-50"
+                            }`}
+                          >
+                            {feature.text}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
+
+        {/* Bottom Note */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-center mt-16"
+        >
+          <p className="text-text-muted text-sm">
+            All plans include WhatsApp Business API integration.{" "}
+            <a href="#" className="text-accent hover:text-accent/80 transition-colors">
+              Meta API fees
+            </a>{" "}
+            are billed separately based on your usage.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

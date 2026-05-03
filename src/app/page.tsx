@@ -1,10 +1,12 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import SocialProof from "@/components/SocialProof";
 import FeatureGrid from "@/components/FeatureGrid";
 import HowItWorks from "@/components/HowItWorks";
 import ProductPreview from "@/components/ProductPreview";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import InquirySection from "@/components/InquirySection";
+import PricingSection from "@/components/PricingSection";
+import FAQSection from "@/components/FAQSection";
 import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
 
@@ -34,6 +36,8 @@ export default function Home() {
       <main>
         <HeroSection />
 
+        <SocialProof />
+
         <div className="section-divider" />
 
         <FeatureGrid />
@@ -52,7 +56,13 @@ export default function Home() {
 
         <div className="section-divider" />
 
-        <InquirySection />
+        <PricingSection />
+
+        <div className="section-divider" />
+
+        <FAQSection />
+
+        <div className="section-divider" />
 
         <CTABanner />
       </main>

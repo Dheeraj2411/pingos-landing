@@ -6,10 +6,10 @@ import { ArrowRight, Play } from "lucide-react";
 import Image from "next/image";
 
 const dynamicWords = [
-  { text: "Business Messaging", color: "from-[#ffffff] via-[#c7d2fe] to-[#22d3ee]" },
-  { text: "Lead Generation", color: "from-emerald-300 via-teal-300 to-cyan-400" },
-  { text: "Sales Outreach", color: "from-rose-300 via-pink-300 to-orange-400" },
-  { text: "Customer Support", color: "from-blue-300 via-indigo-400 to-purple-400" },
+  { text: "WhatsApp CRM", color: "from-emerald-300 via-teal-300 to-cyan-400" },
+  { text: "Lead Generation", color: "from-rose-300 via-pink-300 to-orange-400" },
+  { text: "Sales Automation", color: "from-blue-300 via-indigo-400 to-purple-400" },
+  { text: "Team Collaboration", color: "from-[#ffffff] via-[#c7d2fe] to-[#22d3ee]" },
 ];
 
 export default function HeroSection() {
@@ -58,7 +58,7 @@ export default function HeroSection() {
           transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="text-[1.75rem] sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6"
         >
-          <span className="gradient-text-hero">The Ultimate</span>
+          <span className="gradient-text-hero">The AI-Powered</span>
           <br />
           <span className="relative inline-grid" style={{ gridTemplateColumns: "1fr", perspective: "1000px" }}>
             <AnimatePresence mode="popLayout">
@@ -76,7 +76,7 @@ export default function HeroSection() {
             </AnimatePresence>
           </span>
           <br />
-          <span className="gradient-text-primary">Operating System</span>
+          <span className="gradient-text-primary">for Modern Teams</span>
         </motion.h1>
 
         {/* Subheading */}
@@ -86,9 +86,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 wrap-break-word"
         >
-          Automate conversations, manage leads, run campaigns, and unify your
-          inbox — all from a single, beautiful dashboard. Built for teams that
-          move fast.
+          Automate conversations, run high-converting drip campaigns, and manage all your Click-to-WhatsApp ads from one unified platform. Built for teams that move fast.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -98,13 +96,13 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a href="#inquiry" className="btn-primary text-base py-3.5! px-8!">
-            Start Free Trial
+          <a href="#pricing" className="btn-primary text-base py-3.5! px-8!">
+            Start for Free
             <ArrowRight className="w-4 h-4" />
           </a>
           <button className="btn-secondary text-base py-3.5! px-8!">
             <Play className="w-4 h-4" />
-            Watch Demo
+            Book a Demo
           </button>
         </motion.div>
 
@@ -116,10 +114,10 @@ export default function HeroSection() {
           className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-16"
         >
           {[
-            { value: "10K+", label: "Messages / day" },
+            { value: "10M+", label: "Messages sent" },
+            { value: "500+", label: "Teams active" },
             { value: "99.9%", label: "Uptime SLA" },
-            { value: "2.4s", label: "Avg. response" },
-            { value: "150+", label: "Teams trust us" },
+            { value: "No code", label: "Bot builder" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-2xl sm:text-3xl font-bold text-text-primary">
