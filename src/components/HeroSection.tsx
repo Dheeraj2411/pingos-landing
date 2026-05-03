@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Image from "next/image";
+import ContactFormModal from "./ContactFormModal";
+import WhatsAppButton from "./WhatsAppButton";
 
 const dynamicWords = [
   { text: "WhatsApp CRM", color: "from-emerald-300 via-teal-300 to-cyan-400" },
@@ -14,6 +16,7 @@ const dynamicWords = [
 
 export default function HeroSection() {
   const [wordIndex, setWordIndex] = useState(0);
+  const [contactFormOpen, setContactFormOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -94,16 +97,23 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap"
         >
-          <a href="#pricing" className="btn-primary text-base py-3.5! px-8!">
-            Start for Free
+          <button
+            onClick={() => setContactFormOpen(true)}
+            className="btn-primary text-base py-3.5! px-8!"
+          >
+            Start Your Free Trial
             <ArrowRight className="w-4 h-4" />
-          </a>
-          <button className="btn-secondary text-base py-3.5! px-8!">
+          </button>
+          <button
+            onClick={() => setContactFormOpen(true)}
+            className="btn-secondary text-base py-3.5! px-8!"
+          >
             <Play className="w-4 h-4" />
             Book a Demo
           </button>
+          <WhatsAppButton />
         </motion.div>
 
         {/* Stats Row */}
@@ -243,6 +253,12 @@ export default function HeroSection() {
             </div>
           </div>
         </motion.div>
+
+        {/* Contact Form Modal */}
+        <ContactFormModal
+          isOpen={contactFormOpen}
+          onClose={() => setContactFormOpen(false)}
+        />
       </div>
     </section>
   );

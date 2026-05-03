@@ -1,9 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, MessageSquare } from "lucide-react";
+import ContactFormModal from "./ContactFormModal";
+import WhatsAppButton from "./WhatsAppButton";
 
 export default function CTABanner() {
+  const [contactFormOpen, setContactFormOpen] = useState(false);
+
   return (
     <section className="relative py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-6">
@@ -24,34 +29,41 @@ export default function CTABanner() {
 
           <div className="relative px-8 py-16 sm:px-16 sm:py-20 text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
-              Scale your business across
+              Ready to scale your WhatsApp revenue?
               <br />
-              <span className="text-accent">WhatsApp Business</span>
+              <span className="text-accent">Start automating today</span>
             </h2>
             <p className="max-w-xl mx-auto text-indigo-200 text-lg mb-10">
-              Join 150+ businesses already using PingOS to automate
+              Join 500+ forward-thinking teams already using PingOS to automate
               conversations, convert leads, and grow revenue — all on
               autopilot.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="#inquiry"
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
+              <button
+                onClick={() => setContactFormOpen(true)}
                 className="inline-flex items-center gap-2 bg-white text-primary-dark font-semibold px-8 py-3.5 rounded-xl hover:bg-indigo-50 transition-colors shadow-lg shadow-black/10"
               >
                 Start Your Free Trial
                 <ArrowRight className="w-4 h-4" />
-              </a>
-              <a
-                href="#inquiry"
+              </button>
+              <button
+                onClick={() => setContactFormOpen(true)}
                 className="inline-flex items-center gap-2 border border-white/30 text-white font-medium px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
                 Talk to Sales
-              </a>
+              </button>
+              <WhatsAppButton />
             </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactFormModal
+        isOpen={contactFormOpen}
+        onClose={() => setContactFormOpen(false)}
+      />
     </section>
   );
 }

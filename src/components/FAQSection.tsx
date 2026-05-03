@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import ContactFormModal from "./ContactFormModal";
 
 const faqs = [
   {
@@ -107,6 +108,7 @@ function FAQItem({ question, answer, index, isOpen, onToggle }: FAQItemProps) {
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [contactFormOpen, setContactFormOpen] = useState(false);
 
   return (
     <section id="faq" className="relative py-20 sm:py-28">
@@ -160,11 +162,20 @@ export default function FAQSection() {
           <p className="text-text-secondary mb-6">
             Our support team is here to help. Reach out anytime—we typically respond within 2 hours.
           </p>
-          <button className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:-translate-y-0.5">
+          <button
+            onClick={() => setContactFormOpen(true)}
+            className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:-translate-y-0.5"
+          >
             Get in Touch
           </button>
         </motion.div>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactFormModal
+        isOpen={contactFormOpen}
+        onClose={() => setContactFormOpen(false)}
+      />
     </section>
   );
 }

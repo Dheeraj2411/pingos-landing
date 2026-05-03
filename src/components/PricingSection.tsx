@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Sparkles, Zap, Crown } from "lucide-react";
+import ContactFormModal from "./ContactFormModal";
 
 const plans = [
   {
@@ -13,7 +15,7 @@ const plans = [
     tier: "free",
     features: [
       {
-        text: "1 User (Admin only)",
+        text: "Single Account Access",
         included: true,
       },
       {
@@ -78,7 +80,7 @@ const plans = [
     tier: "pro",
     features: [
       {
-        text: "Up to 5 Users",
+        text: "Single Account Access",
         included: true,
       },
       {
@@ -122,11 +124,11 @@ const plans = [
         included: true,
       },
       {
-        text: "AI-Assisted Smart Replies",
-        included: false,
+        text: "Custom Webhooks",
+        included: true,
       },
       {
-        text: "API Access & Webhooks",
+        text: "API Access",
         included: false,
       },
     ],
@@ -143,11 +145,7 @@ const plans = [
     tier: "enterprise",
     features: [
       {
-        text: "Unlimited Users",
-        included: true,
-      },
-      {
-        text: "Role-Based Access Control (RBAC)",
+        text: "Single Account Access",
         included: true,
       },
       {
@@ -159,31 +157,23 @@ const plans = [
         included: true,
       },
       {
-        text: "Cross-workspace Inbox",
+        text: "Advanced Inbox Management",
         included: true,
       },
       {
-        text: "AI-Assisted Smart Replies",
+        text: "Visual ReactFlow Bot Builder",
         included: true,
       },
       {
-        text: "Custom Webhooks",
+        text: "All Pro Features Included",
         included: true,
       },
       {
-        text: "API Access",
+        text: "Custom Webhooks & API Access",
         included: true,
       },
       {
         text: "Salesforce Integration",
-        included: true,
-      },
-      {
-        text: "Shopify Integration",
-        included: true,
-      },
-      {
-        text: "Dedicated IP",
         included: true,
       },
       {
@@ -194,6 +184,18 @@ const plans = [
         text: "Dedicated Account Manager",
         included: true,
       },
+      {
+        text: "Priority Implementation",
+        included: true,
+      },
+      {
+        text: "Custom Branding",
+        included: true,
+      },
+      {
+        text: "Dedicated IP (Optional)",
+        included: true,
+      },
     ],
     cta: "Contact Sales",
     ctaUrl: "#",
@@ -202,6 +204,16 @@ const plans = [
 ];
 
 export default function PricingSection() {
+  const [contactFormOpen, setContactFormOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<
+    "starter" | "pro" | "enterprise" | undefined
+  >(undefined);
+
+  const handleContactClick = (plan: "starter" | "pro" | "enterprise") => {
+    setSelectedPlan(plan);
+    setContactFormOpen(true);
+  };
+
   return (
     <section id="pricing" className="relative py-20 sm:py-28">
       <div className="absolute inset-0 bg-radial-glow opacity-30" />
@@ -322,6 +334,7 @@ export default function PricingSection() {
 
                     {/* CTA Button */}
                     <button
+                      onClick={() => handleContactClick(plan.tier as "starter" | "pro" | "enterprise")}
                       className={`w-full mb-8 py-3 px-6 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
                         plan.highlight
                           ? "bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/50 hover:shadow-xl hover:shadow-primary/60 hover:-translate-y-0.5"
@@ -383,6 +396,13 @@ export default function PricingSection() {
           </p>
         </motion.div>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactFormModal
+        isOpen={contactFormOpen}
+        onClose={() => setContactFormOpen(false)}
+        planType={selectedPlan}
+      />
     </section>
   );
 }
