@@ -1,4 +1,21 @@
 import LegalLayout from "@/components/LegalLayout";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | PingOS",
+  description:
+    "Read PingOS Privacy Policy. Learn how we collect, use, and protect your personal data when using our business messaging platform.",
+  alternates: {
+    canonical: "/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy | PingOS",
+    description: "Learn how we protect your personal data at PingOS.",
+    type: "website",
+    locale: "en_US",
+    url: "/privacy",
+  },
+};
 
 export default function PrivacyPolicy() {
   return (

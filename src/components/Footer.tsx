@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 
 const footerLinks: Record<string, { label: string; href: string }[]> = {
@@ -35,7 +36,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <a href="/" className="flex items-center gap-2.5 mb-4 group">
+            <Link href="/" className="flex items-center gap-2.5 mb-4 group">
               <Image
                 src="/logo.png"
                 alt="PingOS Logo"
@@ -46,7 +47,7 @@ export default function Footer() {
               <span className="text-2xl font-bold text-text-primary tracking-tight">
                 Ping<span className="text-primary-light">OS</span>
               </span>
-            </a>
+            </Link>
             <p className="text-sm text-text-muted leading-relaxed max-w-xs">
               The all-in-one business messaging OS. Automate, engage, and grow
               — all from a single platform.
@@ -60,17 +61,31 @@ export default function Footer() {
                 {category}
               </h4>
               <ul className="space-y-2.5">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                      className="text-sm text-text-muted hover:text-text-secondary transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
+                {links.map((link) => {
+                  const isExternal = link.href.startsWith("http");
+
+                  return (
+                    <li key={link.label}>
+                      {isExternal ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-text-muted hover:text-text-secondary transition-colors"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className="text-sm text-text-muted hover:text-text-secondary transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

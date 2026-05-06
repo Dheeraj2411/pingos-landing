@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Check, ArrowRight, Sparkles, Zap, Crown } from "lucide-react";
 import ContactFormModal from "./ContactFormModal";
 
 const plans = [
   {
     name: "Starter",
-    price: "Free",
+    price: "Trial",
     period: "",
     description: "Perfect for solopreneurs and small teams testing the platform.",
     icon: Zap,
@@ -260,7 +261,7 @@ export default function PricingSection() {
               >
                 {/* Glow Effect for Popular */}
                 {plan.highlight && (
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-primary/30 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
+                  <div className="absolute inset-0 rounded-3xl bg-linear-to-b from-primary/30 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
                 )}
 
                 {/* Popular Badge */}
@@ -270,7 +271,7 @@ export default function PricingSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="absolute -top-4 left-1/2 -translate-x-1/2 z-20"
                   >
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary via-primary/80 to-accent text-white text-xs font-bold shadow-xl shadow-primary/40">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-primary via-primary/80 to-accent text-white text-xs font-bold shadow-xl shadow-primary/40">
                       <Sparkles className="w-4 h-4" />
                       Most Popular
                     </div>
@@ -280,7 +281,7 @@ export default function PricingSection() {
                 <div
                   className={`relative h-full rounded-3xl backdrop-blur-xl transition-all duration-500 overflow-hidden ${
                     plan.highlight
-                      ? "bg-gradient-to-br from-surface-card/80 to-primary/5 border border-primary/40 shadow-2xl shadow-primary/20"
+                      ? "bg-linear-to-br from-surface-card/80 to-primary/5 border border-primary/40 shadow-2xl shadow-primary/20"
                       : "glass-card hover:bg-surface-card/60 hover:border-primary/20"
                   }`}
                 >
@@ -288,7 +289,7 @@ export default function PricingSection() {
                   <div
                     className={`absolute inset-0 opacity-40 ${
                       plan.highlight
-                        ? "bg-gradient-to-br from-primary/20 to-transparent"
+                        ? "bg-linear-to-br from-primary/20 to-transparent"
                         : "bg-none"
                     }`}
                   />
@@ -299,7 +300,7 @@ export default function PricingSection() {
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
                           plan.highlight
-                            ? "bg-gradient-to-br from-primary to-accent text-white"
+                            ? "bg-linear-to-br from-primary to-accent text-white"
                             : "bg-surface-elevated text-primary"
                         }`}
                       >
@@ -316,7 +317,7 @@ export default function PricingSection() {
                     {/* Price */}
                     <div className="mb-8">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-5xl font-bold bg-gradient-to-r from-text-primary to-accent bg-clip-text text-transparent">
+                        <span className="text-5xl font-bold bg-linear-to-r from-text-primary to-accent bg-clip-text text-transparent">
                           {plan.price}
                         </span>
                         {plan.period && (
@@ -337,7 +338,7 @@ export default function PricingSection() {
                       onClick={() => handleContactClick(plan.tier as "starter" | "pro" | "enterprise")}
                       className={`w-full mb-8 py-3 px-6 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
                         plan.highlight
-                          ? "bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/50 hover:shadow-xl hover:shadow-primary/60 hover:-translate-y-0.5"
+                          ? "bg-linear-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/50 hover:shadow-xl hover:shadow-primary/60 hover:-translate-y-0.5"
                           : "bg-surface-elevated text-text-primary border border-border-subtle hover:border-primary/50 hover:bg-surface-card hover:-translate-y-0.5"
                       }`}
                     >
@@ -389,9 +390,9 @@ export default function PricingSection() {
         >
           <p className="text-text-muted text-sm">
             All plans include WhatsApp Business API integration.{" "}
-            <a href="#" className="text-accent hover:text-accent/80 transition-colors">
+              <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">
               Meta API fees
-            </a>{" "}
+              </Link>{" "}
             are billed separately based on your usage.
           </p>
         </motion.div>

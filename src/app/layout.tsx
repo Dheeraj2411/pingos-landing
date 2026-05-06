@@ -25,44 +25,81 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || "https://pingos.ai"
   ),
   title: {
-    default: "PingOS — Business Messaging OS | Unified WhatsApp, SMS & Email",
+    default: "PingOS — Business Messaging OS | WhatsApp API, SMS & Email Automation",
     template: "%s | PingOS",
   },
   description:
-    "PingOS is the all-in-one business messaging operating system. Automate conversations, manage leads, run campaigns, and unify your inbox across WhatsApp, SMS, and email.",
+    "PingOS is the #1 business messaging operating system. Automate conversations, manage leads, run campaigns, and unify your inbox across WhatsApp, SMS, and email. Join 500+ teams.",
   keywords: [
-    "business messaging",
+    "business messaging platform",
     "WhatsApp API",
-    "CRM",
+    "WhatsApp CRM",
+    "business CRM",
     "marketing automation",
     "unified inbox",
-    "PingOS",
-    "customer support",
-    "B2B software",
     "omnichannel messaging",
+    "customer support software",
+    "SMS marketing",
+    "email automation",
+    "lead management",
+    "sales automation",
+    "team collaboration",
+    "messaging bot",
+    "conversation automation",
   ],
   authors: [{ name: "PingOS Team" }],
   creator: "PingOS",
+  publisher: "PingOS",
   applicationName: "PingOS",
-  robots: "index, follow",
+  category: "Business",
+  classification: "Business Software",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "PingOS — Business Messaging OS",
+    title: "PingOS — Business Messaging OS | Automate WhatsApp, SMS & Email",
     description:
-      "Automate conversations, manage leads, and run campaigns across WhatsApp, SMS & email — all from a single dashboard.",
+      "Unify your customer communications. Automate conversations, manage leads, and run campaigns from one dashboard. Join 500+ teams.",
     type: "website",
     locale: "en_US",
     siteName: "PingOS",
-    url: "/",
+    url: "https://pingos.ai",
+    images: [
+      {
+        url: "https://pingos.ai/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "PingOS - Business Messaging Operating System",
+        type: "image/png",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "PingOS — Business Messaging OS",
     description:
-      "Automate conversations, manage leads, and run campaigns across WhatsApp, SMS & email.",
+      "Automate conversations, manage leads, and run campaigns across WhatsApp, SMS & email — all from a single unified dashboard.",
     creator: "@PingOS",
+    images: {
+      url: "https://pingos.ai/og-image.png",
+      alt: "PingOS Dashboard",
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || "",
   },
 };
 

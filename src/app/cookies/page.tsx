@@ -1,4 +1,21 @@
 import LegalLayout from "@/components/LegalLayout";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cookie Policy | PingOS",
+  description:
+    "Read PingOS Cookie Policy. Learn how we use cookies to improve your experience on our business messaging platform.",
+  alternates: {
+    canonical: "/cookies",
+  },
+  openGraph: {
+    title: "Cookie Policy | PingOS",
+    description: "Understand how we use cookies at PingOS.",
+    type: "website",
+    locale: "en_US",
+    url: "/cookies",
+  },
+};
 
 export default function CookiePolicy() {
   return (

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 
@@ -35,7 +36,7 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5 group">
+        <Link href="/" className="flex items-center gap-2.5 group">
           <Image
             src="/logo.png"
             alt="PingOS Logo"
@@ -46,18 +47,18 @@ export default function Navbar() {
           <span className="text-3xl font-bold text-text-primary tracking-tight">
             Ping<span className="text-primary-light">OS</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-white/5"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -85,14 +86,14 @@ export default function Navbar() {
           >
             <div className="px-6 py-4 flex flex-col gap-2">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="py-2 text-text-secondary hover:text-text-primary transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
 
             </div>

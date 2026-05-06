@@ -1,4 +1,21 @@
 import LegalLayout from "@/components/LegalLayout";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | PingOS",
+  description:
+    "Read PingOS Terms of Service. Understand the terms and conditions for using our business messaging operating system.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    title: "Terms of Service | PingOS",
+    description: "Review the terms and conditions for using PingOS.",
+    type: "website",
+    locale: "en_US",
+    url: "/terms",
+  },
+};
 
 export default function TermsOfService() {
   return (

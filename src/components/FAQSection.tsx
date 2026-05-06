@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 import ContactFormModal from "./ContactFormModal";
 
 const faqs = [
@@ -130,7 +131,7 @@ export default function FAQSection() {
             <span className="gradient-text-hero">Frequently Asked Questions</span>
           </h2>
           <p className="mt-6 text-text-secondary text-lg max-w-2xl mx-auto">
-            Everything you need to know about PingOS, from pricing to features to support. Can't find an answer? <a href="#" className="text-accent hover:text-accent/80 transition-colors">Contact our team</a>.
+            Everything you need to know about PingOS, from pricing to features to support. Cant find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
           </p>
         </motion.div>
 
@@ -164,7 +165,7 @@ export default function FAQSection() {
           </p>
           <button
             onClick={() => setContactFormOpen(true)}
-            className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:-translate-y-0.5"
+            className="px-8 py-3 rounded-xl bg-linear-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:-translate-y-0.5"
           >
             Get in Touch
           </button>

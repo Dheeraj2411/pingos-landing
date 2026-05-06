@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Info } from "lucide-react";
 
 interface ProductInfoButtonProps {
@@ -20,6 +21,20 @@ export default function ProductInfoButton({
     outline:
       "border border-primary/50 text-primary hover:bg-primary/10",
   };
+
+  const isInternalLink = productUrl.startsWith("/") || productUrl.startsWith("#");
+
+  if (isInternalLink) {
+    return (
+      <Link
+        href={productUrl}
+        className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:-translate-y-0.5 ${variants[variant]}`}
+      >
+        <Info className="w-4 h-4" />
+        Explore Product
+      </Link>
+    );
+  }
 
   return (
     <a

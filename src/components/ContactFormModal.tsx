@@ -94,16 +94,19 @@ export default function ContactFormModal({
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
-            <div className="w-full max-w-md glass-card rounded-2xl p-8 relative">
-              {/* Close Button */}
+            <div className="w-full max-w-md glass-card rounded-2xl p-8 relative max-h-[90vh] flex flex-col">
+              {/* Close Button - Fixed at top */}
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 p-2 hover:bg-surface-elevated rounded-lg transition-colors"
+                className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-lg transition-colors z-50"
+                aria-label="Close modal"
               >
-                <X className="w-5 h-5 text-text-secondary" />
+                <X className="w-6 h-6 text-white" />
               </button>
 
-              {submitted ? (
+              {/* Scrollable Content */}
+              <div className="overflow-y-auto flex-1">
+                {submitted ? (
                 // Success State
                 <div className="text-center py-8">
                   <motion.div
@@ -241,6 +244,7 @@ export default function ContactFormModal({
                   </form>
                 </>
               )}
+              </div>
             </div>
           </motion.div>
         </>
