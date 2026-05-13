@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Send, User, Mail, Building2, Phone, MessageSquare, CheckCircle, Loader2 } from "lucide-react";
 import { useState, FormEvent } from "react";
+import WhatsAppQR from "./WhatsAppQR";
 
 const planOptions = [
   { value: "", label: "Select a plan you're interested in" },
@@ -81,14 +82,17 @@ export default function InquirySection() {
           </p>
         </motion.div>
 
-        {/* Form Card */}
+        {/* Form Card with QR Code */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            {/* Left: Form */}
+            <div className="lg:col-span-2">
           <div className="relative rounded-2xl p-px bg-linear-to-b from-primary/30 via-primary/10 to-transparent">
             <div className="rounded-2xl bg-surface-card border border-primary/10 p-8 sm:p-10 md:p-12">
               {status === "success" ? (
@@ -264,6 +268,19 @@ export default function InquirySection() {
                 </form>
               )}
             </div>
+          </div>
+            </div>
+
+            {/* Right: QR Code */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+              className="lg:col-span-1 flex items-center justify-center"
+            >
+              <WhatsAppQR />
+            </motion.div>
           </div>
         </motion.div>
       </div>

@@ -5,9 +5,13 @@ import { motion } from "framer-motion";
 import { ArrowRight, MessageSquare } from "lucide-react";
 import ContactFormModal from "./ContactFormModal";
 import WhatsAppButton from "./WhatsAppButton";
+import Link from "next/link";
+import { getProductUrl } from "@/lib/product";
 
 export default function CTABanner() {
   const [contactFormOpen, setContactFormOpen] = useState(false);
+  const loginUrl = getProductUrl("/login");
+  const signupUrl = getProductUrl("/signup");
 
   return (
     <section className="relative py-16 sm:py-20">
@@ -39,20 +43,20 @@ export default function CTABanner() {
               autopilot.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
-              <button
-                onClick={() => setContactFormOpen(true)}
+              <Link
+                href={signupUrl}
                 className="inline-flex items-center gap-2 bg-white text-primary-dark font-semibold px-8 py-3.5 rounded-xl hover:bg-indigo-50 transition-colors shadow-lg shadow-black/10"
               >
-                Start Your Free Trial
+                Sign Up
                 <ArrowRight className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setContactFormOpen(true)}
+              </Link>
+              <Link
+                href={loginUrl}
                 className="inline-flex items-center gap-2 border border-white/30 text-white font-medium px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
-                Talk to Sales
-              </button>
+                Login
+              </Link>
               <WhatsAppButton />
             </div>
           </div>

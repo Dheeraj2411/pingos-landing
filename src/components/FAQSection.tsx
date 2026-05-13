@@ -131,7 +131,7 @@ export default function FAQSection() {
             <span className="gradient-text-hero">Frequently Asked Questions</span>
           </h2>
           <p className="mt-6 text-text-secondary text-lg max-w-2xl mx-auto">
-            Everything you need to know about PingOS, from pricing to features to support. Cant find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
+            Everything you need to know about PingOS, from pricing to features to support. Can't find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
           </p>
         </motion.div>
 

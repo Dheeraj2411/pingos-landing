@@ -15,7 +15,7 @@ export default function ProductInfoButton({
 
   const variants = {
     primary:
-      "bg-gradient-to-r from-primary via-primary to-accent text-white hover:shadow-lg hover:shadow-primary/50",
+      "bg-linear-to-r from-primary via-primary to-accent text-white hover:shadow-lg hover:shadow-primary/50",
     secondary:
       "bg-surface-elevated text-text-primary border border-border-subtle hover:border-primary/50 hover:bg-surface-card",
     outline:

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SocialProof from "@/components/SocialProof";
@@ -11,6 +12,27 @@ import InquirySection from "@/components/InquirySection";
 import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
 
+export const metadata: Metadata = {
+  title: "PingOS | WhatsApp CRM, Business Messaging & Lead Automation",
+  description:
+    "PingOS helps teams manage WhatsApp, SMS, and email in one place with shared inboxes, automation, lead capture, and campaign tools.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "PingOS | WhatsApp CRM, Business Messaging & Lead Automation",
+    description:
+      "Manage customer conversations, automate follow-ups, and capture more leads across WhatsApp, SMS, and email.",
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PingOS | WhatsApp CRM, Business Messaging & Lead Automation",
+    description:
+      "Manage customer conversations, automate follow-ups, and capture more leads across WhatsApp, SMS, and email.",
+  },
+};
+
 export default function Home() {
   // Comprehensive JSON-LD structured data for better SEO
   const organizationSchema = {
@@ -21,15 +43,10 @@ export default function Home() {
     logo: "https://pingos.ai/logo.png",
     description:
       "PingOS is the all-in-one business messaging operating system. Automate conversations, manage leads, run campaigns, and unify your inbox across WhatsApp, SMS, and email.",
-    sameAs: [
-      "https://twitter.com/PingOS",
-      "https://www.linkedin.com/company/pingos",
-      "https://github.com/pingos",
-    ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Support",
-      email: "support@pingos.ai",
+      email: "support@pingos.me",
     },
   };
 
@@ -65,11 +82,6 @@ export default function Home() {
         description: "For large-scale operations with dedicated support.",
       },
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      ratingCount: "127",
-    },
   };
 
   const faqSchema = {

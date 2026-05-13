@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 import ContactFormModal from "./ContactFormModal";
 import WhatsAppButton from "./WhatsAppButton";
+import { getProductUrl } from "@/lib/product";
 
 const dynamicWords = [
   { text: "WhatsApp CRM", color: "from-emerald-300 via-teal-300 to-cyan-400" },
@@ -17,6 +19,8 @@ const dynamicWords = [
 export default function HeroSection() {
   const [wordIndex, setWordIndex] = useState(0);
   const [contactFormOpen, setContactFormOpen] = useState(false);
+  const loginUrl = getProductUrl("/login");
+  const signupUrl = getProductUrl("/signup");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -89,7 +93,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 wrap-break-word"
         >
-          Automate conversations, run high-converting drip campaigns, and manage all your Click-to-WhatsApp ads from one unified platform. Built for teams that move fast.
+          PingOS is a business messaging OS for WhatsApp CRM, lead generation, and sales automation. Automate conversations, run high-converting drip campaigns, and manage Click-to-WhatsApp ads from one unified platform.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -99,20 +103,20 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap"
         >
-          <button
-            onClick={() => setContactFormOpen(true)}
+          <Link
+            href={signupUrl}
             className="btn-primary text-base py-3.5! px-8!"
           >
-            Start Your Free Trial
+            Sign Up
             <ArrowRight className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => setContactFormOpen(true)}
+          </Link>
+          <Link
+            href={loginUrl}
             className="btn-secondary text-base py-3.5! px-8!"
           >
             <Play className="w-4 h-4" />
-            Book a Demo
-          </button>
+            Login
+          </Link>
           <WhatsAppButton />
         </motion.div>
 

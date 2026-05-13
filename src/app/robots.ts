@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pingos.ai";
+  const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
 
   return {
     rules: {
@@ -9,6 +10,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/api/",
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    host: normalizedBaseUrl,
+    sitemap: `${normalizedBaseUrl}/sitemap.xml`,
   };
 }

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import { getProductUrl } from "@/lib/product";
 
 const navLinks = [
   { label: "Features", href: "/#features" },
@@ -16,6 +17,8 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const loginUrl = getProductUrl("/login");
+  const signupUrl = getProductUrl("/signup");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -60,6 +63,18 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          <Link
+            href={loginUrl}
+            className="ml-3 px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-white/5"
+          >
+            Login
+          </Link>
+          <Link
+            href={signupUrl}
+            className="px-4 py-2 text-sm font-semibold rounded-lg bg-linear-to-r from-primary to-accent text-white hover:shadow-lg hover:shadow-primary/30 transition-all"
+          >
+            Sign Up
+          </Link>
         </div>
 
 
@@ -95,6 +110,20 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              <Link
+                href={loginUrl}
+                onClick={() => setMobileOpen(false)}
+                className="py-2 text-text-secondary hover:text-text-primary transition-colors"
+              >
+                Login
+              </Link>
+              <Link
+                href={signupUrl}
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 inline-flex items-center justify-center rounded-xl bg-linear-to-r from-primary to-accent px-4 py-3 font-semibold text-white"
+              >
+                Sign Up
+              </Link>
 
             </div>
           </motion.div>

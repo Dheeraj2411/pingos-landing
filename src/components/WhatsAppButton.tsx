@@ -14,7 +14,7 @@ export default function WhatsAppButton() {
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-green-500 via-green-500 to-emerald-500 text-white font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300 hover:-translate-y-0.5"
+      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-green-500 via-green-500 to-emerald-500 text-white font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300 hover:-translate-y-0.5"
     >
       <MessageCircle className="w-4 h-4" />
       Chat on WhatsApp

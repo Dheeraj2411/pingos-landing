@@ -2,28 +2,29 @@ import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pingos.ai";
+  const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
 
   return [
     {
-      url: baseUrl,
+      url: normalizedBaseUrl,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/privacy`,
+      url: `${normalizedBaseUrl}/privacy`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/terms`,
+      url: `${normalizedBaseUrl}/terms`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/cookies`,
+      url: `${normalizedBaseUrl}/cookies`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,

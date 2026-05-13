@@ -39,7 +39,7 @@ export default function SocialProof() {
           className="text-center mb-12"
         >
           <p className="text-text-secondary text-lg">
-            Trusted by teams worldwide
+            Trusted by teams worldwide using PingOS for WhatsApp CRM and business messaging
           </p>
         </motion.div>
 
@@ -86,7 +86,7 @@ export default function SocialProof() {
           className="mt-16 pt-16 border-t border-border-subtle text-center"
         >
           <p className="text-text-muted text-sm mb-6">
-            Used by sales teams, marketing agencies, and enterprises worldwide
+            Used by sales teams, marketing agencies, and enterprises worldwide to manage PingOS conversations at scale
           </p>
           <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
             <div className="text-xs font-semibold text-text-secondary tracking-widest">

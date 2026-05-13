@@ -76,10 +76,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "PingOS",
-    url: "https://pingos.ai",
+    url: "/",
     images: [
       {
-        url: "https://pingos.ai/og-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "PingOS - Business Messaging Operating System",
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
       "Automate conversations, manage leads, and run campaigns across WhatsApp, SMS & email — all from a single unified dashboard.",
     creator: "@PingOS",
     images: {
-      url: "https://pingos.ai/og-image.png",
+      url: "/og-image.png",
       alt: "PingOS Dashboard",
     },
   },

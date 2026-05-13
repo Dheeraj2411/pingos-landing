@@ -236,7 +236,7 @@ export default function ContactFormModal({
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-2.5 rounded-lg bg-gradient-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
+                      className="w-full py-2.5 rounded-lg bg-linear-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
                     >
                       {loading && <Loader2 className="w-4 h-4 animate-spin" />}
                       {loading ? "Sending..." : "Send Inquiry"}
