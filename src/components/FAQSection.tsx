@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import ContactFormModal from "./ContactFormModal";
@@ -61,17 +60,7 @@ function FAQItem({ question, answer, index, isOpen, onToggle }: FAQItemProps) {
   const contentId = `faq-answer-${index}`;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.05,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className="group"
-    >
+    <div className="group">
       <button
         onClick={onToggle}
         type="button"
@@ -83,33 +72,20 @@ function FAQItem({ question, answer, index, isOpen, onToggle }: FAQItemProps) {
           <h3 className="text-lg font-semibold text-text-primary group-hover:text-accent transition-colors">
             {question}
           </h3>
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-            className="shrink-0"
-          >
+          <div className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}>
             <ChevronDown className="w-5 h-5 text-primary" />
-          </motion.div>
+          </div>
         </div>
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            id={contentId}
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
-          >
-            <div className="px-6 py-4 text-text-secondary leading-relaxed border-t border-border-subtle">
-              {answer}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+      {isOpen && (
+        <div id={contentId} className="overflow-hidden">
+          <div className="px-6 py-4 text-text-secondary leading-relaxed border-t border-border-subtle">
+            {answer}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -122,14 +98,7 @@ export default function FAQSection() {
       <div className="absolute inset-0 bg-radial-glow opacity-20" />
 
       <div className="relative max-w-4xl mx-auto px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 rounded-full bg-surface-glass border border-border-subtle text-xs font-semibold text-accent-green mb-4">
             Questions & Answers
           </span>
@@ -139,9 +108,8 @@ export default function FAQSection() {
           <p className="mt-6 text-text-secondary text-lg max-w-2xl mx-auto">
             Everything you need to know about PingOS, from pricing to features to support. Can&apos;t find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
           </p>
-        </motion.div>
+        </div>
 
-        {/* FAQ Items */}
         <div className="space-y-3">
           {faqs.map((faq, index) => (
             <FAQItem
@@ -155,14 +123,7 @@ export default function FAQSection() {
           ))}
         </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 p-8 rounded-2xl glass-card text-center border border-primary/20"
-        >
+        <div className="mt-16 p-8 rounded-2xl glass-card text-center border border-primary/20">
           <h3 className="text-2xl font-bold text-text-primary mb-4">
             Still have questions?
           </h3>
@@ -175,10 +136,9 @@ export default function FAQSection() {
           >
             Get in Touch
           </button>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Contact Form Modal */}
       <ContactFormModal
         isOpen={contactFormOpen}
         onClose={() => setContactFormOpen(false)}

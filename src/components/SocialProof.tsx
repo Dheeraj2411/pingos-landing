@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Users, TrendingUp, Zap } from "lucide-react";
 
 const stats = [
@@ -31,35 +28,18 @@ export default function SocialProof() {
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <p className="text-text-secondary text-lg">
             Trusted by teams worldwide using PingOS for WhatsApp CRM and business messaging
           </p>
-        </motion.div>
+        </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.1,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="text-center"
-              >
+              <div key={i} className="text-center">
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 mb-4 group hover:from-primary/30 hover:to-accent/30 transition-all">
                   <Icon className="w-7 h-7 text-accent" />
                 </div>
@@ -72,19 +52,13 @@ export default function SocialProof() {
                 <p className="text-sm text-text-muted">
                   {stat.description}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
         {/* Company Logos / Testimonial */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 pt-16 border-t border-border-subtle text-center"
-        >
+        <div className="mt-16 pt-16 border-t border-border-subtle text-center">
           <p className="text-text-muted text-sm mb-6">
             Used by sales teams, marketing agencies, and enterprises worldwide to manage PingOS conversations at scale
           </p>
@@ -93,7 +67,7 @@ export default function SocialProof() {
               TRUSTED BY LEADING BRANDS
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

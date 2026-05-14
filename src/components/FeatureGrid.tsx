@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import {
   Zap,
   Users,
@@ -72,13 +69,7 @@ export default function FeatureGrid() {
     <section id="features" className="relative py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="text-sm font-medium text-primary-light uppercase tracking-widest">
             Features
           </span>
@@ -91,17 +82,13 @@ export default function FeatureGrid() {
             Everything you need to automate, personalize, and scale your
             customer conversations — unified in one powerful platform.
           </p>
-        </motion.div>
+        </div>
 
         {/* Feature Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {features.map((feature, i) => (
-            <motion.div
+          {features.map((feature) => (
+            <div
               key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className={`glass-card glass-card-hover p-6 group cursor-default ${feature.borderColor}`}
             >
               {/* Icon */}
@@ -118,7 +105,7 @@ export default function FeatureGrid() {
               <p className="text-sm text-text-secondary leading-relaxed">
                 {feature.description}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

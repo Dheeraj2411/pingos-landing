@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import Image from "next/image";
 
@@ -39,32 +36,21 @@ export default function TestimonialsSection() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="text-sm font-semibold text-primary-light uppercase tracking-wider mb-3">
-              Trusted by Innovators
-            </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
-              Don&apos;t just take our word for it
-            </h2>
-            <p className="text-lg text-text-secondary">
-              See how businesses are using PingOS to scale their communication and build better customer relationships.
-            </p>
-          </motion.div>
+          <p className="text-sm font-semibold text-primary-light uppercase tracking-wider mb-3">
+            Trusted by Innovators
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
+            Don&apos;t just take our word for it
+          </h2>
+          <p className="text-lg text-text-secondary">
+            See how businesses are using PingOS to scale their communication and build better customer relationships.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, idx) => (
-            <motion.div
+          {testimonials.map((testimonial) => (
+            <div
               key={testimonial.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="bg-surface-secondary/40 backdrop-blur-sm border border-border-subtle p-8 rounded-3xl flex flex-col h-full hover:border-primary/30 hover:bg-surface-secondary/60 transition-colors shadow-2xl shadow-black/10"
             >
               <div className="flex gap-1 mb-6">
@@ -89,7 +75,7 @@ export default function TestimonialsSection() {
                   <p className="text-sm text-text-muted">{testimonial.role}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

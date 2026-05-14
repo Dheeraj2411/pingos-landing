@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowRight, MessageSquare } from "lucide-react";
 import WhatsAppButton from "./WhatsAppButton";
 import Link from "next/link";
@@ -13,13 +10,7 @@ export default function CTABanner() {
   return (
     <section className="relative py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative overflow-hidden rounded-3xl"
-        >
+        <div className="relative overflow-hidden rounded-3xl">
           {/* Gradient Background */}
           <div className="absolute inset-0 bg-linear-to-br from-primary via-primary-dark to-[#3730a3]" />
           <div className="absolute inset-0 bg-grid-pattern opacity-10" />
@@ -57,7 +48,7 @@ export default function CTABanner() {
               <WhatsAppButton />
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

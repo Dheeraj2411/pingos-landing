@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { Check, ArrowRight, Sparkles, Zap, Crown } from "lucide-react";
 import ContactFormModal from "./ContactFormModal";
@@ -15,61 +14,21 @@ const plans = [
     icon: Zap,
     tier: "free",
     features: [
-      {
-        text: "Single Account Access",
-        included: true,
-      },
-      {
-        text: "500 Contacts",
-        included: true,
-      },
-      {
-        text: "~1,000 Messages/month",
-        included: true,
-      },
-      {
-        text: "Basic Shared Inbox",
-        included: true,
-      },
-      {
-        text: "Basic Keyword Auto-replies",
-        included: true,
-      },
-      {
-        text: "Standard Contact Management",
-        included: true,
-      },
-      {
-        text: "Single Broadcast Messages",
-        included: true,
-      },
-      {
-        text: "'Powered by PingOS' Watermark",
-        included: true,
-      },
-      {
-        text: "Community & Documentation",
-        included: true,
-      },
-      {
-        text: "Visual Bot Builder",
-        included: false,
-      },
-      {
-        text: "Drip Campaigns & CTWA Ads",
-        included: false,
-      },
-      {
-        text: "Custom Fields & Segmentation",
-        included: false,
-      },
-      {
-        text: "Priority Support",
-        included: false,
-      },
+      { text: "Single Account Access", included: true },
+      { text: "500 Contacts", included: true },
+      { text: "~1,000 Messages/month", included: true },
+      { text: "Basic Shared Inbox", included: true },
+      { text: "Basic Keyword Auto-replies", included: true },
+      { text: "Standard Contact Management", included: true },
+      { text: "Single Broadcast Messages", included: true },
+      { text: "'Powered by PingOS' Watermark", included: true },
+      { text: "Community & Documentation", included: true },
+      { text: "Visual Bot Builder", included: false },
+      { text: "Drip Campaigns & CTWA Ads", included: false },
+      { text: "Custom Fields & Segmentation", included: false },
+      { text: "Priority Support", included: false },
     ],
     cta: "Start Free",
-    ctaUrl: "#",
     highlight: false,
   },
   {
@@ -80,61 +39,21 @@ const plans = [
     icon: Sparkles,
     tier: "pro",
     features: [
-      {
-        text: "Single Account Access",
-        included: true,
-      },
-      {
-        text: "10,000 Contacts",
-        included: true,
-      },
-      {
-        text: "~50,000 Messages/month",
-        included: true,
-      },
-      {
-        text: "Advanced Shared Inbox",
-        included: true,
-      },
-      {
-        text: "Team Notes & Tagging",
-        included: true,
-      },
-      {
-        text: "Visual ReactFlow Bot Builder",
-        included: true,
-      },
-      {
-        text: "Custom Contact Attributes",
-        included: true,
-      },
-      {
-        text: "Multi-step Drip Campaigns",
-        included: true,
-      },
-      {
-        text: "Click-to-WhatsApp (CTWA) Ads",
-        included: true,
-      },
-      {
-        text: "Remove PingOS Branding",
-        included: true,
-      },
-      {
-        text: "Priority Email Support (24h SLA)",
-        included: true,
-      },
-      {
-        text: "Custom Webhooks",
-        included: true,
-      },
-      {
-        text: "API Access",
-        included: false,
-      },
+      { text: "Single Account Access", included: true },
+      { text: "10,000 Contacts", included: true },
+      { text: "~50,000 Messages/month", included: true },
+      { text: "Advanced Shared Inbox", included: true },
+      { text: "Team Notes & Tagging", included: true },
+      { text: "Visual ReactFlow Bot Builder", included: true },
+      { text: "Custom Contact Attributes", included: true },
+      { text: "Multi-step Drip Campaigns", included: true },
+      { text: "Click-to-WhatsApp (CTWA) Ads", included: true },
+      { text: "Remove PingOS Branding", included: true },
+      { text: "Priority Email Support (24h SLA)", included: true },
+      { text: "Custom Webhooks", included: true },
+      { text: "API Access", included: false },
     ],
     cta: "Start Free Trial",
-    ctaUrl: "#",
     highlight: true,
   },
   {
@@ -145,70 +64,28 @@ const plans = [
     icon: Crown,
     tier: "enterprise",
     features: [
-      {
-        text: "Single Account Access",
-        included: true,
-      },
-      {
-        text: "Unlimited Contacts",
-        included: true,
-      },
-      {
-        text: "Custom Message Volume",
-        included: true,
-      },
-      {
-        text: "Advanced Inbox Management",
-        included: true,
-      },
-      {
-        text: "Visual ReactFlow Bot Builder",
-        included: true,
-      },
-      {
-        text: "All Pro Features Included",
-        included: true,
-      },
-      {
-        text: "Custom Webhooks & API Access",
-        included: true,
-      },
-      {
-        text: "Salesforce Integration",
-        included: true,
-      },
-      {
-        text: "Custom SLA & 24/7 Support",
-        included: true,
-      },
-      {
-        text: "Dedicated Account Manager",
-        included: true,
-      },
-      {
-        text: "Priority Implementation",
-        included: true,
-      },
-      {
-        text: "Custom Branding",
-        included: true,
-      },
-      {
-        text: "Dedicated IP (Optional)",
-        included: true,
-      },
+      { text: "Single Account Access", included: true },
+      { text: "Unlimited Contacts", included: true },
+      { text: "Custom Message Volume", included: true },
+      { text: "Advanced Inbox Management", included: true },
+      { text: "Visual ReactFlow Bot Builder", included: true },
+      { text: "All Pro Features Included", included: true },
+      { text: "Custom Webhooks & API Access", included: true },
+      { text: "Salesforce Integration", included: true },
+      { text: "Custom SLA & 24/7 Support", included: true },
+      { text: "Dedicated Account Manager", included: true },
+      { text: "Priority Implementation", included: true },
+      { text: "Custom Branding", included: true },
+      { text: "Dedicated IP (Optional)", included: true },
     ],
     cta: "Contact Sales",
-    ctaUrl: "#",
     highlight: false,
   },
 ];
 
 export default function PricingSection() {
   const [contactFormOpen, setContactFormOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<
-    "starter" | "pro" | "enterprise" | undefined
-  >(undefined);
+  const [selectedPlan, setSelectedPlan] = useState<"starter" | "pro" | "enterprise" | undefined>(undefined);
 
   const handleContactClick = (plan: "starter" | "pro" | "enterprise") => {
     setSelectedPlan(plan);
@@ -221,14 +98,7 @@ export default function PricingSection() {
       <div className="absolute inset-0 bg-radial-glow-bottom opacity-20" />
 
       <div className="relative max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <span className="inline-block px-3 py-1 rounded-full bg-surface-glass border border-border-subtle text-xs font-semibold text-accent-green mb-4">
             Simple, Transparent Pricing
           </span>
@@ -238,44 +108,28 @@ export default function PricingSection() {
           <p className="mt-6 max-w-2xl mx-auto text-text-secondary text-lg leading-relaxed">
             Start free and scale as you grow. No hidden fees, no surprises. Upgrade, downgrade, or cancel anytime.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {plans.map((plan, i) => {
+          {plans.map((plan) => {
             const Icon = plan.icon;
+
             return (
-              <motion.div
+              <div
                 key={plan.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.15,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className={`relative h-full group ${
-                  plan.highlight ? "lg:scale-105 lg:z-10" : ""
-                }`}
+                className={`relative h-full group ${plan.highlight ? "lg:scale-105 lg:z-10" : ""}`}
               >
-                {/* Glow Effect for Popular */}
                 {plan.highlight && (
                   <div className="absolute inset-0 rounded-3xl bg-linear-to-b from-primary/30 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
                 )}
 
-                {/* Popular Badge */}
                 {plan.highlight && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    className="absolute -top-4 left-1/2 -translate-x-1/2 z-20"
-                  >
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-primary via-primary/80 to-accent text-white text-xs font-bold shadow-xl shadow-primary/40">
                       <Sparkles className="w-4 h-4" />
                       Most Popular
                     </div>
-                  </motion.div>
+                  </div>
                 )}
 
                 <div
@@ -285,55 +139,35 @@ export default function PricingSection() {
                       : "glass-card hover:bg-surface-card/60 hover:border-primary/20"
                   }`}
                 >
-                  {/* Background Gradient */}
                   <div
-                    className={`absolute inset-0 opacity-40 ${
-                      plan.highlight
-                        ? "bg-linear-to-br from-primary/20 to-transparent"
-                        : "bg-none"
-                    }`}
+                    className={`absolute inset-0 opacity-40 ${plan.highlight ? "bg-linear-to-br from-primary/20 to-transparent" : "bg-none"}`}
                   />
 
                   <div className="relative p-8 sm:p-10 h-full flex flex-col">
-                    {/* Icon & Title */}
                     <div className="mb-8">
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
-                          plan.highlight
-                            ? "bg-linear-to-br from-primary to-accent text-white"
-                            : "bg-surface-elevated text-primary"
+                          plan.highlight ? "bg-linear-to-br from-primary to-accent text-white" : "bg-surface-elevated text-primary"
                         }`}
                       >
                         <Icon className="w-6 h-6" />
                       </div>
-                      <h3 className="text-2xl font-bold text-text-primary">
-                        {plan.name}
-                      </h3>
-                      <p className="text-sm text-text-muted mt-2">
-                        {plan.description}
-                      </p>
+                      <h3 className="text-2xl font-bold text-text-primary">{plan.name}</h3>
+                      <p className="text-sm text-text-muted mt-2">{plan.description}</p>
                     </div>
 
-                    {/* Price */}
                     <div className="mb-8">
                       <div className="flex items-baseline gap-2">
                         <span className="text-5xl font-bold bg-linear-to-r from-text-primary to-accent bg-clip-text text-transparent">
                           {plan.price}
                         </span>
-                        {plan.period && (
-                          <span className="text-text-muted">
-                            {plan.period}
-                          </span>
-                        )}
+                        {plan.period && <span className="text-text-muted">{plan.period}</span>}
                       </div>
                       {plan.tier === "free" && (
-                        <p className="text-xs text-accent-green mt-2">
-                          Forever free, no credit card required
-                        </p>
+                        <p className="text-xs text-accent-green mt-2">Forever free, no credit card required</p>
                       )}
                     </div>
 
-                    {/* CTA Button */}
                     <button
                       onClick={() => handleContactClick(plan.tier as "starter" | "pro" | "enterprise")}
                       className={`w-full mb-8 py-3 px-6 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
@@ -346,16 +180,9 @@ export default function PricingSection() {
                       <ArrowRight className="w-4 h-4" />
                     </button>
 
-                    {/* Features List */}
                     <div className="space-y-4 flex-1">
                       {plan.features.map((feature, idx) => (
-                        <motion.div
-                          key={idx}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: idx * 0.05 }}
-                          className="flex items-start gap-3"
-                        >
+                        <div key={idx} className="flex items-start gap-3">
                           {feature.included ? (
                             <Check className="w-5 h-5 text-accent-green shrink-0 mt-0.5" />
                           ) : (
@@ -363,42 +190,32 @@ export default function PricingSection() {
                           )}
                           <span
                             className={`text-sm ${
-                              feature.included
-                                ? "text-text-secondary"
-                                : "text-text-muted line-through opacity-50"
+                              feature.included ? "text-text-secondary" : "text-text-muted line-through opacity-50"
                             }`}
                           >
                             {feature.text}
                           </span>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
-        {/* Bottom Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-16"
-        >
+        <div className="text-center mt-16">
           <p className="text-text-muted text-sm">
-            All plans include WhatsApp Business API integration.{" "}
-              <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">
+            All plans include WhatsApp Business API integration. {" "}
+            <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">
               Meta API fees
-              </Link>{" "}
+            </Link>{" "}
             are billed separately based on your usage.
           </p>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Contact Form Modal */}
       <ContactFormModal
         isOpen={contactFormOpen}
         onClose={() => setContactFormOpen(false)}

@@ -7,12 +7,12 @@ import Footer from "@/components/Footer";
 const SocialProof = dynamic(() => import("@/components/SocialProof"));
 const FeatureGrid = dynamic(() => import("@/components/FeatureGrid"));
 const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
-const ProductPreview = dynamic(() => import("@/components/ProductPreview"));
-const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"));
-const PricingSection = dynamic(() => import("@/components/PricingSection"));
-const FAQSection = dynamic(() => import("@/components/FAQSection"));
-const InquirySection = dynamic(() => import("@/components/InquirySection"));
-const CTABanner = dynamic(() => import("@/components/CTABanner"));
+const ProductPreview = dynamic(() => import("../components/ProductPreview"));
+const TestimonialsSection = dynamic(() => import("../components/TestimonialsSection"));
+const PricingSection = dynamic(() => import("../components/PricingSection"));
+const FAQSection = dynamic(() => import("../components/FAQSection"));
+const InquirySection = dynamic(() => import("../components/InquirySection"));
+const CTABanner = dynamic(() => import("../components/CTABanner"));
 
 export const metadata: Metadata = {
   title: "PingOS | WhatsApp CRM, Business Messaging & Lead Automation",
