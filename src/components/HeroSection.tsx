@@ -56,12 +56,12 @@ export default function HeroSection() {
         >
           <span className="gradient-text-hero">The AI-Powered</span>
           <br />
-          <span className="relative inline-block align-top" style={{ minWidth: "18ch", perspective: "1200px", transformStyle: "preserve-3d" }}>
+          <span className="relative inline-block align-top" style={{ minWidth: "18ch", minHeight: "1.2em", perspective: "1200px", transformStyle: "preserve-3d", display: "inline-block" }}>
             {dynamicWords.map((word, index) => (
               <span
                 key={word.text}
-                className={`hero-word-cycle absolute inset-0 bg-linear-to-r ${word.color} bg-clip-text text-transparent pb-2 origin-center will-change-transform`}
-                style={{ animationDelay: `${index * 3}s` }}
+                className={`hero-word-cycle absolute inset-0 bg-linear-to-r ${word.color} bg-clip-text text-transparent origin-center will-change-transform`}
+                style={{ animationDelay: `${index * 3}s`, lineHeight: "1.2" }}
               >
                 {word.text}
               </span>
