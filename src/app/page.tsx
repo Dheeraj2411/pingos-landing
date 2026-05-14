@@ -15,23 +15,23 @@ const InquirySection = dynamic(() => import("../components/InquirySection"));
 const CTABanner = dynamic(() => import("../components/CTABanner"));
 
 export const metadata: Metadata = {
-  title: "PingOS | WhatsApp CRM, Business Messaging & Lead Automation",
+  title: "PingOS | WhatsApp CRM, Business Messaging & WABA Automation",
   description:
-    "PingOS helps teams manage WhatsApp, SMS, and email in one place with shared inboxes, automation, lead capture, and campaign tools.",
+    "PingOS is a specialized WhatsApp Business OS. Manage leads, automate follow-ups, and run high-volume campaigns using the Official WABA API.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "PingOS | WhatsApp CRM, Business Messaging & Lead Automation",
+    title: "PingOS | WhatsApp CRM, Business Messaging & WABA Automation",
     description:
-      "Manage customer conversations, automate follow-ups, and capture more leads across WhatsApp, SMS, and email.",
+      "Manage customer conversations, automate follow-ups, and capture more leads exclusively through the Official WhatsApp Business API.",
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PingOS | WhatsApp CRM, Business Messaging & Lead Automation",
+    title: "PingOS | WhatsApp CRM, Business Messaging & WABA Automation",
     description:
-      "Manage customer conversations, automate follow-ups, and capture more leads across WhatsApp, SMS, and email.",
+      "Manage customer conversations, automate follow-ups, and capture more leads exclusively through the Official WhatsApp Business API.",
   },
 };
 
@@ -44,7 +44,7 @@ export default function Home() {
     url: "https://pingos.ai",
     logo: "https://pingos.ai/logo.png",
     description:
-      "PingOS is the all-in-one business messaging operating system. Automate conversations, manage leads, run campaigns, and unify your inbox across WhatsApp, SMS, and email.",
+      "PingOS is the specialized WhatsApp Business operating system. Automate conversations, manage leads, and run high-volume campaigns via the Official WABA API.",
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.8",

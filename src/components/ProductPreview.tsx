@@ -22,8 +22,8 @@ export default function ProductPreview() {
             See PingOS in Action
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-text-secondary text-lg">
-            A powerful command center for your customer conversations,
-            with real-time analytics and AI-powered automations.
+            The ultimate command center for your WhatsApp Business API,
+            with real-time analytics and Official WABA automations.
           </p>
         </div>
 

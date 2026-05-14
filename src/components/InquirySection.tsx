@@ -202,7 +202,7 @@ export default function InquirySection() {
                           rows={5}
                           value={formData.message}
                           onChange={handleChange}
-                          placeholder="Tell us about your messaging needs, team size, or any questions you have..."
+                          placeholder="Tell us about your WhatsApp automation needs, team size, or WABA onboarding questions..."
                           className="inquiry-input resize-none"
                         />
                       </div>

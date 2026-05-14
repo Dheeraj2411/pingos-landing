@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Users, TrendingUp, Zap } from "lucide-react";
 
 const stats = [
@@ -23,10 +26,16 @@ const stats = [
 
 export default function SocialProof() {
   return (
-    <section className="relative py-16 sm:py-20 border-y border-border-subtle">
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5" />
+    <section className="relative py-16 sm:py-20 border-y border-border-subtle overflow-hidden">
+      <div className="absolute inset-0 bg-linear-to-r from-primary/5 via-transparent to-accent/5" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className="relative max-w-7xl mx-auto px-6"
+      >
         {/* Heading */}
         <div className="text-center mb-12">
           <p className="text-text-secondary text-lg">
@@ -39,8 +48,15 @@ export default function SocialProof() {
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
-              <div key={i} className="text-center">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 mb-4 group hover:from-primary/30 hover:to-accent/30 transition-all">
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-linear-to-br from-primary/20 to-accent/20 mb-4 group hover:from-primary/30 hover:to-accent/30 transition-all">
                   <Icon className="w-7 h-7 text-accent" />
                 </div>
                 <p className="text-3xl sm:text-4xl font-bold text-text-primary mb-2">
@@ -52,7 +68,7 @@ export default function SocialProof() {
                 <p className="text-sm text-text-muted">
                   {stat.description}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -68,7 +84,8 @@ export default function SocialProof() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
+

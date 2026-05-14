@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, Variants } from "framer-motion";
 import {
   Zap,
   Users,
@@ -10,66 +13,92 @@ import {
 const features = [
   {
     icon: Zap,
-    title: "Visual Automations",
+    title: "WhatsApp Automations",
     description:
-      "Build powerful workflows with a drag-and-drop builder. Trigger responses based on keywords, events, or schedules — no code needed.",
+      "Build powerful WhatsApp workflows with a drag-and-drop builder. Trigger responses based on WABA keywords, media, or schedules.",
     gradient: "from-yellow-500/20 to-orange-500/20",
     iconColor: "text-yellow-400",
     borderColor: "hover:border-yellow-500/30",
   },
   {
     icon: Users,
-    title: "Lead Management",
+    title: "Official WABA CRM",
     description:
-      "Capture, score, and nurture leads automatically. Tag contacts, track lifecycle stage, and never let a hot lead slip away.",
+      "Official Meta-verified CRM for WhatsApp. Capture, score, and nurture leads from Click-to-WhatsApp ads automatically.",
     gradient: "from-emerald-500/20 to-teal-500/20",
     iconColor: "text-emerald-400",
     borderColor: "hover:border-emerald-500/30",
   },
   {
     icon: Megaphone,
-    title: "Smart Campaigns",
+    title: "Bulk Broadcasts",
     description:
-      "Broadcast targeted messages across WhatsApp, SMS, and email. Schedule, A/B test, and track performance in real time.",
+      "Send high-volume WhatsApp broadcasts using Official WABA templates. Schedule campaigns and track read rates in real-time.",
     gradient: "from-blue-500/20 to-cyan-500/20",
     iconColor: "text-blue-400",
     borderColor: "hover:border-blue-500/30",
   },
   {
     icon: Inbox,
-    title: "Unified Inbox",
+    title: "Multi-Agent Inbox",
     description:
-      "One inbox for every channel. Assign conversations, collaborate with your team, and respond faster than ever before.",
+      "One unified inbox for your entire team. Manage thousands of WhatsApp conversations with speed, tags, and assignments.",
     gradient: "from-purple-500/20 to-pink-500/20",
     iconColor: "text-purple-400",
     borderColor: "hover:border-purple-500/30",
   },
   {
     icon: BarChart3,
-    title: "Real-Time Analytics",
+    title: "Messaging Analytics",
     description:
-      "Track message delivery, open rates, response times, and team performance with beautiful, actionable dashboards.",
+      "Deep insights into delivery rates, template performance, and response times for every WhatsApp interaction.",
     gradient: "from-cyan-500/20 to-blue-500/20",
     iconColor: "text-cyan-400",
     borderColor: "hover:border-cyan-500/30",
   },
   {
     icon: Shield,
-    title: "Enterprise Security",
+    title: "Meta-Verified Security",
     description:
-      "SOC 2 compliant, end-to-end encryption, role-based access, and audit logs. Your data is safe with PingOS.",
+      "Built on the Official WhatsApp Business API. SOC 2 compliant and Meta-approved for enterprise-grade data security.",
     gradient: "from-rose-500/20 to-red-500/20",
     iconColor: "text-rose-400",
     borderColor: "hover:border-rose-500/30",
   },
 ];
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  },
+};
+
 export default function FeatureGrid() {
   return (
-    <section id="features" className="relative py-16 sm:py-20">
+    <section id="features" className="relative py-16 sm:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <span className="text-sm font-medium text-primary-light uppercase tracking-widest">
             Features
           </span>
@@ -82,13 +111,20 @@ export default function FeatureGrid() {
             Everything you need to automate, personalize, and scale your
             customer conversations — unified in one powerful platform.
           </p>
-        </div>
+        </motion.div>
 
         {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
           {features.map((feature) => (
-            <div
+            <motion.div
               key={feature.title}
+              variants={cardVariants}
               className={`glass-card glass-card-hover p-6 group cursor-default ${feature.borderColor}`}
             >
               {/* Icon */}
@@ -105,10 +141,11 @@ export default function FeatureGrid() {
               <p className="text-sm text-text-secondary leading-relaxed">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+

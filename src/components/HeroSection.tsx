@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
 import WhatsAppButton from "./WhatsAppButton";
@@ -8,14 +9,24 @@ import { getProductUrl } from "@/lib/product";
 
 const dynamicWords = [
   { text: "WhatsApp CRM", color: "from-emerald-300 via-teal-300 to-cyan-400" },
-  { text: "Lead Generation", color: "from-rose-300 via-pink-300 to-orange-400" },
-  { text: "Sales Automation", color: "from-blue-300 via-indigo-400 to-purple-400" },
-  { text: "Team Collaboration", color: "from-[#ffffff] via-[#c7d2fe] to-[#22d3ee]" },
+  { text: "WABA Automation", color: "from-rose-300 via-pink-300 to-orange-400" },
+  { text: "Lead Generation", color: "from-blue-300 via-indigo-400 to-purple-400" },
+  { text: "Sales Automation", color: "from-[#ffffff] via-[#c7d2fe] to-[#22d3ee]" },
 ];
 
 export default function HeroSection() {
+  const [index, setIndex] = useState(0);
   const loginUrl = getProductUrl("/login");
   const signupUrl = getProductUrl("/signup");
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % dynamicWords.length);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, []);
+
+  const currentWord = dynamicWords[index];
 
   return (
     <section
@@ -43,7 +54,7 @@ export default function HeroSection() {
         >
           <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
           <span className="text-sm text-text-secondary">
-            Now with WhatsApp Business API
+            Official WhatsApp Business API (WABA) Partner
           </span>
         </motion.div>
 
@@ -51,21 +62,35 @@ export default function HeroSection() {
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            delay: 0.3 
+          }}
           className="text-[1.75rem] sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6"
         >
           <span className="gradient-text-hero">The AI-Powered</span>
           <br />
-          <span className="relative inline-block align-top" style={{ minWidth: "18ch", minHeight: "1.2em", perspective: "1200px", transformStyle: "preserve-3d", display: "inline-block" }}>
-            {dynamicWords.map((word, index) => (
-              <span
-                key={word.text}
-                className={`hero-word-cycle absolute inset-0 bg-linear-to-r ${word.color} bg-clip-text text-transparent origin-center will-change-opacity`}
-                style={{ animationDelay: `${index * 3}s`, lineHeight: "1.2" }}
+          <span className="relative inline-block align-top" style={{ minWidth: "18ch", minHeight: "1.2em", perspective: "1000px", transformStyle: "preserve-3d" }}>
+            <AnimatePresence mode="popLayout">
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, y: 40, rotateX: -90, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, rotateX: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -40, rotateX: 90, filter: "blur(10px)" }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 120,
+                  damping: 18,
+                  mass: 1
+                }}
+                className={`absolute inset-0 bg-linear-to-r ${currentWord.color} bg-clip-text text-transparent will-change-transform`}
+                style={{ lineHeight: "1.2" }}
               >
-                {word.text}
-              </span>
-            ))}
+                {currentWord.text}
+              </motion.span>
+            </AnimatePresence>
           </span>
           <br />
           <span className="gradient-text-primary">for Modern Teams</span>
@@ -75,25 +100,38 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            delay: 0.5 
+          }}
           className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 wrap-break-word"
         >
-          PingOS is a business messaging OS for WhatsApp CRM, lead generation, and sales automation. Automate conversations, run high-converting drip campaigns, and manage Click-to-WhatsApp ads from one unified platform.
+          PingOS is a specialized WhatsApp Business OS. Automate lead generation, scale sales with Official WABA API, and manage Click-to-WhatsApp ads with precision from one unified dashboard.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            delay: 0.7 
+          }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap"
         >
           <Link
             href={signupUrl}
-            className="btn-primary text-base py-3.5! px-8!"
+            className="btn-primary text-base py-3.5! px-8! group relative overflow-hidden"
           >
-            Sign Up
-            <ArrowRight className="w-4 h-4" />
+            <span className="relative z-10 flex items-center gap-2">
+              Sign Up
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </span>
+            <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer transition-transform" />
           </Link>
           <Link
             href={loginUrl}
@@ -109,7 +147,12 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            delay: 0.9 
+          }}
           className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-16"
         >
           {[
@@ -118,11 +161,15 @@ export default function HeroSection() {
             { value: "99.9%", label: "Uptime SLA" },
             { value: "No code", label: "Bot builder" },
           ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-text-primary">
+            <div key={stat.label} className="text-center group cursor-default">
+              <motion.div 
+                whileHover={{ y: -5, scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="text-2xl sm:text-3xl font-bold text-text-primary group-hover:text-primary-light transition-colors"
+              >
                 {stat.value}
-              </div>
-              <div className="text-sm text-text-muted mt-1">{stat.label}</div>
+              </motion.div>
+              <div className="text-sm text-text-muted mt-1 group-hover:text-text-secondary transition-colors">{stat.label}</div>
             </div>
           ))}
         </motion.div>
@@ -179,7 +226,7 @@ export default function HeroSection() {
                         WhatsApp
                       </div>
                       <div className="px-3 py-1 rounded-full bg-primary/10 text-primary-light text-xs font-medium border border-primary/20">
-                        Email
+                        WABA API
                       </div>
                     </div>
                   </div>
@@ -196,14 +243,14 @@ export default function HeroSection() {
                       },
                       {
                         name: "Alex Johnson",
-                        msg: "Thanks for the quick response! The demo was great.",
+                        msg: "The automated response solved my issue immediately! Thanks.",
                         time: "15m ago",
                         unread: false,
-                        channel: "Email",
+                        channel: "WhatsApp",
                       },
                       {
                         name: "Café Bloom",
-                        msg: "Can we schedule the onboarding for next week?",
+                        msg: "How do we upgrade our WABA API templates?",
                         time: "1h ago",
                         unread: true,
                         channel: "WhatsApp",

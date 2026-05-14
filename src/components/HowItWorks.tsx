@@ -1,41 +1,50 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Plug, Workflow, Rocket } from "lucide-react";
 
 const steps = [
   {
     number: "01",
     icon: Plug,
-    title: "Connect Your Channels",
+    title: "Official WABA Onboarding",
     description:
-      "Link your WhatsApp Business API, email provider, and SMS gateway in under 5 minutes. No engineering team required.",
-    detail: "WhatsApp • Email • SMS • Instagram",
+      "Connect your Official WhatsApp Business API (WABA) in minutes. No complex technical setup or lengthy approvals required.",
+    detail: "Official WABA API • Meta Partner",
   },
   {
     number: "02",
     icon: Workflow,
-    title: "Build Automations",
+    title: "Design WhatsApp Flows",
     description:
-      "Design visual workflows with our drag-and-drop builder. Set triggers, conditions, and actions to automate every conversation.",
-    detail: "Visual Builder • If/Else Logic • Templates",
+      "Design visual WhatsApp workflows with our drag-and-drop builder. Automate lead qualification, support, and sales on WhatsApp.",
+    detail: "Interactive Buttons • Media Support • Flow Builder",
   },
   {
     number: "03",
     icon: Rocket,
-    title: "Launch & Scale",
+    title: "Scale Your Engagement",
     description:
-      "Go live in minutes. Monitor performance analytics, optimize campaigns, and scale your messaging as your business grows.",
-    detail: "Real-time Analytics • A/B Testing • Auto-Scale",
+      "Go live and reach thousands of customers. Monitor WhatsApp performance, optimize template engagement, and scale your ROI.",
+    detail: "Template Analytics • Broadcast Lists • Auto-Scale",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative py-16 sm:py-20">
+    <section id="how-it-works" className="relative py-16 sm:py-20 overflow-hidden">
       {/* Subtle background */}
       <div className="absolute inset-0 bg-radial-glow-bottom opacity-50" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-20"
+        >
           <span className="text-sm font-medium text-primary-light uppercase tracking-widest">
             How It Works
           </span>
@@ -45,7 +54,7 @@ export default function HowItWorks() {
           <p className="mt-4 max-w-xl mx-auto text-text-secondary text-lg">
             Three simple steps to transform your customer communication.
           </p>
-        </div>
+        </motion.div>
 
         {/* Steps */}
         <div className="relative">
@@ -53,8 +62,15 @@ export default function HowItWorks() {
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-linear-to-r from-transparent via-border-subtle to-transparent -translate-y-1/2" />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
-            {steps.map((step) => (
-              <div key={step.number} className="relative">
+            {steps.map((step, i) => (
+              <motion.div 
+                key={step.number} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="relative"
+              >
                 <div className="glass-card glass-card-hover p-8 text-center h-full flex flex-col items-center">
                   {/* Step Number */}
                   <div className="text-5xl font-black text-primary/10 mb-4 font-mono">
@@ -79,7 +95,7 @@ export default function HowItWorks() {
                     {step.detail}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -87,3 +103,4 @@ export default function HowItWorks() {
     </section>
   );
 }
+

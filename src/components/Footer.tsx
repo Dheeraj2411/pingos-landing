@@ -44,8 +44,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-text-muted leading-relaxed max-w-xs">
-              The all-in-one business messaging OS. Automate, engage, and grow
-              — all from a single platform.
+              The ultimate WhatsApp Business Messaging OS. Automate, engage, and grow your customer relationships — all from one Official WABA platform.
             </p>
           </div>
 

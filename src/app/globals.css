@@ -2,7 +2,7 @@
 
 /* ===== PingOS Design System ===== */
 
-@theme inline {
+@theme {
   /* Primary Palette */
   --color-primary: #8b5cf6;
   --color-primary-light: #ba9eff;
@@ -216,24 +216,6 @@ h6 {
   }
 }
 
-@keyframes hero-word-cycle {
-  0% {
-    opacity: 1;
-    transform: translateY(0) rotateX(0deg) scale(1);
-    filter: blur(0px);
-  }
-  99% {
-    opacity: 1;
-    transform: translateY(0) rotateX(0deg) scale(1);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(0) rotateX(0deg) scale(0.95);
-    filter: blur(2px);
-  }
-}
-
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -242,17 +224,12 @@ h6 {
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
-.hero-word-cycle {
-  animation: hero-word-cycle 3s infinite;
-  transform-style: preserve-3d;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hero-word-cycle {
-    animation: none;
-    opacity: 1;
-    transform: none;
-    filter: none;
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

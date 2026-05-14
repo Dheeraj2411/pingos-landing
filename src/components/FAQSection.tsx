@@ -106,7 +106,7 @@ export default function FAQSection() {
             <span className="gradient-text-hero">Frequently Asked Questions</span>
           </h2>
           <p className="mt-6 text-text-secondary text-lg max-w-2xl mx-auto">
-            Everything you need to know about PingOS, from pricing to features to support. Can&apos;t find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
+            Everything you need to know about PingOS, from WABA onboarding to feature support. Can&apos;t find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
           </p>
         </div>
 
@@ -128,7 +128,7 @@ export default function FAQSection() {
             Still have questions?
           </h3>
           <p className="text-text-secondary mb-6">
-            Our support team is here to help. Reach out anytime—we typically respond within 2 hours.
+            Our support team is here to help you scale your WhatsApp operations. Reach out anytime—we typically respond within 2 hours.
           </p>
           <button
             onClick={() => setContactFormOpen(true)}
