@@ -60,7 +60,7 @@ export default function HeroSection() {
             {dynamicWords.map((word, index) => (
               <span
                 key={word.text}
-                className={`hero-word-cycle absolute inset-0 bg-linear-to-r ${word.color} bg-clip-text text-transparent origin-center will-change-transform`}
+                className={`hero-word-cycle absolute inset-0 bg-linear-to-r ${word.color} bg-clip-text text-transparent origin-center will-change-opacity`}
                 style={{ animationDelay: `${index * 3}s`, lineHeight: "1.2" }}
               >
                 {word.text}

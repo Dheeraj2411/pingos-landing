@@ -219,20 +219,18 @@ h6 {
 @keyframes hero-word-cycle {
   0% {
     opacity: 1;
-    transform: translateY(0) rotateX(0deg);
+    transform: translateY(0) rotateX(0deg) scale(1);
     filter: blur(0px);
   }
-  20%,
-  25% {
+  99% {
     opacity: 1;
-    transform: translateY(0) rotateX(0deg);
+    transform: translateY(0) rotateX(0deg) scale(1);
     filter: blur(0px);
   }
-  33.333%,
   100% {
     opacity: 0;
-    transform: translateY(-1rem) rotateX(90deg);
-    filter: blur(4px);
+    transform: translateY(0) rotateX(0deg) scale(0.95);
+    filter: blur(2px);
   }
 }
 
@@ -245,7 +243,7 @@ h6 {
 }
 
 .hero-word-cycle {
-  animation: hero-word-cycle 12s infinite;
+  animation: hero-word-cycle 3s infinite;
   transform-style: preserve-3d;
 }
 
