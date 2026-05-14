@@ -218,11 +218,11 @@ h6 {
 
 @keyframes hero-word-cycle {
   0% {
-    opacity: 0;
-    transform: translateY(1rem) rotateX(-90deg);
-    filter: blur(4px);
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+    filter: blur(0px);
   }
-  8%,
+  20%,
   25% {
     opacity: 1;
     transform: translateY(0) rotateX(0deg);
