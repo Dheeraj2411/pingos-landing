@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import SocialProof from "@/components/SocialProof";
-import FeatureGrid from "@/components/FeatureGrid";
-import HowItWorks from "@/components/HowItWorks";
-import ProductPreview from "@/components/ProductPreview";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import PricingSection from "@/components/PricingSection";
-import FAQSection from "@/components/FAQSection";
-import InquirySection from "@/components/InquirySection";
-import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
+
+const SocialProof = dynamic(() => import("@/components/SocialProof"));
+const FeatureGrid = dynamic(() => import("@/components/FeatureGrid"));
+const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
+const ProductPreview = dynamic(() => import("@/components/ProductPreview"));
+const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"));
+const PricingSection = dynamic(() => import("@/components/PricingSection"));
+const FAQSection = dynamic(() => import("@/components/FAQSection"));
+const InquirySection = dynamic(() => import("@/components/InquirySection"));
+const CTABanner = dynamic(() => import("@/components/CTABanner"));
 
 export const metadata: Metadata = {
   title: "PingOS | WhatsApp CRM, Business Messaging & Lead Automation",
@@ -43,6 +45,11 @@ export default function Home() {
     logo: "https://pingos.ai/logo.png",
     description:
       "PingOS is the all-in-one business messaging operating system. Automate conversations, manage leads, run campaigns, and unify your inbox across WhatsApp, SMS, and email.",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "127",
+    },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Support",
@@ -68,21 +75,21 @@ export default function Home() {
       {
         "@type": "Offer",
         name: "Starter (Free Trial)",
-        price: "0",
+        price: "29/month",
         priceCurrency: "USD",
         description: "Perfect for solopreneurs and small teams testing the platform.",
       },
       {
         "@type": "Offer",
         name: "Pro",
-        price: "49",
+        price: "49/month",
         priceCurrency: "USD",
         description: "The revenue driver for growing sales teams and agencies.",
       },
       {
         "@type": "Offer",
         name: "Enterprise",
-        price: "299",
+        price: "299/year",
         priceCurrency: "USD",
         description: "For large-scale operations with dedicated support.",
       },

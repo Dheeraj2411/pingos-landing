@@ -1,15 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, MessageSquare } from "lucide-react";
-import ContactFormModal from "./ContactFormModal";
 import WhatsAppButton from "./WhatsAppButton";
 import Link from "next/link";
 import { getProductUrl } from "@/lib/product";
 
 export default function CTABanner() {
-  const [contactFormOpen, setContactFormOpen] = useState(false);
   const loginUrl = getProductUrl("/login");
   const signupUrl = getProductUrl("/signup");
 
@@ -62,12 +59,6 @@ export default function CTABanner() {
           </div>
         </motion.div>
       </div>
-
-      {/* Contact Form Modal */}
-      <ContactFormModal
-        isOpen={contactFormOpen}
-        onClose={() => setContactFormOpen(false)}
-      />
     </section>
   );
 }

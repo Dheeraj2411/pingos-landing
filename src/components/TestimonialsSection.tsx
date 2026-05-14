@@ -32,7 +32,10 @@ export default function TestimonialsSection() {
   return (
     <section id="testimonials" className="relative py-16 sm:py-20 overflow-hidden">
       {/* Background Ambience */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full bg-primary/10 blur-[120px] rounded-full pointer-events-none"
+        style={{ maxWidth: "800px", height: "400px" }}
+      />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
@@ -42,12 +45,12 @@ export default function TestimonialsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h2 className="text-sm font-semibold text-primary-light uppercase tracking-wider mb-3">
+            <p className="text-sm font-semibold text-primary-light uppercase tracking-wider mb-3">
               Trusted by Innovators
-            </h2>
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
               Don&apos;t just take our word for it
-            </h3>
+            </h2>
             <p className="text-lg text-text-secondary">
               See how businesses are using PingOS to scale their communication and build better customer relationships.
             </p>

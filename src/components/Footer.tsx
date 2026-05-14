@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 
 const footerLinks: Record<string, { label: string; href: string }[]> = {
   Product: [
@@ -37,13 +36,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-2.5 mb-4 group">
-              <Image
-                src="/logo.png"
-                alt="PingOS Logo"
-                width={32}
-                height={32}
-                className="group-hover:drop-shadow-lg transition-all"
-              />
+              <div className="w-8 h-8 rounded-lg bg-linear-to-br from-primary via-primary to-accent flex items-center justify-center text-[10px] font-black text-white shadow-lg shadow-primary/20">
+                P
+              </div>
               <span className="text-2xl font-bold text-text-primary tracking-tight">
                 Ping<span className="text-primary-light">OS</span>
               </span>

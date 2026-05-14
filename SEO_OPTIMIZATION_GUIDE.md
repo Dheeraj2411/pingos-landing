@@ -37,10 +37,10 @@ This document outlines all the SEO optimizations implemented for the PingOS land
 
 ### 4. **Structured Data (Schema.org / JSON-LD)**
 
-- ✅ **Organization Schema** - Company information, logo, social profiles, contact
-- ✅ **SoftwareApplication Schema** - Product details, pricing tiers, ratings
+- ✅ **Organization Schema** - Company information, logo, contact, and aggregateRating
+- ✅ **SoftwareApplication Schema** - Product details, pricing tiers, and aggregateRating
 - ✅ **FAQPage Schema** - Common questions and answers (for featured snippets)
-- ✅ **Aggregate Rating** - 4.8/5 rating with 127 reviews (for star ratings in search results)
+- ✅ **Aggregate Rating** - `4.8/5` rating with `127` reviews via `aggregateRating` (for star ratings in search results)
 
 ### 5. **Page-Level SEO**
 

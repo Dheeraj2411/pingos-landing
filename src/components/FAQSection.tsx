@@ -58,6 +58,8 @@ interface FAQItemProps {
 }
 
 function FAQItem({ question, answer, index, isOpen, onToggle }: FAQItemProps) {
+  const contentId = `faq-answer-${index}`;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -72,6 +74,9 @@ function FAQItem({ question, answer, index, isOpen, onToggle }: FAQItemProps) {
     >
       <button
         onClick={onToggle}
+        type="button"
+        aria-expanded={isOpen}
+        aria-controls={contentId}
         className="w-full text-left px-6 py-5 rounded-xl glass-card hover:bg-surface-card/60 hover:border-primary/20 transition-all duration-300"
       >
         <div className="flex items-center justify-between gap-4">
@@ -91,6 +96,7 @@ function FAQItem({ question, answer, index, isOpen, onToggle }: FAQItemProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id={contentId}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -131,7 +137,7 @@ export default function FAQSection() {
             <span className="gradient-text-hero">Frequently Asked Questions</span>
           </h2>
           <p className="mt-6 text-text-secondary text-lg max-w-2xl mx-auto">
-            Everything you need to know about PingOS, from pricing to features to support. Can't find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
+            Everything you need to know about PingOS, from pricing to features to support. Can&apos;t find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
           </p>
         </motion.div>
 

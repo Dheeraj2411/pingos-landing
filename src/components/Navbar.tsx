@@ -45,6 +45,9 @@ export default function Navbar() {
             alt="PingOS Logo"
             width={40}
             height={40}
+            sizes="40px"
+            quality={60}
+            priority
             className="group-hover:drop-shadow-lg transition-all"
           />
           <span className="text-3xl font-bold text-text-primary tracking-tight">
@@ -76,9 +79,6 @@ export default function Navbar() {
             Sign Up
           </Link>
         </div>
-
-
-
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -124,7 +124,6 @@ export default function Navbar() {
               >
                 Sign Up
               </Link>
-
             </div>
           </motion.div>
         )}

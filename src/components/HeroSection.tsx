@@ -1,11 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import ContactFormModal from "./ContactFormModal";
 import WhatsAppButton from "./WhatsAppButton";
 import { getProductUrl } from "@/lib/product";
 
@@ -17,17 +14,9 @@ const dynamicWords = [
 ];
 
 export default function HeroSection() {
-  const [wordIndex, setWordIndex] = useState(0);
-  const [contactFormOpen, setContactFormOpen] = useState(false);
   const loginUrl = getProductUrl("/login");
   const signupUrl = getProductUrl("/signup");
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % dynamicWords.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
   return (
     <section
       id="hero"
@@ -67,20 +56,16 @@ export default function HeroSection() {
         >
           <span className="gradient-text-hero">The AI-Powered</span>
           <br />
-          <span className="relative inline-grid" style={{ gridTemplateColumns: "1fr", perspective: "1000px" }}>
-            <AnimatePresence mode="popLayout">
-              <motion.span
-                key={wordIndex}
-                initial={{ y: 40, opacity: 0, rotateX: -90, filter: "blur(4px)" }}
-                animate={{ y: 0, opacity: 1, rotateX: 0, filter: "blur(0px)" }}
-                exit={{ y: -40, opacity: 0, rotateX: 90, filter: "blur(4px)" }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className={`bg-linear-to-r ${dynamicWords[wordIndex].color} bg-clip-text text-transparent pb-2 origin-center`}
-                style={{ gridColumn: 1, gridRow: 1, transformStyle: "preserve-3d" }}
+          <span className="relative inline-block align-top" style={{ minWidth: "18ch", perspective: "1000px" }}>
+            {dynamicWords.map((word, index) => (
+              <span
+                key={word.text}
+                className={`hero-word-cycle absolute inset-0 bg-linear-to-r ${word.color} bg-clip-text text-transparent pb-2 origin-center`}
+                style={{ animationDelay: `${index * 3}s` }}
               >
-                {dynamicWords[wordIndex].text}
-              </motion.span>
-            </AnimatePresence>
+                {word.text}
+              </span>
+            ))}
           </span>
           <br />
           <span className="gradient-text-primary">for Modern Teams</span>
@@ -157,7 +142,9 @@ export default function HeroSection() {
                 {/* Sidebar */}
                 <div className="hidden sm:flex w-56 border-r border-border-subtle flex-col p-4 gap-3 bg-surface-primary/50">
                   <div className="flex items-center gap-2 mb-4">
-                    <Image src="/logo.png" alt="PingOS" width={28} height={28} />
+                    <div className="w-7 h-7 rounded-lg bg-linear-to-br from-primary to-accent flex items-center justify-center text-[10px] font-black text-white shadow-sm shadow-primary/20">
+                      P
+                    </div>
                     <span className="text-sm font-semibold">PingOS</span>
                   </div>
                   {["Inbox", "Contacts", "Campaigns", "Automations", "Analytics"].map(
@@ -258,11 +245,6 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Contact Form Modal */}
-        <ContactFormModal
-          isOpen={contactFormOpen}
-          onClose={() => setContactFormOpen(false)}
-        />
       </div>
     </section>
   );

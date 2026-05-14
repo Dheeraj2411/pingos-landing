@@ -70,7 +70,7 @@ export default function ProductPreview() {
               </div>
 
               {/* Messages */}
-              <div className="p-4 space-y-4 min-h-[320px] bg-surface-primary/30">
+              <div className="p-4 space-y-4 min-h-80 bg-surface-primary/30">
                 {/* Incoming */}
                 <div className="flex gap-2 max-w-[80%]">
                   <div className="bg-surface-elevated rounded-2xl rounded-tl-md px-4 py-2.5">
@@ -143,16 +143,28 @@ export default function ProductPreview() {
 
               {/* Input */}
               <div className="p-3 border-t border-border-subtle flex items-center gap-2">
-                <button className="p-2 text-text-muted hover:text-text-secondary transition-colors">
+                <button
+                  type="button"
+                  aria-label="Attach file"
+                  className="p-2 text-text-muted hover:text-text-secondary transition-colors"
+                >
                   <Paperclip className="w-4 h-4" />
                 </button>
                 <div className="flex-1 bg-surface-elevated rounded-xl px-4 py-2 text-sm text-text-muted">
                   Type a message...
                 </div>
-                <button className="p-2 text-text-muted hover:text-text-secondary transition-colors">
+                <button
+                  type="button"
+                  aria-label="Open emoji picker"
+                  className="p-2 text-text-muted hover:text-text-secondary transition-colors"
+                >
                   <Smile className="w-4 h-4" />
                 </button>
-                <button className="p-2 bg-primary text-white rounded-xl hover:bg-primary-dark transition-colors">
+                <button
+                  type="button"
+                  aria-label="Send message"
+                  className="p-2 bg-primary text-white rounded-xl hover:bg-primary-dark transition-colors"
+                >
                   <Send className="w-4 h-4" />
                 </button>
               </div>
