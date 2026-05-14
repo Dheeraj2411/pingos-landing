@@ -59,6 +59,11 @@ export default function Home() {
     description:
       "Business messaging operating system for automation, CRM, and marketing.",
     url: "https://pingos.ai",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "127",
+    },
     offers: [
       {
         "@type": "Offer",
