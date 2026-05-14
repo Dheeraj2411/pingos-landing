@@ -47,9 +47,9 @@ export default function HeroSection() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 text-center">
         {/* Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-subtle bg-surface-glass backdrop-blur-sm mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
@@ -60,13 +60,13 @@ export default function HeroSection() {
 
         {/* Heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ 
             type: "spring",
             stiffness: 100,
             damping: 20,
-            delay: 0.3 
+            delay: 0.2 
           }}
           className="text-[1.75rem] sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6"
         >
@@ -98,13 +98,13 @@ export default function HeroSection() {
 
         {/* Subheading */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ 
             type: "spring",
             stiffness: 100,
             damping: 20,
-            delay: 0.5 
+            delay: 0.3 
           }}
           className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 wrap-break-word"
         >
@@ -113,13 +113,13 @@ export default function HeroSection() {
 
         {/* CTA Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ 
             type: "spring",
             stiffness: 100,
             damping: 20,
-            delay: 0.7 
+            delay: 0.4 
           }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap"
         >
@@ -145,13 +145,13 @@ export default function HeroSection() {
 
         {/* Stats Row */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ 
             type: "spring",
             stiffness: 100,
             damping: 20,
-            delay: 0.9 
+            delay: 0.5 
           }}
           className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-16"
         >
@@ -176,9 +176,9 @@ export default function HeroSection() {
 
         {/* Dashboard Preview */}
         <motion.div
-          initial={{ opacity: 0, y: 60, scale: 0.95 }}
+          initial={{ opacity: 0, y: 40, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.9, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mt-20 relative mx-auto w-full max-w-5xl"
         >
           <div className="absolute -inset-4 bg-linear-to-b from-primary/20 via-accent/10 to-transparent rounded-2xl blur-2xl" />
