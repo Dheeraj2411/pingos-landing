@@ -35,9 +35,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group">
-              <div className="w-8 h-8 rounded-lg bg-linear-to-br from-primary via-primary to-accent flex items-center justify-center text-[10px] font-black text-white shadow-lg shadow-primary/20">
-                P
+            <Link href="/" className="flex items-center gap-2.5 mb-6 group">
+              <div className="relative w-10 h-10 overflow-hidden rounded-xl border border-border-subtle group-hover:border-primary/50 transition-colors">
+                <img
+                  src="/logo.png"
+                  alt="PingOS"
+                  className="w-full h-full object-contain p-1.5"
+                />
               </div>
               <span className="text-2xl font-bold text-text-primary tracking-tight">
                 Ping<span className="text-primary-light">OS</span>
@@ -90,7 +94,7 @@ export default function Footer() {
           <p className="text-xs text-text-muted">
             © {new Date().getFullYear()} PingOS. All rights reserved.
           </p>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-2">
             {socialLinks.map((social) => (
               <a
                 key={social.name}
@@ -98,7 +102,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="text-text-muted hover:text-text-secondary transition-colors"
+                className="p-2.5 text-text-muted hover:text-text-secondary transition-colors"
               >
                 {social.icon}
               </a>

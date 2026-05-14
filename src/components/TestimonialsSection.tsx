@@ -6,21 +6,21 @@ const testimonials = [
     name: "Sarah Jenkins",
     role: "Head of Marketing, TechFlow",
     content: "PingOS completely transformed how we handle inbound leads. Our response time went from hours to seconds, and conversions are up 40%.",
-    image: "https://i.pravatar.cc/150?img=47",
+    image: "https://i.pravatar.cc/150?img=47&v=1.1",
     stars: 5,
   },
   {
     name: "David Chen",
     role: "Founding Partner, Apollo Labs",
     content: "The unified inbox is a lifesaver. We no longer switch between WhatsApp, email, and SMS. Everything is right there, beautifully organized.",
-    image: "https://i.pravatar.cc/150?img=11",
+    image: "https://i.pravatar.cc/150?img=11&v=1.1",
     stars: 5,
   },
   {
     name: "Elena Rodriguez",
     role: "Customer Success, GrowthStack",
     content: "Setting up automated campaigns was incredibly intuitive. We launched our holiday promo on WhatsApp in 10 minutes and saw massive engagement.",
-    image: "https://i.pravatar.cc/150?img=32",
+    image: "https://i.pravatar.cc/150?img=32&v=1.1",
     stars: 5,
   },
 ];
@@ -67,6 +67,7 @@ export default function TestimonialsSection() {
                     src={testimonial.image}
                     alt={testimonial.name}
                     fill
+                    sizes="(max-width: 768px) 48px, 48px"
                     className="object-cover"
                   />
                 </div>

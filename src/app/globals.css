@@ -98,6 +98,13 @@ h6 {
   border-radius: 1rem;
 }
 
+@media (max-width: 640px) {
+  .glass-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
 .glass-card-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -256,7 +263,7 @@ h6 {
   border-radius: 0.75rem;
   padding: 0.85rem 1rem;
   color: var(--color-text-primary);
-  font-size: 0.95rem;
+  font-size: 1rem; /* 16px to prevent iOS zoom */
   font-family: inherit;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;

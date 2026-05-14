@@ -48,7 +48,7 @@ export default function Navbar() {
             sizes="40px"
             quality={60}
             priority
-            className="group-hover:drop-shadow-lg transition-all"
+            className="w-10 h-10 group-hover:drop-shadow-lg transition-all"
           />
           <span className="text-3xl font-bold text-text-primary tracking-tight">
             Ping<span className="text-primary-light">OS</span>

@@ -45,11 +45,9 @@ export default function HeroSection() {
       />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 text-center">
-        {/* Badge */}
+        {/* Badge - Instant reveal on mobile */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
+          initial={{ opacity: 1, y: 0 }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-subtle bg-surface-glass backdrop-blur-sm mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
@@ -58,35 +56,19 @@ export default function HeroSection() {
           </span>
         </motion.div>
 
-        {/* Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            type: "spring",
-            stiffness: 100,
-            damping: 20,
-            delay: 0.1 
-          }}
-          className="text-[1.75rem] sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6"
-        >
+        {/* Heading - Removed delay and initial opacity for LCP speed */}
+        <h1 className="text-[1.75rem] sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6">
           <span className="gradient-text-hero">The AI-Powered</span>
           <br />
-          <span className="relative inline-block align-top" style={{ minWidth: "18ch", minHeight: "1.2em", perspective: "1000px", transformStyle: "preserve-3d" }}>
-            <AnimatePresence mode="popLayout">
+          <span className="relative inline-flex flex-col items-center justify-center min-w-[280px] sm:min-w-[450px]" style={{ minHeight: "1.2em" }}>
+            <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
                 key={index}
-                initial={{ opacity: 0, y: 20, rotateX: -90, filter: "blur(8px)" }}
-                animate={{ opacity: 1, y: 0, rotateX: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -20, rotateX: 90, filter: "blur(8px)" }}
-                transition={{ 
-                  type: "spring",
-                  stiffness: 120,
-                  damping: 18,
-                  mass: 1
-                }}
-                className={`absolute inset-0 bg-linear-to-r ${currentWord.color} bg-clip-text text-transparent will-change-transform`}
-                style={{ lineHeight: "1.2" }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className={`bg-linear-to-r ${currentWord.color} bg-clip-text text-transparent py-1`}
               >
                 {currentWord.text}
               </motion.span>
@@ -94,18 +76,13 @@ export default function HeroSection() {
           </span>
           <br />
           <span className="gradient-text-primary">for Modern Teams</span>
-        </motion.h1>
+        </h1>
 
-        {/* Subheading */}
+        {/* Subheading - Near instant */}
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            type: "spring",
-            stiffness: 100,
-            damping: 20,
-            delay: 0.15 
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 wrap-break-word"
         >
           PingOS is a specialized WhatsApp Business OS. Automate lead generation, scale sales with Official WABA API, and manage Click-to-WhatsApp ads with precision from one unified dashboard.
@@ -113,14 +90,9 @@ export default function HeroSection() {
 
         {/* CTA Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            type: "spring",
-            stiffness: 100,
-            damping: 20,
-            delay: 0.2 
-          }}
+          transition={{ duration: 0.4, delay: 0.2 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap"
         >
           <Link

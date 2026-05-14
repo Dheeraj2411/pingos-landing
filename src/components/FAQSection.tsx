@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import ContactFormModal from "./ContactFormModal";
@@ -78,13 +79,22 @@ function FAQItem({ question, answer, index, isOpen, onToggle }: FAQItemProps) {
         </div>
       </button>
 
-      {isOpen && (
-        <div id={contentId} className="overflow-hidden">
-          <div className="px-6 py-4 text-text-secondary leading-relaxed border-t border-border-subtle">
-            {answer}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            id={contentId}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 py-4 text-text-secondary leading-relaxed border-t border-border-subtle">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -102,10 +112,10 @@ export default function FAQSection() {
           <span className="inline-block px-3 py-1 rounded-full bg-surface-glass border border-border-subtle text-xs font-semibold text-accent-green mb-4">
             Questions & Answers
           </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight">
             <span className="gradient-text-hero">Frequently Asked Questions</span>
           </h2>
-          <p className="mt-6 text-text-secondary text-lg max-w-2xl mx-auto">
+          <p className="mt-6 text-text-secondary text-base sm:text-lg max-w-2xl mx-auto">
             Everything you need to know about PingOS, from WABA onboarding to feature support. Can&apos;t find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
           </p>
         </div>

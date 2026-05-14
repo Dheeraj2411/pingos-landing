@@ -120,12 +120,12 @@ export default function PricingSection() {
                 className={`relative h-full group ${plan.highlight ? "lg:scale-105 lg:z-10" : ""}`}
               >
                 {plan.highlight && (
-                  <div className="absolute inset-0 rounded-3xl bg-linear-to-b from-primary/30 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
+                  <div className="absolute inset-0 rounded-3xl bg-linear-to-b from-primary/20 via-primary/5 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
                 )}
 
                 {plan.highlight && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-primary via-primary/80 to-accent text-white text-xs font-bold shadow-xl shadow-primary/40">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 w-full flex justify-center">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-primary via-primary/80 to-accent text-white text-xs font-bold shadow-xl shadow-primary/40 whitespace-nowrap">
                       <Sparkles className="w-4 h-4" />
                       Most Popular
                     </div>
