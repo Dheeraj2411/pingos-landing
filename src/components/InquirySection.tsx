@@ -6,9 +6,9 @@ import WhatsAppQR from "./WhatsAppQR";
 
 const planOptions = [
   { value: "", label: "Select a plan you're interested in" },
-  { value: "starter", label: "Starter — Free" },
-  { value: "professional", label: "Professional — $79/mo" },
-  { value: "enterprise", label: "Enterprise — $299/mo" },
+  { value: "starter", label: "Base (Free / Starter)" },
+  { value: "pro", label: "Pro — $49/mo (monthly or yearly)" },
+  { value: "enterprise", label: "Enterprise — Custom (yearly only)" },
   { value: "custom", label: "Custom / Not sure yet" },
 ];
 

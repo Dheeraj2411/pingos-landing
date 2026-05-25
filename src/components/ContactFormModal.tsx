@@ -209,9 +209,9 @@ export default function ContactFormModal({
                           className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary focus:outline-none focus:border-primary/50 transition-colors"
                         >
                           <option value="not-specified">Not specified</option>
-                          <option value="starter">Starter (Free)</option>
-                          <option value="pro">Pro ($49/mo)</option>
-                          <option value="enterprise">Enterprise ($299+/mo)</option>
+                          <option value="starter">Base (Free / Starter)</option>
+                          <option value="pro">Pro ($49/mo, yearly available)</option>
+                          <option value="enterprise">Enterprise (Custom, yearly only)</option>
                         </select>
                       </div>
                     )}

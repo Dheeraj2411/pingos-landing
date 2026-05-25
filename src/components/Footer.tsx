@@ -50,6 +50,14 @@ export default function Footer() {
             <p className="text-sm text-text-muted leading-relaxed max-w-xs">
               The ultimate WhatsApp Business Messaging OS. Automate, engage, and grow your customer relationships — all from one Official WABA platform.
             </p>
+            <a
+              href="https://wa.me/918076377512"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-sm text-primary-light hover:text-accent transition-colors"
+            >
+              WhatsApp: +91 80763 77512
+            </a>
           </div>
 
           {/* Link Columns */}

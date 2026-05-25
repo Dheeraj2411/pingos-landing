@@ -54,6 +54,7 @@ export default function Home() {
       "@type": "ContactPoint",
       contactType: "Customer Support",
       email: "support@pingos.me",
+      telephone: "+91-8076377512",
     },
   };
 
@@ -74,24 +75,24 @@ export default function Home() {
     offers: [
       {
         "@type": "Offer",
-        name: "Starter (Free Trial)",
-        price: "29/month",
+        name: "Base (Free / Starter)",
+        price: "0",
         priceCurrency: "USD",
-        description: "Perfect for solopreneurs and small teams testing the platform.",
+        description: "Default plan for new workspaces with core limits and no premium features.",
       },
       {
         "@type": "Offer",
         name: "Pro",
-        price: "49/month",
+        price: "49",
         priceCurrency: "USD",
-        description: "The revenue driver for growing sales teams and agencies.",
+        description: "Growth plan for teams with expanded limits and all premium features.",
       },
       {
         "@type": "Offer",
         name: "Enterprise",
-        price: "299/year",
+        price: "Custom",
         priceCurrency: "USD",
-        description: "For large-scale operations with dedicated support.",
+        description: "Unlimited enterprise usage with annual contracts.",
       },
     ],
   };
