@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
 export default function WhatsAppButton() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "918076377512";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+  if (!whatsappNumber) return null;
   const whatsappMessage = encodeURIComponent(
     "Hi! I'm interested in learning more about PingOS and how it can help my business."
   );

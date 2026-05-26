@@ -34,3 +34,23 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Environment variables
+
+This project uses a public environment variable `NEXT_PUBLIC_WHATSAPP_NUMBER` to enable WhatsApp links/QR. If this variable is not set, WhatsApp UI (button/QR/footer link) will be hidden and no phone number will be exposed in the app.
+
+Add a local `.env.local` file at the project root (do not commit it) with the number in international format (digits only, no plus sign or punctuation):
+
+```bash
+# Example (.env.local)
+NEXT_PUBLIC_WHATSAPP_NUMBER=918076377512
+```
+
+On Windows PowerShell you can set it for the current session like this before running the dev server:
+
+```powershell
+$env:NEXT_PUBLIC_WHATSAPP_NUMBER="918076377512"
+npm run dev
+```
+
+In production, set `NEXT_PUBLIC_WHATSAPP_NUMBER` in your hosting platform's environment settings (e.g., Vercel Environment Variables).

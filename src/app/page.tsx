@@ -54,7 +54,6 @@ export default function Home() {
       "@type": "ContactPoint",
       contactType: "Customer Support",
       email: "support@pingos.me",
-      telephone: "+91-8076377512",
     },
   };
 

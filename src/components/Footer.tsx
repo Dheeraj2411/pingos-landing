@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 const footerLinks: Record<string, { label: string; href: string }[]> = {
   Product: [
@@ -29,6 +30,8 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+
   return (
     <footer className="border-t border-border-subtle bg-surface-primary/80">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -37,10 +40,13 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-2.5 mb-6 group">
               <div className="relative w-10 h-10 overflow-hidden rounded-xl border border-border-subtle group-hover:border-primary/50 transition-colors">
-                <img
+                <Image
                   src="/logo.png"
                   alt="PingOS"
-                  className="w-full h-full object-contain p-1.5"
+                  width={40}
+                  height={40}
+                  className="object-contain p-1.5"
+                  priority
                 />
               </div>
               <span className="text-2xl font-bold text-text-primary tracking-tight">
@@ -50,14 +56,16 @@ export default function Footer() {
             <p className="text-sm text-text-muted leading-relaxed max-w-xs">
               The ultimate WhatsApp Business Messaging OS. Automate, engage, and grow your customer relationships — all from one Official WABA platform.
             </p>
-            <a
-              href="https://wa.me/918076377512"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm text-primary-light hover:text-accent transition-colors"
-            >
-              WhatsApp: +91 80763 77512
-            </a>
+            {whatsappNumber && (
+              <a
+                href={`https://wa.me/${whatsappNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-4 text-sm text-primary-light hover:text-accent transition-colors"
+              >
+                Chat on WhatsApp
+              </a>
+            )}
           </div>
 
           {/* Link Columns */}
