@@ -8,7 +8,7 @@ import ContactFormModal from "./ContactFormModal";
 const plans = [
   {
     name: "Base",
-    price: "$0",
+    price: "$19/month",
     period: "",
     description: "Default plan for new workspaces with essential tools for getting started.",
     icon: Zap,
@@ -27,7 +27,7 @@ const plans = [
       { text: "Premium Features: None", included: true },
       { text: "Billing Cycles: Monthly, Yearly", included: true },
     ],
-    cta: "Start Free",
+    cta: "Start Free Trial",
     highlight: false,
   },
   {
