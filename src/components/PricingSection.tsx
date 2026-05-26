@@ -8,8 +8,8 @@ import ContactFormModal from "./ContactFormModal";
 const plans = [
   {
     name: "Base",
-    price: "$19/month",
-    period: "",
+    price: "$19",
+    period: "/mo",
     description: "Default plan for new workspaces with essential tools for getting started.",
     icon: Zap,
     tier: "starter",
@@ -161,7 +161,7 @@ export default function PricingSection() {
                         {plan.period && <span className="text-text-muted">{plan.period}</span>}
                       </div>
                       {plan.tier === "starter" && (
-                        <p className="text-xs text-accent-green mt-2">Forever free, no credit card required</p>
+                        <p className="text-xs text-accent-green mt-2"> 7-Day Free Trial </p>
                       )}
                     </div>
 
