@@ -120,7 +120,7 @@ export default function ContactFormModal({
                     Thank You!
                   </h3>
                   <p className="text-text-secondary">
-                    We've received your inquiry. Our team will be in touch within 24 hours.
+                    We&apos;ve received your inquiry. Our team will be in touch within 24 hours.
                   </p>
                 </div>
               ) : (
