@@ -68,18 +68,18 @@ export default function HeroSection() {
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
                 key={index}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className={`bg-linear-to-r ${currentWord.color} bg-clip-text text-transparent py-1`}
+                initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className={`bg-linear-to-r ${currentWord.color} bg-clip-text text-transparent pb-2`}
               >
                 {currentWord.text}
               </motion.span>
             </AnimatePresence>
           </span>
           <br />
-          <span className="gradient-text-primary">for Modern Teams</span>
+          <span className="text-text-primary">for Modern Teams</span>
         </h1>
 
         {/* Subheading - Near instant */}
