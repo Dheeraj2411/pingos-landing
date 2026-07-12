@@ -8,7 +8,7 @@ const features = [
     icon: Zap,
     title: "WhatsApp Automations",
     description:
-      "Build powerful WhatsApp workflows with a drag-and-drop builder. Trigger responses based on WABA keywords, media, or schedules.",
+      "Build workflows with a visual drag-and-drop builder.",
     gradient: "from-primary/10 to-primary/5",
     iconColor: "text-primary",
     borderColor: "hover:border-primary/30",
@@ -17,7 +17,7 @@ const features = [
     icon: Users,
     title: "Official WABA CRM",
     description:
-      "Official Meta-verified CRM for WhatsApp. Capture, score, and nurture leads from Click-to-WhatsApp ads automatically.",
+      "Capture, score, and nurture leads from Click-to-WhatsApp ads automatically.",
     gradient: "from-primary-light/10 to-primary-light/5",
     iconColor: "text-primary-light",
     borderColor: "hover:border-primary-light/30",
@@ -26,7 +26,7 @@ const features = [
     icon: Megaphone,
     title: "Bulk Broadcasts",
     description:
-      "Send high-volume WhatsApp broadcasts using Official WABA templates. Schedule campaigns and track read rates in real-time.",
+      "Send high-volume WhatsApp broadcasts using Official WABA templates.",
     gradient: "from-accent/10 to-accent/5",
     iconColor: "text-accent",
     borderColor: "hover:border-accent/30",
@@ -35,7 +35,7 @@ const features = [
     icon: Inbox,
     title: "Multi-Agent Inbox",
     description:
-      "One unified inbox for your entire team. Manage thousands of WhatsApp conversations with speed, tags, and assignments.",
+      "One unified inbox to manage thousands of conversations with tags and assignments.",
     gradient: "from-primary-dark/10 to-primary-dark/5",
     iconColor: "text-primary-dark",
     borderColor: "hover:border-primary-dark/30",
@@ -44,7 +44,7 @@ const features = [
     icon: BarChart3,
     title: "Messaging Analytics",
     description:
-      "Deep insights into delivery rates, template performance, and response times for every WhatsApp interaction.",
+      "Deep insights into delivery rates and template performance.",
     gradient: "from-accent-green/10 to-accent-green/5",
     iconColor: "text-accent-green",
     borderColor: "hover:border-accent-green/30",
@@ -53,7 +53,7 @@ const features = [
     icon: Shield,
     title: "Meta-Verified Security",
     description:
-      "Built on the Official WhatsApp Business API. SOC 2 compliant and Meta-approved for enterprise-grade data security.",
+      "SOC 2 compliant and Meta-approved for enterprise-grade data security.",
     gradient: "from-primary/10 to-primary/5",
     iconColor: "text-primary",
     borderColor: "hover:border-primary/30",

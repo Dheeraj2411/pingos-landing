@@ -9,7 +9,7 @@ const steps = [
     icon: Plug,
     title: "Official WABA Onboarding",
     description:
-      "Connect your Official WhatsApp Business API (WABA) in minutes. No complex technical setup or lengthy approvals required.",
+      "Connect your Official WhatsApp Business API (WABA) in minutes.",
     detail: "Official WABA API • Meta Partner",
   },
   {
@@ -17,7 +17,7 @@ const steps = [
     icon: Workflow,
     title: "Design WhatsApp Flows",
     description:
-      "Design visual WhatsApp workflows with our drag-and-drop builder. Automate lead qualification, support, and sales on WhatsApp.",
+      "Automate lead qualification, support, and sales on WhatsApp.",
     detail: "Interactive Buttons • Media Support • Flow Builder",
   },
   {
@@ -25,7 +25,7 @@ const steps = [
     icon: Rocket,
     title: "Scale Your Engagement",
     description:
-      "Go live and reach thousands of customers. Monitor WhatsApp performance, optimize template engagement, and scale your ROI.",
+      "Go live and reach thousands of customers while monitoring performance.",
     detail: "Template Analytics • Broadcast Lists • Auto-Scale",
   },
 ];

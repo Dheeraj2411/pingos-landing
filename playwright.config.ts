@@ -1,7 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
-import dotenv from "dotenv";
-
-dotenv.config({ path: ".env.local" });
+// Vercel typecheck workaround for dotenv
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({ path: ".env.local" });
+}
 
 export default defineConfig({
   testDir: "./tests",
@@ -20,10 +21,10 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
   ],
-  webServer: {
-    command: "npm run dev -- -p 3000",
-    url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+  // webServer: {
+  //   command: "npm run dev -- -p 3000",
+  //   url: "http://localhost:3000",
+  //   reuseExistingServer: !process.env.CI,
+  //   timeout: 120 * 1000,
+  // },
 });

@@ -13,7 +13,7 @@ const TestimonialsSection = dynamic(
 );
 const PricingSection = dynamic(() => import("../components/PricingSection"));
 const FAQSection = dynamic(() => import("../components/FAQSection"));
-const InquirySection = dynamic(() => import("../components/InquirySection"));
+
 const CTABanner = dynamic(() => import("../components/CTABanner"));
 
 export const metadata: Metadata = {
@@ -176,10 +176,6 @@ export default function Home() {
         <div className="section-divider" />
 
         <FAQSection />
-
-        <div className="section-divider" />
-
-        <InquirySection />
 
         <div className="section-divider" />
 

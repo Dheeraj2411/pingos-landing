@@ -7,7 +7,6 @@ import Link from "next/link";
 import { getProductUrl } from "@/lib/product";
 
 export default function CTABanner() {
-  const loginUrl = getProductUrl("/login");
   const signupUrl = getProductUrl("/signup");
 
   return (
@@ -67,8 +66,7 @@ export default function CTABanner() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="max-w-xl mx-auto text-white/90 text-lg mb-10"
             >
-              Join 500+ forward-thinking teams already using PingOS to automate
-              conversations, convert leads, and grow revenue — all on autopilot.
+              Join forward-thinking teams using PingOS to automate conversations and grow revenue — all on autopilot.
             </motion.p>
 
             <motion.div
@@ -83,19 +81,11 @@ export default function CTABanner() {
                 className="inline-flex items-center gap-2 bg-white text-primary font-semibold px-8 py-3.5 rounded-xl hover:bg-gray-50 transition-colors shadow-sm group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Sign Up
+                  Start Free Trial
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
                 <div className="absolute inset-0 bg-black/5 -translate-x-full group-hover:animate-shimmer transition-transform" />
               </Link>
-              <Link
-                href={loginUrl}
-                className="inline-flex items-center gap-2 border border-white/30 text-white font-medium px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors"
-              >
-                <MessageSquare className="w-4 h-4" />
-                Login
-              </Link>
-              <WhatsAppButton />
             </motion.div>
           </div>
         </motion.div>

@@ -106,19 +106,18 @@ export default function HeroSection() {
             className="btn-primary text-base py-3.5! px-8! group relative overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2">
-              Sign Up
+              Start Free Trial
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
             <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:animate-shimmer transition-transform" />
           </Link>
           <Link
-            href={loginUrl}
+            href="/#product"
             className="btn-secondary text-base py-3.5! px-8!"
           >
             <Play className="w-4 h-4" />
-            Login
+            See How It Works
           </Link>
-          <WhatsAppButton />
         </motion.div>
 
         {/* Stats Row */}

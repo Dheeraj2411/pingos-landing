@@ -69,16 +69,10 @@ export default function Navbar() {
             </Link>
           ))}
           <Link
-            href={loginUrl}
-            className="ml-3 px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-full hover:bg-black/5"
-          >
-            Login
-          </Link>
-          <Link
             href={signupUrl}
             className="btn-primary py-2! px-4! text-sm ml-2"
           >
-            Sign Up
+            Start Free Trial
           </Link>
         </div>
         {/* Mobile Toggle */}
@@ -117,18 +111,11 @@ export default function Navbar() {
                 </Link>
               ))}
               <Link
-                href={loginUrl}
-                onClick={() => setMobileOpen(false)}
-                className="py-2 text-text-secondary hover:text-text-primary transition-colors"
-              >
-                Login
-              </Link>
-              <Link
                 href={signupUrl}
                 onClick={() => setMobileOpen(false)}
                 className="mt-2 btn-primary w-full justify-center"
               >
-                Sign Up
+                Start Free Trial
               </Link>
             </div>
           </motion.div>
