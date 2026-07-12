@@ -7,7 +7,7 @@ export default function WhatsAppQR() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   if (!whatsappNumber) return null;
   const whatsappMessage = encodeURIComponent(
-    "Hi! I'm interested in learning more about PingOS and how it can help my business."
+    "Hi! I'm interested in learning more about PingOS and how it can help my business.",
   );
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -26,7 +26,9 @@ export default function WhatsAppQR() {
 
       {/* Text */}
       <div className="text-center">
-        <p className="text-sm font-semibold text-gray-700 mb-1">Scan to connect on WhatsApp</p>
+        <p className="text-sm font-semibold text-gray-700 mb-1">
+          Scan to connect on WhatsApp
+        </p>
         <p className="text-xs text-gray-600">Chat with us directly</p>
       </div>
 

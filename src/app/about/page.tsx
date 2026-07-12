@@ -17,13 +17,16 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h1 className="text-4xl font-bold text-white mb-4">About PingOS</h1>
           <p className="text-text-secondary max-w-3xl mx-auto mb-8">
-            PingOS is a focused WhatsApp Business operating system that helps teams automate customer conversations, manage leads, and run campaigns using the Official WABA API.
+            PingOS is a focused WhatsApp Business operating system that helps
+            teams automate customer conversations, manage leads, and run
+            campaigns using the Official WABA API.
           </p>
 
           <section className="space-y-6 text-left text-text-secondary">
             <h2 className="text-2xl font-semibold text-white">Our Mission</h2>
             <p>
-              We build tools that make conversational commerce scalable and delightful for businesses and their customers.
+              We build tools that make conversational commerce scalable and
+              delightful for businesses and their customers.
             </p>
 
             <h2 className="text-2xl font-semibold text-white">What We Value</h2>

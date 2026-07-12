@@ -1,14 +1,13 @@
 import {
   Send,
   Smile,
-  Paperclip,
   Check,
-  CheckCheck,
   Bot,
   TrendingUp,
   Users,
   MessageCircle,
 } from "lucide-react";
+import ChatBubble from "./ChatBubble";
 
 export default function ProductPreview() {
   return (
@@ -22,146 +21,96 @@ export default function ProductPreview() {
             See PingOS in Action
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-text-secondary text-lg">
-            The ultimate command center for your WhatsApp Business API,
-            with real-time analytics and Official WABA automations.
+            The ultimate command center for your WhatsApp Business API, with
+            real-time analytics and Official WABA automations.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="glass-card overflow-hidden h-full">
-            <div className="flex items-center gap-3 p-4 border-b border-border-subtle">
-              <div className="w-10 h-10 rounded-full bg-linear-to-br from-emerald-500/30 to-teal-500/30 flex items-center justify-center text-sm font-bold">
+          <div className="glass-card overflow-hidden h-full flex flex-col bg-chat-bg">
+            {/* Header */}
+            <div className="flex items-center gap-3 px-4 py-3 bg-primary-dark text-white shadow-md z-10">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold shrink-0">
                 PS
               </div>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-text-primary">
+              <div className="flex-1 min-w-0">
+                <div className="text-[16px] font-medium leading-tight truncate">
                   Priya Sharma
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  <span className="text-xs text-text-muted">
-                    Online • WhatsApp
-                  </span>
-                </div>
+                <div className="text-[13px] text-white/80">online</div>
               </div>
-              <div className="flex items-center gap-1 text-xs font-medium text-primary-light bg-primary/10 px-2.5 py-1 rounded-full border border-primary/20">
-                <Bot className="w-3 h-3" />
-                AI Active
+              <div className="flex gap-4 opacity-90 shrink-0">
+                <div className="w-5 h-5 rounded-full border-2 border-current" />
+                <div className="w-5 h-5 rounded-full border-2 border-current" />
               </div>
             </div>
 
-            <div className="p-4 space-y-4 min-h-80 bg-surface-primary/30">
-              <div className="flex gap-2 max-w-[80%]">
-                <div className="bg-surface-elevated rounded-2xl rounded-tl-md px-4 py-2.5">
-                  <p className="text-sm text-text-primary">
-                    Hi! I&apos;m interested in the enterprise plan. Can you tell me
-                    about pricing?
-                  </p>
-                  <div className="flex items-center gap-1 mt-1">
-                    <span className="text-[10px] text-text-muted">10:32 AM</span>
-                  </div>
-                </div>
+            {/* Chat Area */}
+            <div className="flex-1 p-4 space-y-4 overflow-y-auto">
+              <div className="text-center mb-6">
+                <span className="bg-[#E1F3FB] text-text-secondary text-[12px] px-3 py-1 rounded-lg shadow-sm">
+                  TODAY
+                </span>
               </div>
 
-              <div className="flex gap-2 max-w-[80%] ml-auto flex-row-reverse">
-                <div className="bg-primary/10 border border-primary/20 rounded-2xl rounded-tr-md px-4 py-2.5">
-                  <div className="flex items-center gap-1 mb-1">
-                    <Bot className="w-3 h-3 text-primary-light" />
-                    <span className="text-[10px] text-primary-light font-medium">
-                      Auto-reply
-                    </span>
-                  </div>
-                  <p className="text-sm text-text-primary">
-                    Thanks for reaching out, Priya! 🙌 Our Enterprise plan starts
-                    at $299/mo and includes unlimited messaging, priority support,
-                    and custom integrations.
-                  </p>
-                  <div className="flex items-center gap-1 mt-1 justify-end">
-                    <span className="text-[10px] text-text-muted">10:32 AM</span>
-                    <CheckCheck className="w-3 h-3 text-blue-400" />
-                  </div>
-                </div>
-              </div>
+              <ChatBubble
+                message="Hi! I'm interested in the enterprise plan. Can you tell me about pricing?"
+                time="10:32 AM"
+                isOutbound={false}
+              />
 
-              <div className="flex gap-2 max-w-[80%]">
-                <div className="bg-surface-elevated rounded-2xl rounded-tl-md px-4 py-2.5">
-                  <p className="text-sm text-text-primary">
-                    That sounds great! Can I schedule a demo?
-                  </p>
-                  <div className="flex items-center gap-1 mt-1">
-                    <span className="text-[10px] text-text-muted">10:34 AM</span>
-                  </div>
-                </div>
-              </div>
+              <ChatBubble
+                message="Thanks for reaching out, Priya! 🙌 Our Enterprise plan starts at $299/mo and includes unlimited messaging, priority support, and custom integrations."
+                time="10:32 AM"
+                isOutbound={true}
+                isAutoReply={true}
+                status="read"
+              />
 
-              <div className="flex gap-2 max-w-[80%] ml-auto flex-row-reverse">
-                <div className="bg-primary/10 border border-primary/20 rounded-2xl px-4 py-3">
-                  <div className="flex gap-1">
-                    <span className="w-2 h-2 rounded-full bg-primary-light animate-bounce" />
-                    <span
-                      className="w-2 h-2 rounded-full bg-primary-light animate-bounce"
-                      style={{ animationDelay: "0.1s" }}
-                    />
-                    <span
-                      className="w-2 h-2 rounded-full bg-primary-light animate-bounce"
-                      style={{ animationDelay: "0.2s" }}
-                    />
-                  </div>
-                </div>
-              </div>
+              <ChatBubble
+                message="That sounds great! Can I schedule a demo?"
+                time="10:34 AM"
+                isOutbound={false}
+              />
+            </div>
 
-              <div className="p-3 border-t border-border-subtle flex items-center gap-2">
-                <button
-                  type="button"
-                  aria-label="Attach file"
-                  className="p-2 text-text-muted hover:text-text-secondary transition-colors"
-                >
-                  <Paperclip className="w-4 h-4" />
-                </button>
-                <div className="flex-1 bg-surface-elevated rounded-xl px-4 py-2 text-sm text-text-muted">
-                  Type a message...
-                </div>
-                <button
-                  type="button"
-                  aria-label="Open emoji picker"
-                  className="p-2 text-text-muted hover:text-text-secondary transition-colors"
-                >
-                  <Smile className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Send message"
-                  className="p-2 bg-primary text-white rounded-xl hover:bg-primary-dark transition-colors"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
+            {/* Input Area */}
+            <div className="p-3 bg-surface-primary flex items-center gap-2">
+              <button className="p-2 text-text-secondary shrink-0">
+                <Smile className="w-6 h-6" />
+              </button>
+              <div className="flex-1 bg-white rounded-full px-4 py-2.5 text-[15px] text-text-muted flex items-center gap-2 shadow-sm">
+                Type a message
               </div>
+              <button className="p-2.5 bg-[#00A884] text-white rounded-full shadow-md shrink-0">
+                <Send className="w-5 h-5 ml-0.5" />
+              </button>
             </div>
           </div>
 
           <div className="flex flex-col gap-5">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 {
                   icon: MessageCircle,
                   label: "Sent Today",
                   value: "2,847",
                   change: "+18%",
-                  color: "text-blue-400",
+                  color: "text-primary",
                 },
                 {
                   icon: Users,
                   label: "New Leads",
                   value: "384",
                   change: "+24%",
-                  color: "text-emerald-400",
+                  color: "text-accent-green",
                 },
                 {
                   icon: TrendingUp,
                   label: "Open Rate",
                   value: "94.2%",
                   change: "+3.1%",
-                  color: "text-purple-400",
+                  color: "text-accent",
                 },
               ].map((stat) => (
                 <div key={stat.label} className="glass-card p-4 flex flex-col">
@@ -169,8 +118,10 @@ export default function ProductPreview() {
                   <div className="text-xl font-bold text-text-primary">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-text-muted mt-0.5">{stat.label}</div>
-                  <div className="text-xs text-emerald-400 mt-1 font-medium">
+                  <div className="text-xs text-text-muted mt-0.5">
+                    {stat.label}
+                  </div>
+                  <div className="text-xs text-accent-green mt-1 font-medium">
                     {stat.change}
                   </div>
                 </div>
@@ -209,11 +160,11 @@ export default function ProductPreview() {
                 ].map((day, i) => (
                   <div key={i} className="flex-1 flex items-end gap-1">
                     <div
-                      className="flex-1 bg-linear-to-t from-primary/40 to-primary/80 rounded-t-md transition-all duration-500"
+                      className="flex-1 bg-linear-to-t from-primary/30 to-primary/60 rounded-t-sm transition-all duration-500"
                       style={{ height: `${day.sent}%` }}
                     />
                     <div
-                      className="flex-1 bg-linear-to-t from-accent/30 to-accent/60 rounded-t-md transition-all duration-500"
+                      className="flex-1 bg-linear-to-t from-accent-green/40 to-accent-green/70 rounded-t-sm transition-all duration-500"
                       style={{ height: `${day.recv}%` }}
                     />
                   </div>
@@ -221,11 +172,13 @@ export default function ProductPreview() {
               </div>
 
               <div className="flex justify-between mt-3 text-[10px] text-text-muted">
-                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
-                  <span key={day} className="flex-1 text-center">
-                    {day}
-                  </span>
-                ))}
+                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
+                  (day) => (
+                    <span key={day} className="flex-1 text-center">
+                      {day}
+                    </span>
+                  ),
+                )}
               </div>
             </div>
 
@@ -239,7 +192,7 @@ export default function ProductPreview() {
                     text: "Campaign 'Summer Sale' delivered to 1,247 contacts",
                     time: "2m ago",
                     icon: Check,
-                    color: "text-emerald-400",
+                    color: "text-accent-green",
                   },
                   {
                     text: 'Automation "Welcome Flow" triggered 38 times',
@@ -251,7 +204,7 @@ export default function ProductPreview() {
                     text: "New lead captured: Maria Garcia (WhatsApp)",
                     time: "32m ago",
                     icon: Users,
-                    color: "text-cyan-400",
+                    color: "text-primary",
                   },
                 ].map((item) => (
                   <div key={item.text} className="flex items-start gap-3">

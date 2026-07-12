@@ -29,7 +29,7 @@ export default function SocialProof() {
     <section className="relative py-16 sm:py-20 border-y border-border-subtle overflow-hidden">
       <div className="absolute inset-0 bg-linear-to-r from-primary/5 via-transparent to-accent/5" />
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -39,7 +39,8 @@ export default function SocialProof() {
         {/* Heading */}
         <div className="text-center mb-12">
           <p className="text-text-secondary text-lg">
-            Trusted by teams worldwide using PingOS for WhatsApp CRM and business messaging
+            Trusted by teams worldwide using PingOS for WhatsApp CRM and
+            business messaging
           </p>
         </div>
 
@@ -48,16 +49,16 @@ export default function SocialProof() {
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-linear-to-br from-primary/20 to-accent/20 mb-4 group hover:from-primary/30 hover:to-accent/30 transition-all">
-                  <Icon className="w-7 h-7 text-accent" />
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 mb-4 group hover:bg-primary/20 transition-all border border-primary/20">
+                  <Icon className="w-7 h-7 text-primary-light" />
                 </div>
                 <p className="text-3xl sm:text-4xl font-bold text-text-primary mb-2">
                   {stat.number}
@@ -65,9 +66,7 @@ export default function SocialProof() {
                 <p className="text-base font-semibold text-text-secondary mb-1">
                   {stat.label}
                 </p>
-                <p className="text-sm text-text-muted">
-                  {stat.description}
-                </p>
+                <p className="text-sm text-text-muted">{stat.description}</p>
               </motion.div>
             );
           })}
@@ -76,11 +75,30 @@ export default function SocialProof() {
         {/* Company Logos / Testimonial */}
         <div className="mt-16 pt-16 border-t border-border-subtle text-center">
           <p className="text-text-muted text-sm mb-6">
-            Used by sales teams, marketing agencies, and enterprises worldwide to manage PingOS conversations at scale
+            Used by sales teams, marketing agencies, and enterprises worldwide
+            to manage PingOS conversations at scale
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-            <div className="text-xs font-semibold text-text-secondary tracking-widest">
-              TRUSTED BY LEADING BRANDS
+          <div className="relative flex overflow-hidden w-full py-4 mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <div className="flex gap-8 w-max animate-marquee items-center">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="flex gap-8 items-center shrink-0">
+                  {[
+                    "Acme Corp",
+                    "GlobalTech",
+                    "Nexus Industries",
+                    "Nova Dynamics",
+                    "Quantum Solutions",
+                    "Stellar Innovations",
+                  ].map((brand) => (
+                    <span
+                      key={brand}
+                      className="text-2xl font-bold text-text-muted/40 uppercase tracking-widest whitespace-nowrap"
+                    >
+                      {brand}
+                    </span>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -88,4 +106,3 @@ export default function SocialProof() {
     </section>
   );
 }
-

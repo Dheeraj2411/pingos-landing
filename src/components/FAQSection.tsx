@@ -70,10 +70,12 @@ function FAQItem({ question, answer, index, isOpen, onToggle }: FAQItemProps) {
         className="w-full text-left px-6 py-5 rounded-xl glass-card hover:bg-surface-card/60 hover:border-primary/20 transition-all duration-300"
       >
         <div className="flex items-center justify-between gap-4">
-          <h3 className="text-lg font-semibold text-text-primary group-hover:text-accent transition-colors">
+          <h3 className="text-lg font-semibold text-text-primary group-hover:text-primary-light transition-colors">
             {question}
           </h3>
-          <div className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}>
+          <div
+            className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
+          >
             <ChevronDown className="w-5 h-5 text-primary" />
           </div>
         </div>
@@ -113,10 +115,20 @@ export default function FAQSection() {
             Questions & Answers
           </span>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-            <span className="gradient-text-hero">Frequently Asked Questions</span>
+            <span className="text-text-primary">
+              Frequently Asked Questions
+            </span>
           </h2>
           <p className="mt-6 text-text-secondary text-base sm:text-lg max-w-2xl mx-auto">
-            Everything you need to know about PingOS, from WABA onboarding to feature support. Can&apos;t find an answer? <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">Contact our team</Link>.
+            Everything you need to know about PingOS, from WABA onboarding to
+            feature support. Can&apos;t find an answer?{" "}
+            <Link
+              href="/#inquiry"
+              className="text-accent hover:text-accent/80 transition-colors"
+            >
+              Contact our team
+            </Link>
+            .
           </p>
         </div>
 
@@ -138,11 +150,12 @@ export default function FAQSection() {
             Still have questions?
           </h3>
           <p className="text-text-secondary mb-6">
-            Our support team is here to help you scale your WhatsApp operations. Reach out anytime—we typically respond within 2 hours.
+            Our support team is here to help you scale your WhatsApp operations.
+            Reach out anytime—we typically respond within 2 hours.
           </p>
           <button
             onClick={() => setContactFormOpen(true)}
-            className="px-8 py-3 rounded-xl bg-linear-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:-translate-y-0.5"
+            className="btn-primary py-3 px-8 text-white hover:-translate-y-0.5"
           >
             Get in Touch
           </button>

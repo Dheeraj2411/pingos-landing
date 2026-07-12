@@ -10,7 +10,8 @@ const plans = [
     name: "Base",
     price: "$19",
     period: "/mo",
-    description: "Default plan for new workspaces with essential tools for getting started.",
+    description:
+      "Default plan for new workspaces with essential tools for getting started.",
     icon: Zap,
     tier: "starter",
     features: [
@@ -58,7 +59,8 @@ const plans = [
     name: "Enterprise",
     price: "Custom",
     period: "",
-    description: "Unlimited usage for large-scale operations with annual enterprise terms.",
+    description:
+      "Unlimited usage for large-scale operations with annual enterprise terms.",
     icon: Crown,
     tier: "enterprise",
     features: [
@@ -82,7 +84,9 @@ const plans = [
 
 export default function PricingSection() {
   const [contactFormOpen, setContactFormOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<"starter" | "pro" | "enterprise" | undefined>(undefined);
+  const [selectedPlan, setSelectedPlan] = useState<
+    "starter" | "pro" | "enterprise" | undefined
+  >(undefined);
 
   const handleContactClick = (plan: "starter" | "pro" | "enterprise") => {
     setSelectedPlan(plan);
@@ -100,10 +104,11 @@ export default function PricingSection() {
             Simple, Transparent Pricing
           </span>
           <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-            <span className="gradient-text-hero">Choose Your Plan</span>
+            <span className="text-text-primary">Choose Your Plan</span>
           </h2>
           <p className="mt-6 max-w-2xl mx-auto text-text-secondary text-lg leading-relaxed">
-            Start free and scale as you grow. No hidden fees, no surprises. Upgrade, downgrade, or cancel anytime.
+            Start free and scale as you grow. No hidden fees, no surprises.
+            Upgrade, downgrade, or cancel anytime.
           </p>
         </div>
 
@@ -122,7 +127,7 @@ export default function PricingSection() {
 
                 {plan.highlight && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 w-full flex justify-center">
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-primary via-primary/80 to-accent text-white text-xs font-bold shadow-xl shadow-primary/40 whitespace-nowrap">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-xs font-bold shadow-md shadow-primary/20 whitespace-nowrap">
                       <Sparkles className="w-4 h-4" />
                       Most Popular
                     </div>
@@ -132,45 +137,56 @@ export default function PricingSection() {
                 <div
                   className={`relative h-full rounded-3xl backdrop-blur-xl transition-all duration-500 overflow-hidden ${
                     plan.highlight
-                      ? "bg-linear-to-br from-surface-card/80 to-primary/5 border border-primary/40 shadow-2xl shadow-primary/20"
-                      : "glass-card hover:bg-surface-card/60 hover:border-primary/20"
+                      ? "bg-white border-2 border-primary-light shadow-lg shadow-primary/10"
+                      : "glass-card hover:border-primary/20 bg-white"
                   }`}
                 >
-                  <div
-                    className={`absolute inset-0 opacity-40 ${plan.highlight ? "bg-linear-to-br from-primary/20 to-transparent" : "bg-none"}`}
-                  />
-
                   <div className="relative p-8 sm:p-10 h-full flex flex-col">
                     <div className="mb-8">
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
-                          plan.highlight ? "bg-linear-to-br from-primary to-accent text-white" : "bg-surface-elevated text-primary"
+                          plan.highlight
+                            ? "bg-primary text-white"
+                            : "bg-primary/10 text-primary"
                         }`}
                       >
                         <Icon className="w-6 h-6" />
                       </div>
-                      <h3 className="text-2xl font-bold text-text-primary">{plan.name}</h3>
-                      <p className="text-sm text-text-muted mt-2">{plan.description}</p>
+                      <h3 className="text-2xl font-bold text-text-primary">
+                        {plan.name}
+                      </h3>
+                      <p className="text-sm text-text-muted mt-2">
+                        {plan.description}
+                      </p>
                     </div>
 
                     <div className="mb-8">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-5xl font-bold bg-linear-to-r from-text-primary to-accent bg-clip-text text-transparent">
+                        <span className="text-5xl font-bold text-text-primary">
                           {plan.price}
                         </span>
-                        {plan.period && <span className="text-text-muted">{plan.period}</span>}
+                        {plan.period && (
+                          <span className="text-text-muted">{plan.period}</span>
+                        )}
                       </div>
                       {plan.tier === "starter" && (
-                        <p className="text-xs text-accent-green mt-2"> 7-Day Free Trial </p>
+                        <p className="text-xs text-accent-green mt-2">
+                          {" "}
+                          7-Day Free Trial{" "}
+                        </p>
                       )}
                     </div>
 
                     <button
-                      onClick={() => handleContactClick(plan.tier as "starter" | "pro" | "enterprise")}
+                      onClick={() =>
+                        handleContactClick(
+                          plan.tier as "starter" | "pro" | "enterprise",
+                        )
+                      }
                       className={`w-full mb-8 py-3 px-6 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
                         plan.highlight
-                          ? "bg-linear-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/50 hover:shadow-xl hover:shadow-primary/60 hover:-translate-y-0.5"
-                          : "bg-surface-elevated text-text-primary border border-border-subtle hover:border-primary/50 hover:bg-surface-card hover:-translate-y-0.5"
+                          ? "btn-primary text-white hover:-translate-y-0.5"
+                          : "bg-white text-text-primary border border-border-subtle hover:border-primary/50 hover:bg-gray-50 hover:-translate-y-0.5"
                       }`}
                     >
                       {plan.cta}
@@ -187,7 +203,9 @@ export default function PricingSection() {
                           )}
                           <span
                             className={`text-sm ${
-                              feature.included ? "text-text-secondary" : "text-text-muted line-through opacity-50"
+                              feature.included
+                                ? "text-text-secondary"
+                                : "text-text-muted line-through opacity-50"
                             }`}
                           >
                             {feature.text}
@@ -204,8 +222,11 @@ export default function PricingSection() {
 
         <div className="text-center mt-16">
           <p className="text-text-muted text-sm">
-            All plans include WhatsApp Business API integration. {" "}
-            <Link href="/#inquiry" className="text-accent hover:text-accent/80 transition-colors">
+            All plans include WhatsApp Business API integration.{" "}
+            <Link
+              href="/#inquiry"
+              className="text-accent hover:text-accent/80 transition-colors"
+            >
               Meta API fees
             </Link>{" "}
             are billed separately based on your usage.

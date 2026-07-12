@@ -8,7 +8,9 @@ const SocialProof = dynamic(() => import("@/components/SocialProof"));
 const FeatureGrid = dynamic(() => import("@/components/FeatureGrid"));
 const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
 const ProductPreview = dynamic(() => import("../components/ProductPreview"));
-const TestimonialsSection = dynamic(() => import("../components/TestimonialsSection"));
+const TestimonialsSection = dynamic(
+  () => import("../components/TestimonialsSection"),
+);
 const PricingSection = dynamic(() => import("../components/PricingSection"));
 const FAQSection = dynamic(() => import("../components/FAQSection"));
 const InquirySection = dynamic(() => import("../components/InquirySection"));
@@ -77,14 +79,16 @@ export default function Home() {
         name: "Base (Free / Starter)",
         price: "0",
         priceCurrency: "USD",
-        description: "Default plan for new workspaces with core limits and no premium features.",
+        description:
+          "Default plan for new workspaces with core limits and no premium features.",
       },
       {
         "@type": "Offer",
         name: "Pro",
         price: "49",
         priceCurrency: "USD",
-        description: "Growth plan for teams with expanded limits and all premium features.",
+        description:
+          "Growth plan for teams with expanded limits and all premium features.",
       },
       {
         "@type": "Offer",
@@ -135,7 +139,9 @@ export default function Home() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(softwareApplicationSchema),
+        }}
       />
       <script
         type="application/ld+json"

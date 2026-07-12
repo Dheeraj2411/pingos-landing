@@ -18,11 +18,11 @@ export default function ProductInfoButton({
       "bg-linear-to-r from-primary via-primary to-accent text-white hover:shadow-lg hover:shadow-primary/50",
     secondary:
       "bg-surface-elevated text-text-primary border border-border-subtle hover:border-primary/50 hover:bg-surface-card",
-    outline:
-      "border border-primary/50 text-primary hover:bg-primary/10",
+    outline: "border border-primary/50 text-primary hover:bg-primary/10",
   };
 
-  const isInternalLink = productUrl.startsWith("/") || productUrl.startsWith("#");
+  const isInternalLink =
+    productUrl.startsWith("/") || productUrl.startsWith("#");
 
   if (isInternalLink) {
     return (

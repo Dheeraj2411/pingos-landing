@@ -22,7 +22,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://pingos.ai"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://pingos.ai",
   ),
   title: {
     default: "PingOS — Official WhatsApp Business API (WABA) Messaging OS",

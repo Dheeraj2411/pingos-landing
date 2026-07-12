@@ -7,7 +7,7 @@ export default function WhatsAppButton() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   if (!whatsappNumber) return null;
   const whatsappMessage = encodeURIComponent(
-    "Hi! I'm interested in learning more about PingOS and how it can help my business."
+    "Hi! I'm interested in learning more about PingOS and how it can help my business.",
   );
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -31,4 +31,3 @@ export default function WhatsAppButton() {
     </motion.a>
   );
 }
-

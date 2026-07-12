@@ -13,7 +13,7 @@ export default function CTABanner() {
   return (
     <section className="relative py-16 sm:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -21,29 +21,34 @@ export default function CTABanner() {
           className="relative overflow-hidden rounded-3xl"
         >
           {/* Gradient Background */}
-          <div className="absolute inset-0 bg-linear-to-br from-primary via-primary-dark to-[#3730a3]" />
+          <div className="absolute inset-0 bg-primary-dark" />
           <div className="absolute inset-0 bg-grid-pattern opacity-10" />
 
           {/* Floating Orbs */}
-          <motion.div 
-            animate={{ 
+          <motion.div
+            animate={{
               scale: [1, 1.1, 1],
-              opacity: [0.2, 0.3, 0.2]
+              opacity: [0.2, 0.3, 0.2],
             }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-32 -right-32 w-80 h-80 bg-accent/20 rounded-full blur-[100px]" 
+            className="absolute -top-32 -right-32 w-80 h-80 bg-accent/20 rounded-full blur-[100px]"
           />
-          <motion.div 
-            animate={{ 
+          <motion.div
+            animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.2, 0.4, 0.2]
+              opacity: [0.2, 0.4, 0.2],
             }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute -bottom-32 -left-32 w-80 h-80 bg-primary-light/20 rounded-full blur-[100px]" 
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+            className="absolute -bottom-32 -left-32 w-80 h-80 bg-primary-light/20 rounded-full blur-[100px]"
           />
 
           <div className="relative px-8 py-16 sm:px-16 sm:py-20 text-center">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -52,22 +57,21 @@ export default function CTABanner() {
             >
               Ready to scale your WhatsApp revenue?
               <br />
-              <span className="text-accent">Start automating today</span>
+              <span className="text-[#25D366]">Start automating today</span>
             </motion.h2>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="max-w-xl mx-auto text-indigo-200 text-lg mb-10"
+              className="max-w-xl mx-auto text-white/90 text-lg mb-10"
             >
               Join 500+ forward-thinking teams already using PingOS to automate
-              conversations, convert leads, and grow revenue — all on
-              autopilot.
+              conversations, convert leads, and grow revenue — all on autopilot.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -76,13 +80,13 @@ export default function CTABanner() {
             >
               <Link
                 href={signupUrl}
-                className="inline-flex items-center gap-2 bg-white text-primary-dark font-semibold px-8 py-3.5 rounded-xl hover:bg-indigo-50 transition-colors shadow-lg shadow-black/10 group relative overflow-hidden"
+                className="inline-flex items-center gap-2 bg-white text-primary font-semibold px-8 py-3.5 rounded-xl hover:bg-gray-50 transition-colors shadow-sm group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Sign Up
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
-                <div className="absolute inset-0 bg-linear-to-r from-transparent via-primary/5 to-transparent -translate-x-full group-hover:animate-shimmer transition-transform" />
+                <div className="absolute inset-0 bg-black/5 -translate-x-full group-hover:animate-shimmer transition-transform" />
               </Link>
               <Link
                 href={loginUrl}
@@ -99,5 +103,3 @@ export default function CTABanner() {
     </section>
   );
 }
-
-

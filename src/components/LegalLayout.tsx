@@ -22,7 +22,7 @@ export default function LegalLayout({
         {/* Glow Effects */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[500px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-accent/10 blur-[100px] rounded-full pointer-events-none" />
-        
+
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

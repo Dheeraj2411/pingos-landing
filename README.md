@@ -96,5 +96,6 @@ WEBHOOK_SECRET=your-webhook-secret
 ```
 
 Notes:
+
 - The webhook is optional; errors when sending the webhook are logged and do not prevent the API from returning success to the web client.
 - For production, validate the `x-pingos-signature` on the receiver side to ensure authenticity.

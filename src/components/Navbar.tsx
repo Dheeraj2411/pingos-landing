@@ -35,7 +35,7 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-surface-primary/80 backdrop-blur-xl border-b border-border-subtle shadow-lg shadow-black/10"
+          ? "bg-white/95 backdrop-blur-xl border-b border-border-subtle shadow-sm shadow-black/5"
           : "bg-transparent"
       }`}
     >
@@ -63,20 +63,20 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-white/5"
+              className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-full hover:bg-black/5"
             >
               {link.label}
             </Link>
           ))}
           <Link
             href={loginUrl}
-            className="ml-3 px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-white/5"
+            className="ml-3 px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-full hover:bg-black/5"
           >
             Login
           </Link>
           <Link
             href={signupUrl}
-            className="px-4 py-2 text-sm font-semibold rounded-lg bg-linear-to-r from-primary to-accent text-white hover:shadow-lg hover:shadow-primary/30 transition-all"
+            className="btn-primary py-2! px-4! text-sm ml-2"
           >
             Sign Up
           </Link>
@@ -87,7 +87,11 @@ export default function Navbar() {
           className="md:hidden p-2 text-text-secondary hover:text-text-primary"
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          {mobileOpen ? (
+            <X className="w-5 h-5" />
+          ) : (
+            <Menu className="w-5 h-5" />
+          )}
         </button>
       </nav>
 
@@ -99,7 +103,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden border-b border-border-subtle bg-surface-primary/95 backdrop-blur-xl"
+            className="md:hidden overflow-hidden border-b border-border-subtle bg-white/95 backdrop-blur-xl shadow-sm"
           >
             <div className="px-6 py-4 flex flex-col gap-2">
               {navLinks.map((link) => (
@@ -122,7 +126,7 @@ export default function Navbar() {
               <Link
                 href={signupUrl}
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 inline-flex items-center justify-center rounded-xl bg-linear-to-r from-primary to-accent px-4 py-3 font-semibold text-white"
+                className="mt-2 btn-primary w-full justify-center"
               >
                 Sign Up
               </Link>

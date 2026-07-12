@@ -32,13 +32,16 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative py-16 sm:py-20 overflow-hidden">
+    <section
+      id="how-it-works"
+      className="relative py-16 sm:py-20 overflow-hidden"
+    >
       {/* Subtle background */}
       <div className="absolute inset-0 bg-radial-glow-bottom opacity-50" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -48,7 +51,7 @@ export default function HowItWorks() {
           <span className="text-sm font-medium text-primary-light uppercase tracking-widest">
             How It Works
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text leading-tight">
+          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
             Up and Running in Minutes
           </h2>
           <p className="mt-4 max-w-xl mx-auto text-text-secondary text-lg">
@@ -63,8 +66,8 @@ export default function HowItWorks() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
             {steps.map((step, i) => (
-              <motion.div 
-                key={step.number} 
+              <motion.div
+                key={step.number}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -78,7 +81,7 @@ export default function HowItWorks() {
                   </div>
 
                   {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-primary/15 to-accent/15 flex items-center justify-center mb-5 border border-primary/10">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 border border-primary/20">
                     <step.icon className="w-6 h-6 text-primary-light" />
                   </div>
 
@@ -103,4 +106,3 @@ export default function HowItWorks() {
     </section>
   );
 }
-

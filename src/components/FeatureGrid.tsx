@@ -1,14 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import {
-  Zap,
-  Users,
-  Megaphone,
-  Inbox,
-  BarChart3,
-  Shield,
-} from "lucide-react";
+import { Zap, Users, Megaphone, Inbox, BarChart3, Shield } from "lucide-react";
 
 const features = [
   {
@@ -16,54 +9,54 @@ const features = [
     title: "WhatsApp Automations",
     description:
       "Build powerful WhatsApp workflows with a drag-and-drop builder. Trigger responses based on WABA keywords, media, or schedules.",
-    gradient: "from-yellow-500/20 to-orange-500/20",
-    iconColor: "text-yellow-400",
-    borderColor: "hover:border-yellow-500/30",
+    gradient: "from-primary/10 to-primary/5",
+    iconColor: "text-primary",
+    borderColor: "hover:border-primary/30",
   },
   {
     icon: Users,
     title: "Official WABA CRM",
     description:
       "Official Meta-verified CRM for WhatsApp. Capture, score, and nurture leads from Click-to-WhatsApp ads automatically.",
-    gradient: "from-emerald-500/20 to-teal-500/20",
-    iconColor: "text-emerald-400",
-    borderColor: "hover:border-emerald-500/30",
+    gradient: "from-primary-light/10 to-primary-light/5",
+    iconColor: "text-primary-light",
+    borderColor: "hover:border-primary-light/30",
   },
   {
     icon: Megaphone,
     title: "Bulk Broadcasts",
     description:
       "Send high-volume WhatsApp broadcasts using Official WABA templates. Schedule campaigns and track read rates in real-time.",
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    iconColor: "text-blue-400",
-    borderColor: "hover:border-blue-500/30",
+    gradient: "from-accent/10 to-accent/5",
+    iconColor: "text-accent",
+    borderColor: "hover:border-accent/30",
   },
   {
     icon: Inbox,
     title: "Multi-Agent Inbox",
     description:
       "One unified inbox for your entire team. Manage thousands of WhatsApp conversations with speed, tags, and assignments.",
-    gradient: "from-purple-500/20 to-pink-500/20",
-    iconColor: "text-purple-400",
-    borderColor: "hover:border-purple-500/30",
+    gradient: "from-primary-dark/10 to-primary-dark/5",
+    iconColor: "text-primary-dark",
+    borderColor: "hover:border-primary-dark/30",
   },
   {
     icon: BarChart3,
     title: "Messaging Analytics",
     description:
       "Deep insights into delivery rates, template performance, and response times for every WhatsApp interaction.",
-    gradient: "from-cyan-500/20 to-blue-500/20",
-    iconColor: "text-cyan-400",
-    borderColor: "hover:border-cyan-500/30",
+    gradient: "from-accent-green/10 to-accent-green/5",
+    iconColor: "text-accent-green",
+    borderColor: "hover:border-accent-green/30",
   },
   {
     icon: Shield,
     title: "Meta-Verified Security",
     description:
       "Built on the Official WhatsApp Business API. SOC 2 compliant and Meta-approved for enterprise-grade data security.",
-    gradient: "from-rose-500/20 to-red-500/20",
-    iconColor: "text-rose-400",
-    borderColor: "hover:border-rose-500/30",
+    gradient: "from-primary/10 to-primary/5",
+    iconColor: "text-primary",
+    borderColor: "hover:border-primary/30",
   },
 ];
 
@@ -80,10 +73,10 @@ const containerVariants: Variants = {
 
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" }
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -92,7 +85,7 @@ export default function FeatureGrid() {
     <section id="features" className="relative py-16 sm:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -102,7 +95,7 @@ export default function FeatureGrid() {
           <span className="text-sm font-medium text-primary-light uppercase tracking-widest">
             Features
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text leading-tight">
+          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
             Engineered for High-Volume
             <br />
             Engagement
@@ -114,7 +107,7 @@ export default function FeatureGrid() {
         </motion.div>
 
         {/* Feature Cards */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -129,7 +122,7 @@ export default function FeatureGrid() {
             >
               {/* Icon */}
               <div
-                className={`w-12 h-12 rounded-xl bg-linear-to-br ${feature.gradient} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
+                className={`w-12 h-12 rounded-xl bg-linear-to-br ${feature.gradient} flex items-center justify-center mb-5 group-hover:-translate-y-1 transition-transform duration-300 shadow-sm`}
               >
                 <feature.icon className={`w-5 h-5 ${feature.iconColor}`} />
               </div>
@@ -148,4 +141,3 @@ export default function FeatureGrid() {
     </section>
   );
 }
-

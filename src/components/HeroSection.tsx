@@ -5,13 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
 import WhatsAppButton from "./WhatsAppButton";
+import ChatBubble from "./ChatBubble";
 import { getProductUrl } from "@/lib/product";
 
 const dynamicWords = [
-  { text: "WhatsApp CRM", color: "from-emerald-300 via-teal-300 to-cyan-400" },
-  { text: "WABA Automation", color: "from-rose-300 via-pink-300 to-orange-400" },
-  { text: "Lead Generation", color: "from-blue-300 via-indigo-400 to-purple-400" },
-  { text: "Sales Automation", color: "from-[#ffffff] via-[#c7d2fe] to-[#22d3ee]" },
+  { text: "WhatsApp CRM", color: "from-primary to-primary-light" },
+  { text: "WABA Automation", color: "from-primary-light to-accent" },
+  { text: "Lead Generation", color: "from-accent to-primary" },
+  { text: "Sales Automation", color: "from-primary-dark to-primary" },
 ];
 
 export default function HeroSection() {
@@ -37,10 +38,10 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-grid-pattern" />
       <div className="absolute inset-0 bg-radial-glow" />
 
-      {/* Floating Orbs - Reduced blur for mobile performance */}
-      <div className="absolute top-20 left-[15%] w-64 h-64 sm:w-72 sm:h-72 bg-primary/10 rounded-full blur-[80px] sm:blur-[120px] animate-float" />
+      {/* Floating Orbs - Subtle for light mode */}
+      <div className="absolute top-20 left-[15%] w-64 h-64 sm:w-72 sm:h-72 bg-primary/5 rounded-full blur-[80px] sm:blur-[120px] animate-float" />
       <div
-        className="absolute bottom-20 right-[10%] w-80 h-80 sm:w-96 sm:h-96 bg-accent/8 rounded-full blur-[100px] sm:blur-[150px]"
+        className="absolute bottom-20 right-[10%] w-80 h-80 sm:w-96 sm:h-96 bg-accent/5 rounded-full blur-[100px] sm:blur-[150px]"
         style={{ animationDelay: "3s" }}
       />
 
@@ -56,11 +57,14 @@ export default function HeroSection() {
           </span>
         </motion.div>
 
-        {/* Heading - Removed delay and initial opacity for LCP speed */}
+        {/* Heading */}
         <h1 className="text-[1.75rem] sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6">
-          <span className="gradient-text-hero">The AI-Powered</span>
+          <span className="text-text-primary">The AI-Powered</span>
           <br />
-          <span className="relative inline-flex flex-col items-center justify-center min-w-[280px] sm:min-w-[450px]" style={{ minHeight: "1.2em" }}>
+          <span
+            className="relative inline-flex flex-col items-center justify-center min-w-[280px] sm:min-w-[450px]"
+            style={{ minHeight: "1.2em" }}
+          >
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
                 key={index}
@@ -83,9 +87,11 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 wrap-break-word"
+          className="max-w-2xl mx-auto text-sm sm:text-xl text-text-secondary leading-relaxed mb-10 px-1 break-words"
         >
-          PingOS is a specialized WhatsApp Business OS. Automate lead generation, scale sales with Official WABA API, and manage Click-to-WhatsApp ads with precision from one unified dashboard.
+          PingOS is a specialized WhatsApp Business OS. Automate lead
+          generation, scale sales with Official WABA API, and manage
+          Click-to-WhatsApp ads with precision from one unified dashboard.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -103,7 +109,7 @@ export default function HeroSection() {
               Sign Up
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
-            <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer transition-transform" />
+            <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:animate-shimmer transition-transform" />
           </Link>
           <Link
             href={loginUrl}
@@ -119,11 +125,11 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ 
+          transition={{
             type: "spring",
             stiffness: 100,
             damping: 20,
-            delay: 0.25 
+            delay: 0.25,
           }}
           className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-16"
         >
@@ -134,136 +140,165 @@ export default function HeroSection() {
             { value: "No code", label: "Bot builder" },
           ].map((stat) => (
             <div key={stat.label} className="text-center group cursor-default">
-              <motion.div 
+              <motion.div
                 whileHover={{ y: -5, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 className="text-2xl sm:text-3xl font-bold text-text-primary group-hover:text-primary-light transition-colors"
               >
                 {stat.value}
               </motion.div>
-              <div className="text-sm text-text-muted mt-1 group-hover:text-text-secondary transition-colors">{stat.label}</div>
+              <div className="text-sm text-text-muted mt-1 group-hover:text-text-secondary transition-colors">
+                {stat.label}
+              </div>
             </div>
           ))}
         </motion.div>
 
-        {/* Dashboard Preview */}
+        {/* Dashboard Preview - WhatsApp Web Style */}
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.99 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
           className="mt-20 relative mx-auto w-full max-w-5xl"
         >
-          <div className="absolute -inset-4 bg-linear-to-b from-primary/20 via-accent/10 to-transparent rounded-2xl blur-2xl" />
-          <div className="relative glass-card rounded-2xl p-1.5 animate-pulse-glow">
-            <div className="bg-surface-card rounded-xl overflow-hidden border border-border-subtle">
-              {/* Mock Dashboard */}
-              <div className="flex">
-                {/* Sidebar */}
-                <div className="hidden sm:flex w-56 border-r border-border-subtle flex-col p-4 gap-3 bg-surface-primary/50">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-7 h-7 rounded-lg bg-linear-to-br from-primary to-accent flex items-center justify-center text-[10px] font-black text-white shadow-sm shadow-primary/20">
-                      P
-                    </div>
-                    <span className="text-sm font-semibold">PingOS</span>
+          <div className="absolute -inset-4 bg-primary/10 rounded-2xl blur-2xl" />
+          <div className="relative glass-card rounded-2xl p-2 animate-pulse-glow bg-border-subtle">
+            <div className="bg-white rounded-xl overflow-hidden shadow-sm flex h-[500px]">
+              {/* WhatsApp Web Sidebar */}
+              <div className="hidden sm:flex w-[30%] min-w-[300px] border-r border-border-subtle flex-col bg-white">
+                {/* Sidebar Header */}
+                <div className="h-16 bg-surface-primary px-4 flex items-center justify-between border-b border-border-subtle">
+                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">
+                    P
                   </div>
-                  {["Inbox", "Contacts", "Campaigns", "Automations", "Analytics"].map(
-                    (item, i) => (
-                      <div
-                        key={item}
-                        className={`px-3 py-2 rounded-lg text-sm ${
-                          i === 0
-                            ? "bg-primary/10 text-primary-light font-medium border border-primary/20"
-                            : "text-text-muted hover:text-text-secondary"
-                        }`}
-                      >
-                        {item}
-                      </div>
-                    )
-                  )}
+                  <div className="flex gap-4 text-text-secondary">
+                    <div className="w-5 h-5 rounded-full border-2 border-current opacity-70" />
+                    <div className="w-5 h-5 rounded-md border-2 border-current opacity-70" />
+                    <div className="w-5 h-5 rounded-full border-2 border-current opacity-70" />
+                  </div>
                 </div>
 
-                {/* Main Panel */}
-                <div className="flex-1 p-4 sm:p-6 min-w-0">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                {/* Search */}
+                <div className="p-2 border-b border-border-subtle">
+                  <div className="bg-surface-primary rounded-lg px-4 py-1.5 text-sm text-text-muted">
+                    Search or start new chat
+                  </div>
+                </div>
+
+                {/* Chat List */}
+                <div className="flex-1 overflow-y-auto">
+                  {[
+                    {
+                      name: "Priya Sharma",
+                      msg: "I'd like to know about...",
+                      time: "10:42",
+                      unread: 2,
+                      active: true,
+                    },
+                    {
+                      name: "Alex Johnson",
+                      msg: "Thanks for the help!",
+                      time: "Yesterday",
+                      unread: 0,
+                      active: false,
+                    },
+                    {
+                      name: "Café Bloom",
+                      msg: "Upgrade our WABA API",
+                      time: "Tuesday",
+                      unread: 1,
+                      active: false,
+                    },
+                  ].map((chat, i) => (
+                    <div
+                      key={i}
+                      className={`flex items-center gap-3 px-3 py-3 cursor-pointer ${chat.active ? "bg-surface-primary" : "hover:bg-[#F5F6F6]"}`}
+                    >
+                      <div className="w-12 h-12 rounded-full bg-gray-200 shrink-0" />
+                      <div className="flex-1 min-w-0 border-b border-border-subtle pb-3 -mb-3">
+                        <div className="flex justify-between items-baseline mb-0.5">
+                          <span className="text-[15px] text-text-primary truncate">
+                            {chat.name}
+                          </span>
+                          <span
+                            className={`text-[12px] ${chat.unread ? "text-[#25D366] font-medium" : "text-[#667781]"}`}
+                          >
+                            {chat.time}
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-[14px] text-[#667781] truncate pr-2">
+                            {chat.msg}
+                          </span>
+                          {chat.unread > 0 && (
+                            <span className="bg-[#25D366] text-white text-[10px] font-medium px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
+                              {chat.unread}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* WhatsApp Web Chat Area */}
+              <div className="flex-1 flex flex-col bg-chat-bg relative">
+                {/* Chat Header */}
+                <div className="h-16 bg-surface-primary px-4 flex items-center justify-between border-b border-border-subtle z-10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gray-200" />
                     <div>
-                      <h3 className="text-sm font-semibold text-text-primary">
-                        Unified Inbox
-                      </h3>
-                      <p className="text-xs text-text-muted mt-0.5">
-                        12 unread conversations
-                      </p>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      <div className="px-3 py-1 rounded-full bg-accent-green/10 text-accent-green text-xs font-medium border border-accent-green/20">
-                        WhatsApp
+                      <div className="text-[15px] text-text-primary">
+                        Priya Sharma
                       </div>
-                      <div className="px-3 py-1 rounded-full bg-primary/10 text-primary-light text-xs font-medium border border-primary/20">
-                        WABA API
+                      <div className="text-[13px] text-[#667781]">
+                        click to here for contact info
                       </div>
                     </div>
+                  </div>
+                  <div className="flex gap-4 text-text-secondary">
+                    <div className="w-5 h-5 rounded-full border-2 border-current opacity-70" />
+                    <div className="w-5 h-5 rounded-full border-2 border-current opacity-70" />
+                  </div>
+                </div>
+
+                {/* Chat Messages */}
+                <div className="flex-1 p-8 sm:p-12 overflow-y-auto flex flex-col gap-2">
+                  <div className="text-center mb-4">
+                    <span className="bg-white/80 px-3 py-1 rounded-lg text-xs text-text-secondary shadow-sm">
+                      TODAY
+                    </span>
                   </div>
 
-                  {/* Conversation List */}
-                  <div className="space-y-3">
-                    {[
-                      {
-                        name: "Priya Sharma",
-                        msg: "Hi! I'd like to know about your enterprise plan...",
-                        time: "2m ago",
-                        unread: true,
-                        channel: "WhatsApp",
-                      },
-                      {
-                        name: "Alex Johnson",
-                        msg: "The automated response solved my issue immediately! Thanks.",
-                        time: "15m ago",
-                        unread: false,
-                        channel: "WhatsApp",
-                      },
-                      {
-                        name: "Café Bloom",
-                        msg: "How do we upgrade our WABA API templates?",
-                        time: "1h ago",
-                        unread: true,
-                        channel: "WhatsApp",
-                      },
-                    ].map((conv) => (
-                      <div
-                        key={conv.name}
-                        className={`flex items-start gap-3 p-3 rounded-lg transition-colors ${
-                          conv.unread
-                            ? "bg-primary/5 border border-primary/10"
-                            : "hover:bg-white/3"
-                        }`}
-                      >
-                        <div className="w-9 h-9 rounded-full bg-linear-to-br from-primary/30 to-accent/30 flex items-center justify-center text-sm font-semibold text-text-primary shrink-0">
-                          {conv.name[0]}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium text-text-primary">
-                              {conv.name}
-                            </span>
-                            <span className="text-xs text-text-muted">
-                              {conv.time}
-                            </span>
-                          </div>
-                          <p className="text-xs text-text-muted truncate mt-0.5">
-                            {conv.msg}
-                          </p>
-                        </div>
-                        {conv.unread && (
-                          <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
-                        )}
-                      </div>
-                    ))}
+                  <ChatBubble
+                    message="Hi! I'm interested in the enterprise plan. Can you tell me about pricing?"
+                    time="10:32 AM"
+                    isOutbound={false}
+                  />
+
+                  <ChatBubble
+                    message="Thanks for reaching out! 🙌 Our Enterprise plan starts at $299/mo and includes unlimited messaging."
+                    time="10:32 AM"
+                    isOutbound={true}
+                    isAutoReply={true}
+                    status="read"
+                  />
+                </div>
+
+                {/* Chat Input */}
+                <div className="h-[62px] bg-surface-primary px-4 flex items-center gap-4">
+                  <div className="w-6 h-6 rounded-full border-2 border-text-secondary opacity-70" />
+                  <div className="w-6 h-6 rounded-md border-2 border-text-secondary opacity-70" />
+                  <div className="flex-1 bg-white rounded-lg h-[42px] px-4 flex items-center text-text-muted text-sm shadow-sm">
+                    Type a message
                   </div>
+                  <div className="w-6 h-6 rounded-full border-2 border-text-secondary opacity-70" />
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
-
       </div>
     </section>
   );

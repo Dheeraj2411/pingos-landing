@@ -30,7 +30,7 @@ export default function ContactFormModal({
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -107,143 +107,153 @@ export default function ContactFormModal({
               {/* Scrollable Content */}
               <div className="overflow-y-auto flex-1">
                 {submitted ? (
-                // Success State
-                <div className="text-center py-8">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", delay: 0.1 }}
-                  >
-                    <CheckCircle className="w-16 h-16 text-accent-green mx-auto mb-4" />
-                  </motion.div>
-                  <h3 className="text-2xl font-bold text-text-primary mb-2">
-                    Thank You!
-                  </h3>
-                  <p className="text-text-secondary">
-                    We&apos;ve received your inquiry. Our team will be in touch within 24 hours.
-                  </p>
-                </div>
-              ) : (
-                // Form State
-                <>
-                  <h2 className="text-2xl font-bold text-text-primary mb-2">
-                    Get in Touch
-                  </h2>
-                  <p className="text-text-secondary text-sm mb-6">
-                    Tell us about your needs, and our team will help you find the perfect solution.
-                  </p>
+                  // Success State
+                  <div className="text-center py-8">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", delay: 0.1 }}
+                    >
+                      <CheckCircle className="w-16 h-16 text-accent-green mx-auto mb-4" />
+                    </motion.div>
+                    <h3 className="text-2xl font-bold text-text-primary mb-2">
+                      Thank You!
+                    </h3>
+                    <p className="text-text-secondary">
+                      We&apos;ve received your inquiry. Our team will be in
+                      touch within 24 hours.
+                    </p>
+                  </div>
+                ) : (
+                  // Form State
+                  <>
+                    <h2 className="text-2xl font-bold text-text-primary mb-2">
+                      Get in Touch
+                    </h2>
+                    <p className="text-text-secondary text-sm mb-6">
+                      Tell us about your needs, and our team will help you find
+                      the perfect solution.
+                    </p>
 
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Name */}
-                    <div>
-                      <label className="block text-sm font-medium text-text-secondary mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="John Doe"
-                        className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
-                      />
-                    </div>
-
-                    {/* Email */}
-                    <div>
-                      <label className="block text-sm font-medium text-text-secondary mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="john@company.com"
-                        className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
-                      />
-                    </div>
-
-                    {/* Company */}
-                    <div>
-                      <label className="block text-sm font-medium text-text-secondary mb-2">
-                        Company
-                      </label>
-                      <input
-                        type="text"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        placeholder="Acme Inc."
-                        className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
-                      />
-                    </div>
-
-                    {/* Phone */}
-                    <div>
-                      <label className="block text-sm font-medium text-text-secondary mb-2">
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+1 (555) 123-4567"
-                        className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
-                      />
-                    </div>
-
-                    {/* Plan (if not pre-selected) */}
-                    {!planType && (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      {/* Name */}
                       <div>
                         <label className="block text-sm font-medium text-text-secondary mb-2">
-                          Interested Plan
+                          Full Name *
                         </label>
-                        <select
-                          name="plan"
-                          value={formData.plan}
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary focus:outline-none focus:border-primary/50 transition-colors"
-                        >
-                          <option value="not-specified">Not specified</option>
-                          <option value="starter">Base (Free / Starter)</option>
-                          <option value="pro">Pro ($49/mo, yearly available)</option>
-                          <option value="enterprise">Enterprise (Custom, yearly only)</option>
-                        </select>
+                          required
+                          placeholder="John Doe"
+                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                        />
                       </div>
-                    )}
 
-                    {/* Message */}
-                    <div>
-                      <label className="block text-sm font-medium text-text-secondary mb-2">
-                        Message *
-                      </label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        placeholder="Tell us more about your needs..."
-                        rows={4}
-                        className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors resize-none"
-                      />
-                    </div>
+                      {/* Email */}
+                      <div>
+                        <label className="block text-sm font-medium text-text-secondary mb-2">
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          placeholder="john@company.com"
+                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                        />
+                      </div>
 
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full py-2.5 rounded-lg bg-linear-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
-                    >
-                      {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-                      {loading ? "Sending..." : "Send Inquiry"}
-                    </button>
-                  </form>
-                </>
-              )}
+                      {/* Company */}
+                      <div>
+                        <label className="block text-sm font-medium text-text-secondary mb-2">
+                          Company
+                        </label>
+                        <input
+                          type="text"
+                          name="company"
+                          value={formData.company}
+                          onChange={handleChange}
+                          placeholder="Acme Inc."
+                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                        />
+                      </div>
+
+                      {/* Phone */}
+                      <div>
+                        <label className="block text-sm font-medium text-text-secondary mb-2">
+                          Phone
+                        </label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="+1 (555) 123-4567"
+                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                        />
+                      </div>
+
+                      {/* Plan (if not pre-selected) */}
+                      {!planType && (
+                        <div>
+                          <label className="block text-sm font-medium text-text-secondary mb-2">
+                            Interested Plan
+                          </label>
+                          <select
+                            name="plan"
+                            value={formData.plan}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary focus:outline-none focus:border-primary/50 transition-colors"
+                          >
+                            <option value="not-specified">Not specified</option>
+                            <option value="starter">
+                              Base (Free / Starter)
+                            </option>
+                            <option value="pro">
+                              Pro ($49/mo, yearly available)
+                            </option>
+                            <option value="enterprise">
+                              Enterprise (Custom, yearly only)
+                            </option>
+                          </select>
+                        </div>
+                      )}
+
+                      {/* Message */}
+                      <div>
+                        <label className="block text-sm font-medium text-text-secondary mb-2">
+                          Message *
+                        </label>
+                        <textarea
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          required
+                          placeholder="Tell us more about your needs..."
+                          rows={4}
+                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors resize-none"
+                        />
+                      </div>
+
+                      {/* Submit Button */}
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full py-2.5 rounded-lg bg-linear-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
+                      >
+                        {loading && (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        )}
+                        {loading ? "Sending..." : "Send Inquiry"}
+                      </button>
+                    </form>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
