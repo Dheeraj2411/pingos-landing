@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pingos.ai";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pingos.me";
   const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
 
   return {

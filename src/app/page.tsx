@@ -43,8 +43,8 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "PingOS",
-    url: "https://pingos.ai",
-    logo: "https://pingos.ai/logo.png",
+    url: "https://pingos.me",
+    logo: "https://pingos.me/logo.png",
     description:
       "PingOS is the specialized WhatsApp Business operating system. Automate conversations, manage leads, and run high-volume campaigns via the Official WABA API.",
     aggregateRating: {
@@ -67,7 +67,7 @@ export default function Home() {
     operatingSystem: "Web",
     description:
       "Business messaging operating system for automation, CRM, and marketing.",
-    url: "https://pingos.ai",
+    url: "https://pingos.me",
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.8",
