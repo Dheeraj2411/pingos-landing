@@ -17,23 +17,23 @@ const FAQSection = dynamic(() => import("../components/FAQSection"));
 const CTABanner = dynamic(() => import("../components/CTABanner"));
 
 export const metadata: Metadata = {
-  title: "PingOS | WhatsApp CRM, Business Messaging & WABA Automation",
+  title: "PingOS App | #1 WhatsApp CRM & Business Messaging OS",
   description:
-    "PingOS is a specialized WhatsApp Business OS. Manage leads, automate follow-ups, and run high-volume campaigns using the Official WABA API.",
+    "The PingOS App is a specialized WhatsApp Business OS. Manage leads, automate follow-ups, and run high-volume campaigns. Get started with our free trial today!",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "PingOS | WhatsApp CRM, Business Messaging & WABA Automation",
+    title: "PingOS App | WhatsApp CRM, Business Messaging & WABA Automation",
     description:
-      "Manage customer conversations, automate follow-ups, and capture more leads exclusively through the Official WhatsApp Business API.",
+      "Manage customer conversations, automate follow-ups, and capture more leads exclusively through the Official WhatsApp Business API. Try the PingOS App today.",
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PingOS | WhatsApp CRM, Business Messaging & WABA Automation",
+    title: "PingOS App | WhatsApp CRM, Business Messaging & WABA Automation",
     description:
-      "Manage customer conversations, automate follow-ups, and capture more leads exclusively through the Official WhatsApp Business API.",
+      "Manage customer conversations, automate follow-ups, and capture more leads exclusively through the Official WhatsApp Business API. Try the PingOS App today.",
   },
 };
 

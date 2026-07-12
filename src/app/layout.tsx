@@ -31,12 +31,14 @@ export const metadata: Metadata = {
         : "https://pingos.me"
   ),
   title: {
-    default: "PingOS — Official WhatsApp Business API (WABA) Messaging OS",
-    template: "%s | PingOS",
+    default: "PingOS App — Official WhatsApp Business API (WABA) Messaging OS",
+    template: "%s | PingOS App",
   },
   description:
-    "PingOS is the #1 WhatsApp Business Messaging OS. Automate lead generation, scale sales with Official WABA API, and manage Click-to-WhatsApp ads with precision from one unified dashboard.",
+    "The PingOS App is the #1 WhatsApp Business Messaging OS. Automate lead generation, scale sales, and manage Click-to-WhatsApp ads. Start your free trial today!",
   keywords: [
+    "PingOS App",
+    "pingos",
     "WhatsApp Business API",
     "WABA OS",
     "WhatsApp CRM",
