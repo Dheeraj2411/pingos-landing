@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const rawUrl = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://pingos.me");
+  const rawUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.pingos.me";
   const baseUrl = rawUrl.startsWith("http") ? rawUrl : `https://${rawUrl}`;
   const normalizedBaseUrl = baseUrl.replace(/\/$/, "");
 

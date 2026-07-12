@@ -95,7 +95,7 @@ export default function ProductPreview() {
                   { sent: 95, recv: 80 },
                   { sent: 85, recv: 65 },
                 ].map((day, i) => (
-                  <div key={i} className="flex-1 flex items-end gap-1">
+                  <div key={i} className="flex-1 flex items-end gap-1 h-full">
                     <div
                       className="flex-1 bg-linear-to-t from-primary/30 to-primary/60 rounded-t-sm transition-all duration-500"
                       style={{ height: `${day.sent}%` }}
