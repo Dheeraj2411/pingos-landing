@@ -1,7 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
+import dotenv from "dotenv";
+
 // Vercel typecheck workaround for dotenv
 if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config({ path: ".env.local" });
+  dotenv.config({ path: ".env.local" });
 }
 
 export default defineConfig({

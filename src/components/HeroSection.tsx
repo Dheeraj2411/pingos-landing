@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
-import WhatsAppButton from "./WhatsAppButton";
 import ChatBubble from "./ChatBubble";
+import AnimatedHeadline from "./AnimatedHeadline";
 import { getProductUrl } from "@/lib/product";
 
 const dynamicWords = [
@@ -16,18 +15,7 @@ const dynamicWords = [
 ];
 
 export default function HeroSection() {
-  const [index, setIndex] = useState(0);
-  const loginUrl = getProductUrl("/login");
   const signupUrl = getProductUrl("/signup");
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % dynamicWords.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, []);
-
-  const currentWord = dynamicWords[index];
 
   return (
     <section
@@ -57,30 +45,13 @@ export default function HeroSection() {
           </span>
         </motion.div>
 
-        {/* Heading */}
-        <h1 className="text-[1.75rem] sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6">
-          <span className="text-text-primary">The AI-Powered</span>
-          <br />
-          <span
-            className="relative inline-flex flex-col items-center justify-center min-w-[280px] sm:min-w-[450px]"
-            style={{ minHeight: "1.2em" }}
-          >
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className={`bg-linear-to-r ${currentWord.color} bg-clip-text text-transparent pb-2`}
-              >
-                {currentWord.text}
-              </motion.span>
-            </AnimatePresence>
-          </span>
-          <br />
-          <span className="text-text-primary">for Modern Teams</span>
-        </h1>
+        {/* Dynamic Accessible Headline */}
+        <AnimatedHeadline
+          staticPrefix="The AI-Powered"
+          staticSuffix="for Modern Teams"
+          words={dynamicWords}
+          intervalMs={2800}
+        />
 
         {/* Subheading - Near instant */}
         <motion.p

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2, CheckCircle } from "lucide-react";
+import { X, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 interface ContactFormProps {
   isOpen: boolean;
@@ -26,6 +27,47 @@ export default function ContactFormModal({
 
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // Synchronous ref to prevent double-click / rapid enter-key submissions
+  const isSubmittingRef = useRef(false);
+  // Ref for timer cleanup on unmount
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Synchronize planType when prop changes or modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setFormData((prev) => ({
+        ...prev,
+        plan: planType || "not-specified",
+      }));
+      setErrorMessage(null);
+    }
+  }, [isOpen, planType]);
+
+  // Lock root documentElement and body scrolling with layout shift compensation
+  useBodyScrollLock(isOpen);
+
+  // Handle Escape key dismissal
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
+  // Cleanup timers on unmount
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -34,11 +76,17 @@ export default function ContactFormModal({
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errorMessage) setErrorMessage(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Guard against multi-submit race condition
+    if (isSubmittingRef.current || loading) return;
+    isSubmittingRef.current = true;
     setLoading(true);
+    setErrorMessage(null);
 
     try {
       const response = await fetch("/api/inquiry", {
@@ -47,7 +95,9 @@ export default function ContactFormModal({
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data.success) {
         setSubmitted(true);
         setFormData({
           name: "",
@@ -58,18 +108,22 @@ export default function ContactFormModal({
           message: "",
         });
 
-        // Close modal after 2 seconds
-        setTimeout(() => {
+        // Close modal after 2.2 seconds cleanly
+        if (timerRef.current) clearTimeout(timerRef.current);
+        timerRef.current = setTimeout(() => {
           onClose();
           setSubmitted(false);
-        }, 2000);
+        }, 2200);
       } else {
-        alert("Failed to submit. Please try again.");
+        setErrorMessage(
+          data.error || "Failed to submit inquiry. Please check your details and try again."
+        );
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred. Please try again.");
+      console.error("Inquiry submission error:", error);
+      setErrorMessage("Network error occurred. Please check your connection and try again.");
     } finally {
+      isSubmittingRef.current = false;
       setLoading(false);
     }
   };
@@ -78,68 +132,99 @@ export default function ContactFormModal({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop with click-to-dismiss and wheel/touch isolation */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+            onWheel={(e) => e.stopPropagation()}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 cursor-pointer overscroll-contain touch-none"
+            aria-hidden="true"
           />
 
-          {/* Modal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          >
-            <div className="w-full max-w-md glass-card rounded-2xl p-8 relative max-h-[90vh] flex flex-col">
-              {/* Close Button - Fixed at top */}
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-lg transition-colors z-50"
-                aria-label="Close modal"
-              >
-                <X className="w-6 h-6 text-white" />
-              </button>
+          {/* Modal Container */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 pointer-events-none overscroll-contain">
+            <motion.div
+              data-testid="contact-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="contact-modal-title"
+              initial={{ opacity: 0, scale: 0.96, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 15 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-xl bg-surface-card rounded-2xl relative max-h-[min(90dvh,640px)] flex flex-col shadow-2xl border border-border-subtle overflow-hidden pointer-events-auto overscroll-contain"
+            >
+              {/* 1. FIXED HEADER */}
+              <div className="px-6 py-5 border-b border-border-subtle/80 flex items-start justify-between shrink-0 bg-surface-card z-10">
+                <div className="pr-4">
+                  <h2
+                    id="contact-modal-title"
+                    className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight"
+                  >
+                    Get in Touch
+                  </h2>
+                  <p className="text-text-secondary text-xs sm:text-sm mt-1">
+                    Tell us about your needs, and our team will help you find the perfect solution.
+                  </p>
+                </div>
+                <button
+                  data-testid="modal-close-button"
+                  onClick={onClose}
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-text-muted hover:text-text-primary bg-surface-primary hover:bg-border-subtle transition-colors shrink-0 focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer"
+                  aria-label="Close modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
-              {/* Scrollable Content */}
-              <div className="overflow-y-auto flex-1">
+              {/* 2. SCROLLABLE BODY */}
+              <div className="overflow-y-auto flex-1 px-6 py-5 overscroll-contain [scrollbar-width:thin] [scrollbar-color:var(--color-border-subtle)_transparent]">
                 {submitted ? (
                   // Success State
-                  <div className="text-center py-8">
+                  <div className="text-center py-10">
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      transition={{ type: "spring", delay: 0.1 }}
+                      transition={{ type: "spring", stiffness: 350, damping: 20 }}
                     >
                       <CheckCircle className="w-16 h-16 text-accent-green mx-auto mb-4" />
                     </motion.div>
                     <h3 className="text-2xl font-bold text-text-primary mb-2">
                       Thank You!
                     </h3>
-                    <p className="text-text-secondary">
-                      We&apos;ve received your inquiry. Our team will be in
+                    <p className="text-text-secondary text-sm max-w-md mx-auto leading-relaxed">
+                      We&apos;ve received your inquiry. A PingOS messaging specialist will be in
                       touch within 24 hours.
                     </p>
                   </div>
                 ) : (
-                  // Form State
-                  <>
-                    <h2 className="text-2xl font-bold text-text-primary mb-2">
-                      Get in Touch
-                    </h2>
-                    <p className="text-text-secondary text-sm mb-6">
-                      Tell us about your needs, and our team will help you find
-                      the perfect solution.
-                    </p>
+                  // Form Content
+                  <form id="contact-form" onSubmit={handleSubmit} className="space-y-4">
+                    {/* Inline Error Callout */}
+                    {errorMessage && (
+                      <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs sm:text-sm flex items-start gap-2.5">
+                        <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-500" />
+                        <span className="flex-1">{errorMessage}</span>
+                        <button
+                          type="button"
+                          onClick={() => setErrorMessage(null)}
+                          className="text-red-500 hover:text-red-700 dark:hover:text-red-300"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Responsive 2-Column Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       {/* Name */}
-                      <div>
-                        <label className="block text-sm font-medium text-text-secondary mb-2">
-                          Full Name *
+                      <div className="sm:col-span-1">
+                        <label className="block text-xs font-semibold text-text-secondary mb-1.5">
+                          Full Name <span className="text-red-500">*</span>
                         </label>
                         <input
                           type="text"
@@ -148,14 +233,14 @@ export default function ContactFormModal({
                           onChange={handleChange}
                           required
                           placeholder="John Doe"
-                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                         />
                       </div>
 
                       {/* Email */}
-                      <div>
-                        <label className="block text-sm font-medium text-text-secondary mb-2">
-                          Email Address *
+                      <div className="sm:col-span-1">
+                        <label className="block text-xs font-semibold text-text-secondary mb-1.5">
+                          Email Address <span className="text-red-500">*</span>
                         </label>
                         <input
                           type="email"
@@ -164,13 +249,13 @@ export default function ContactFormModal({
                           onChange={handleChange}
                           required
                           placeholder="john@company.com"
-                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                         />
                       </div>
 
                       {/* Company */}
-                      <div>
-                        <label className="block text-sm font-medium text-text-secondary mb-2">
+                      <div className="sm:col-span-1">
+                        <label className="block text-xs font-semibold text-text-secondary mb-1.5">
                           Company
                         </label>
                         <input
@@ -179,13 +264,13 @@ export default function ContactFormModal({
                           value={formData.company}
                           onChange={handleChange}
                           placeholder="Acme Inc."
-                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                         />
                       </div>
 
                       {/* Phone */}
-                      <div>
-                        <label className="block text-sm font-medium text-text-secondary mb-2">
+                      <div className="sm:col-span-1">
+                        <label className="block text-xs font-semibold text-text-secondary mb-1.5">
                           Phone
                         </label>
                         <input
@@ -194,40 +279,34 @@ export default function ContactFormModal({
                           value={formData.phone}
                           onChange={handleChange}
                           placeholder="+1 (555) 123-4567"
-                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                          className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                         />
                       </div>
 
-                      {/* Plan (if not pre-selected) */}
-                      {!planType && (
-                        <div>
-                          <label className="block text-sm font-medium text-text-secondary mb-2">
-                            Interested Plan
-                          </label>
-                          <select
-                            name="plan"
-                            value={formData.plan}
-                            onChange={handleChange}
-                            className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary focus:outline-none focus:border-primary/50 transition-colors"
-                          >
-                            <option value="not-specified">Not specified</option>
-                            <option value="starter">
-                              Base (Free / Starter)
-                            </option>
-                            <option value="pro">
-                              Pro ($49/mo, yearly available)
-                            </option>
-                            <option value="enterprise">
-                              Enterprise (Custom, yearly only)
-                            </option>
-                          </select>
-                        </div>
-                      )}
+                      {/* Plan Selection */}
+                      <div className="col-span-full">
+                        <label className="block text-xs font-semibold text-text-secondary mb-1.5">
+                          Interested Plan
+                        </label>
+                        <select
+                          name="plan"
+                          value={formData.plan}
+                          onChange={handleChange}
+                          className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all cursor-pointer"
+                        >
+                          <option value="not-specified">Not specified</option>
+                          <option value="starter">Base (Free / Starter)</option>
+                          <option value="pro">Pro ($49/mo, yearly available)</option>
+                          <option value="enterprise">
+                            Enterprise (Custom, yearly only)
+                          </option>
+                        </select>
+                      </div>
 
                       {/* Message */}
-                      <div>
-                        <label className="block text-sm font-medium text-text-secondary mb-2">
-                          Message *
+                      <div className="col-span-full">
+                        <label className="block text-xs font-semibold text-text-secondary mb-1.5">
+                          Message <span className="text-red-500">*</span>
                         </label>
                         <textarea
                           name="message"
@@ -235,28 +314,34 @@ export default function ContactFormModal({
                           onChange={handleChange}
                           required
                           placeholder="Tell us more about your needs..."
-                          rows={4}
-                          className="w-full px-4 py-2.5 rounded-lg bg-surface-elevated border border-border-subtle text-text-primary placeholder-text-muted focus:outline-none focus:border-primary/50 transition-colors resize-none"
+                          rows={3}
+                          className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
                         />
                       </div>
-
-                      {/* Submit Button */}
-                      <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full py-2.5 rounded-lg bg-linear-to-r from-primary via-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
-                      >
-                        {loading && (
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                        )}
-                        {loading ? "Sending..." : "Send Inquiry"}
-                      </button>
-                    </form>
-                  </>
+                    </div>
+                  </form>
                 )}
               </div>
-            </div>
-          </motion.div>
+
+              {/* 3. FIXED FOOTER */}
+              {!submitted && (
+                <div className="px-6 py-4 border-t border-border-subtle/80 bg-surface-primary/40 shrink-0 flex items-center justify-between gap-4">
+                  <span className="text-[11px] text-text-muted hidden sm:inline">
+                    🔒 100% confidential. No spam, ever.
+                  </span>
+                  <button
+                    type="submit"
+                    form="contact-form"
+                    disabled={loading}
+                    className="w-full sm:w-auto sm:ml-auto py-2.5 px-6 rounded-xl btn-primary text-white text-sm font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+                    {loading ? "Sending..." : "Send Inquiry"}
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
