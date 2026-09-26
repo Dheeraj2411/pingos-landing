@@ -69,4 +69,49 @@ test.describe("Hero Dynamic Headline Animation & Accessibility", () => {
     // In reduced motion, transform should either be 'none' or simple identity matrix
     expect(transform === "none" || transform.includes("matrix")).toBe(true);
   });
+
+  test("pauses animation cycle on hover and resumes on mouse leave", async ({ page }) => {
+    await page.goto("/");
+    const rotator = page.locator('h1 [data-testid="headline-rotator"]');
+    await expect(rotator).toBeVisible();
+
+    const activeWord = page.locator('h1 [data-testid="active-headline-word"]');
+    const wordAtStart = await activeWord.textContent();
+
+    // Hover over the rotator to pause
+    await rotator.hover();
+
+    // Wait 3.5 seconds (longer than rotation interval of 2.8s) while hovered
+    await page.waitForTimeout(3500);
+
+    // Text should NOT have changed because hover paused the timer
+    const wordWhileHovered = await activeWord.textContent();
+    expect(wordWhileHovered).toBe(wordAtStart);
+
+    // Move mouse away to unpause
+    await page.mouse.move(0, 0);
+
+    // After unhovering, it should transition within interval
+    await expect(async () => {
+      const wordAfterResume = await activeWord.textContent();
+      expect(wordAfterResume).not.toBe(wordAtStart);
+    }).toPass({ timeout: 6000 });
+  });
+
+  test("rotator container enforces vertical clipping mask to prevent text bleed", async ({ page }) => {
+    await page.goto("/");
+    const rotator = page.locator('h1 [data-testid="headline-rotator"]');
+    await expect(rotator).toBeVisible();
+
+    // Verify overflow containment
+    const overflow = await rotator.evaluate((el) => {
+      const style = window.getComputedStyle(el);
+      return {
+        overflow: style.overflow,
+        maskImage: style.maskImage || style.webkitMaskImage || "",
+      };
+    });
+    expect(overflow.overflow).toBe("hidden");
+  });
 });
+

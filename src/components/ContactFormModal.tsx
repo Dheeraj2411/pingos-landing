@@ -23,6 +23,7 @@ export default function ContactFormModal({
     phone: "",
     plan: planType || "not-specified",
     message: "",
+    website: "", // Invisible honeypot field
   });
 
   const [loading, setLoading] = useState(false);
@@ -31,10 +32,11 @@ export default function ContactFormModal({
 
   // Synchronous ref to prevent double-click / rapid enter-key submissions
   const isSubmittingRef = useRef(false);
-  // Ref for timer cleanup on unmount
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
+  const formLoadedAtRef = useRef<number>(Date.now());
 
-  // Synchronize planType when prop changes or modal opens
+  // Synchronize planType and reset timestamp when modal opens
   useEffect(() => {
     if (isOpen) {
       setFormData((prev) => ({
@@ -42,6 +44,7 @@ export default function ContactFormModal({
         plan: planType || "not-specified",
       }));
       setErrorMessage(null);
+      formLoadedAtRef.current = Date.now();
     }
   }, [isOpen, planType]);
 
@@ -62,10 +65,11 @@ export default function ContactFormModal({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Cleanup timers on unmount
+  // Cleanup timers and abort controllers on unmount
   useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
+      if (abortControllerRef.current) abortControllerRef.current.abort();
     };
   }, []);
 
@@ -88,11 +92,51 @@ export default function ContactFormModal({
     setLoading(true);
     setErrorMessage(null);
 
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (trimmedName.length < 2) {
+      setErrorMessage("Please enter a valid name (at least 2 characters).");
+      setLoading(false);
+      isSubmittingRef.current = false;
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmedEmail)) {
+      setErrorMessage("Please enter a valid email address.");
+      setLoading(false);
+      isSubmittingRef.current = false;
+      return;
+    }
+
+    if (trimmedMessage.length < 10) {
+      setErrorMessage("Please provide a message with at least 10 characters.");
+      setLoading(false);
+      isSubmittingRef.current = false;
+      return;
+    }
+
     try {
+      abortControllerRef.current = new AbortController();
+
+      const payload = {
+        name: trimmedName,
+        email: trimmedEmail,
+        company: formData.company.trim(),
+        phone: formData.phone.trim(),
+        plan: formData.plan || "not-specified",
+        message: trimmedMessage,
+        website: formData.website, // Honeypot
+        formLoadedAt: formLoadedAtRef.current, // Speed trap
+      };
+
       const response = await fetch("/api/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
+        signal: abortControllerRef.current.signal,
       });
 
       const data = await response.json().catch(() => ({}));
@@ -106,6 +150,7 @@ export default function ContactFormModal({
           phone: "",
           plan: planType || "not-specified",
           message: "",
+          website: "",
         });
 
         // Close modal after 2.2 seconds cleanly
@@ -119,7 +164,10 @@ export default function ContactFormModal({
           data.error || "Failed to submit inquiry. Please check your details and try again."
         );
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      if (error instanceof Error && error.name === "AbortError") {
+        return;
+      }
       console.error("Inquiry submission error:", error);
       setErrorMessage("Network error occurred. Please check your connection and try again.");
     } finally {
@@ -204,6 +252,26 @@ export default function ContactFormModal({
                 ) : (
                   // Form Content
                   <form id="contact-form" onSubmit={handleSubmit} className="space-y-4">
+                    {/* Invisible Anti-Bot Honeypot Field */}
+                    <div
+                      aria-hidden="true"
+                      className="hidden"
+                      style={{ display: "none" }}
+                    >
+                      <label htmlFor="modal-website">Website</label>
+                      <input
+                        id="modal-website"
+                        name="website"
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        className="hidden"
+                        style={{ display: "none" }}
+                        value={formData.website}
+                        onChange={handleChange}
+                      />
+                    </div>
+
                     {/* Inline Error Callout */}
                     {errorMessage && (
                       <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs sm:text-sm flex items-start gap-2.5">
@@ -232,6 +300,7 @@ export default function ContactFormModal({
                           value={formData.name}
                           onChange={handleChange}
                           required
+                          maxLength={100}
                           placeholder="John Doe"
                           className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                         />
@@ -248,6 +317,7 @@ export default function ContactFormModal({
                           value={formData.email}
                           onChange={handleChange}
                           required
+                          maxLength={254}
                           placeholder="john@company.com"
                           className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                         />
@@ -263,6 +333,7 @@ export default function ContactFormModal({
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
+                          maxLength={150}
                           placeholder="Acme Inc."
                           className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                         />
@@ -278,6 +349,7 @@ export default function ContactFormModal({
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
+                          maxLength={30}
                           placeholder="+1 (555) 123-4567"
                           className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                         />
@@ -300,19 +372,27 @@ export default function ContactFormModal({
                           <option value="enterprise">
                             Enterprise (Custom, yearly only)
                           </option>
+                          <option value="custom">Custom / Not sure yet</option>
                         </select>
                       </div>
 
                       {/* Message */}
                       <div className="col-span-full">
-                        <label className="block text-xs font-semibold text-text-secondary mb-1.5">
-                          Message <span className="text-red-500">*</span>
-                        </label>
+                        <div className="flex justify-between items-center mb-1.5">
+                          <label className="block text-xs font-semibold text-text-secondary">
+                            Message <span className="text-red-500">*</span>
+                          </label>
+                          <span className="text-[11px] text-text-muted">
+                            {formData.message.length}/3000
+                          </span>
+                        </div>
                         <textarea
                           name="message"
                           value={formData.message}
                           onChange={handleChange}
                           required
+                          minLength={10}
+                          maxLength={3000}
                           placeholder="Tell us more about your needs..."
                           rows={3}
                           className="w-full px-3.5 py-2.5 rounded-lg bg-surface-primary border border-border-subtle text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"

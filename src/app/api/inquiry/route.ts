@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  validateInquiryPayload,
+  generateSubmissionFingerprint,
+  checkAndRecordDuplicate,
+  checkEmailRateLimit,
+} from "@/lib/validation";
 
 // Lightweight in-memory rate limiter (per-process). Not suitable as the only
 // protection in multi-instance production environments, but useful as a basic layer.
 const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
 const RATE_LIMIT_MAX = 5; // max requests per window per IP
+const MAX_PAYLOAD_SIZE_BYTES = 32 * 1024; // 32 KB
 
 type RateLimitEntry = { count: number; firstRequestTs: number };
 
@@ -20,67 +27,44 @@ global.__PINGOS_RATE_LIMIT = ipRateLimit;
 
 export async function POST(req: NextRequest) {
   try {
-    const body = (await req.json()) as Record<string, unknown>;
-
-    const name = typeof body.name === "string" ? body.name.trim() : "";
-    const email = typeof body.email === "string" ? body.email.trim() : "";
-    const company = typeof body.company === "string" ? body.company.trim() : "";
-    const phone = typeof body.phone === "string" ? body.phone.trim() : "";
-    const plan =
-      typeof body.plan === "string"
-        ? body.plan.trim().toLowerCase()
-        : "not-specified";
-    const message = typeof body.message === "string" ? body.message.trim() : "";
-
-    // Basic validators
-    const isValidEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
-    const allowedPlans = new Set([
-      "not-specified",
-      "starter",
-      "pro",
-      "enterprise",
-    ]);
-
-    if (!name || name.length < 2) {
+    // 1. Guard against oversized payload attacks (DoS prevention)
+    const contentLength = req.headers.get("content-length");
+    if (contentLength && parseInt(contentLength, 10) > MAX_PAYLOAD_SIZE_BYTES) {
       return NextResponse.json(
-        { error: "Name must be at least 2 characters." },
-        { status: 400 },
+        { error: "Payload too large. Maximum request size is 32KB." },
+        { status: 413 }
       );
     }
 
-    if (!email || !isValidEmail(email)) {
+    const rawBody = (await req.json().catch(() => null)) as Record<string, unknown> | null;
+    if (!rawBody || typeof rawBody !== "object") {
       return NextResponse.json(
-        { error: "A valid email address is required." },
-        { status: 400 },
+        { error: "Invalid request payload format." },
+        { status: 400 }
       );
     }
 
-    if (!message || message.length < 10) {
+    // 2. Validate and sanitize inputs with anti-bot honeypot and speed trap checks
+    const validation = validateInquiryPayload(rawBody);
+
+    // If honeypot caught a bot, silently return 200 with dropped flag to not alert the bot
+    if (validation.isSpamHoneypot) {
       return NextResponse.json(
-        { error: "Message must be at least 10 characters." },
-        { status: 400 },
+        { success: true, message: "Inquiry submitted successfully!", dropped: true },
+        { status: 200 }
       );
     }
 
-    if (company && company.length > 200) {
+    if (!validation.isValid) {
       return NextResponse.json(
-        { error: "Company name is too long." },
-        { status: 400 },
+        { error: validation.error || "Invalid submission details." },
+        { status: 400 }
       );
     }
 
-    // Phone validation will be attempted with libphonenumber-js (if available)
-    // later; for now only perform a lightweight length check here.
-    if (phone && phone.length > 25) {
-      return NextResponse.json(
-        { error: "Phone number appears invalid." },
-        { status: 400 },
-      );
-    }
+    const { name, email, company, phone, plan, message } = validation.data;
 
-    const planValue = allowedPlans.has(plan) ? plan : "not-specified";
-
-    // --- Rate limiting by IP ---
+    // 3. Resolve client IP safely
     const ip =
       req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
       req.headers.get("x-real-ip") ||
@@ -88,22 +72,24 @@ export async function POST(req: NextRequest) {
 
     const now = Date.now();
 
-    // Server-side rate limit: prefer Redis when `REDIS_URL` is configured so
-    // the limit works across multiple server instances. Fall back to the
-    // in-process map for local development.
+    // 4. Rate Limiting Layer 1: Dual Email-based throttling
+    if (!checkEmailRateLimit(email)) {
+      return NextResponse.json(
+        { error: "Too many submissions for this email address. Please try again later." },
+        { status: 429 }
+      );
+    }
+
+    // 5. Rate Limiting Layer 2: IP-based throttling (Redis or in-memory)
     const REDIS_URL = process.env.REDIS_URL;
     if (REDIS_URL) {
       /* eslint-disable @typescript-eslint/no-explicit-any */
       let redis = global.__PINGOS_REDIS as any;
       if (!redis) {
         try {
-          // Use runtime `require` via eval to avoid static resolution by TS when
-          // the package isn't installed in development environments.
           const IORedisModule = eval("require")("ioredis");
           const IORedis = (IORedisModule as any).default || IORedisModule;
-          // dynamic runtime constructor
           redis = new (IORedis as any)(REDIS_URL);
-          // Cache on global to survive hot reloads
           global.__PINGOS_REDIS = redis;
         } catch (err) {
           console.error(
@@ -125,7 +111,7 @@ export async function POST(req: NextRequest) {
           if (count > RATE_LIMIT_MAX) {
             return NextResponse.json(
               { error: "Too many requests. Please try again later." },
-              { status: 429 },
+              { status: 429 }
             );
           }
         } catch (err) {
@@ -138,37 +124,44 @@ export async function POST(req: NextRequest) {
       /* eslint-enable @typescript-eslint/no-explicit-any */
     }
 
-    // Fallback in-memory per-process limiter (best-effort)
+    // Fallback in-memory IP limiter
     const entry = ipRateLimit.get(ip) || { count: 0, firstRequestTs: now };
-
     if (now - entry.firstRequestTs > RATE_LIMIT_WINDOW_MS) {
-      // reset window
       entry.count = 0;
       entry.firstRequestTs = now;
     }
-
     entry.count += 1;
     ipRateLimit.set(ip, entry);
 
     if (entry.count > RATE_LIMIT_MAX) {
       return NextResponse.json(
         { error: "Too many requests. Please try again later." },
-        { status: 429 },
+        { status: 429 }
       );
     }
 
-    // --- Optional reCAPTCHA verification ---
-    // If RECAPTCHA_SECRET is set in the environment, require and verify a
-    // `recaptchaToken` field in the request body. This is optional so existing
-    // clients keep working when the secret is not configured.
+    // 6. Idempotency & Duplicate Submission Prevention Layer
+    const fingerprint = generateSubmissionFingerprint({ name, email, message, company });
+    const isDuplicate = checkAndRecordDuplicate(fingerprint);
+    if (isDuplicate) {
+      return NextResponse.json(
+        {
+          success: true,
+          message: "Inquiry already received! Our team is already reviewing your request.",
+          duplicate: true,
+        },
+        { status: 200 }
+      );
+    }
+
+    // 7. Optional reCAPTCHA verification
     const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET;
     if (RECAPTCHA_SECRET) {
-      const recaptchaToken = (body as { recaptchaToken?: string })
-        .recaptchaToken;
+      const recaptchaToken = (rawBody as { recaptchaToken?: string }).recaptchaToken;
       if (!recaptchaToken) {
         return NextResponse.json(
           { error: "reCAPTCHA token required." },
-          { status: 400 },
+          { status: 400 }
         );
       }
 
@@ -191,33 +184,23 @@ export async function POST(req: NextRequest) {
         if (!verifyJson.success) {
           return NextResponse.json(
             { error: "reCAPTCHA verification failed." },
-            { status: 400 },
+            { status: 400 }
           );
         }
       } catch (err) {
         console.error("reCAPTCHA verification error:", err);
         return NextResponse.json(
           { error: "reCAPTCHA verification error." },
-          { status: 500 },
+          { status: 500 }
         );
       }
     }
 
-    // Validate required fields
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: "Name, email, and message are required." },
-        { status: 400 },
-      );
-    }
-
-    // Attempt to normalize phone number to E.164 when possible
+    // 8. Attempt to normalize phone number to E.164
     let normalizedPhone: string | null = null;
     if (phone) {
       /* eslint-disable @typescript-eslint/no-explicit-any */
       try {
-        // Use runtime require to avoid TS resolution errors when the package
-        // isn't installed.
         const lib = eval("require")("libphonenumber-js");
         const parseFn =
           (lib as any).parsePhoneNumberFromString ||
@@ -232,15 +215,14 @@ export async function POST(req: NextRequest) {
           normalizedPhone = parsed.number; // E.164
         }
       } catch {
-        // Ignore: fallback to raw phone value
+        // Fallback to raw phone
       }
       /* eslint-enable @typescript-eslint/no-explicit-any */
     }
 
-    // Build the email content
+    // 9. Build Email content with safe HTML escaping
     const emailSubject = `New PingOS Inquiry from ${name}`;
 
-    // Basic HTML-escape to prevent accidental injection in email HTML
     const escapeHtml = (str: string) =>
       String(str)
         .replaceAll("&", "&amp;")
@@ -253,18 +235,15 @@ export async function POST(req: NextRequest) {
     const escEmail = escapeHtml(email);
     const escCompany = company ? escapeHtml(company) : "—";
     const escPhone = phone ? escapeHtml(phone) : "—";
-    const escPlan = planValue ? escapeHtml(planValue) : "Not specified";
+    const escPlan = plan ? escapeHtml(plan) : "Not specified";
     const escMessage = escapeHtml(message);
 
-    // Plain text fallback
     const emailTextContent =
-      `New Inquiry Received\n====================\nName:    ${name}\nEmail:   ${email}\nCompany: ${company || "N/A"}\nPhone:   ${phone || "N/A"}\nPlan:    ${planValue || "Not specified"}\n\nMessage:\n${message}\n\n---\nSent from PingOS Landing Page`.trim();
+      `New Inquiry Received\n====================\nName:    ${name}\nEmail:   ${email}\nCompany: ${company || "N/A"}\nPhone:   ${phone || "N/A"}\nPlan:    ${plan || "Not specified"}\n\nMessage:\n${message}\n\n---\nSent from PingOS Landing Page`.trim();
 
-    // Beautiful HTML template (values are escaped above)
-    const emailHtmlContent = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f5; margin: 0; padding: 40px 0; } .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); } .header { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); padding: 35px 20px; text-align: center; color: #ffffff; } .header h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; } .header p { margin: 10px 0 0 0; font-size: 15px; color: #e0e7ff; opacity: 0.9; } .content { padding: 40px 30px; color: #3f3f46; } .section-title { font-size: 12px; text-transform: uppercase; color: #94a3b8; font-weight: 700; margin-bottom: 16px; letter-spacing: 1px; } .info-table { border-collapse: collapse; width: 100%; margin-bottom: 35px; border: 1px solid #f1f5f9; border-radius: 8px; overflow: hidden; } .info-table tr:not(:last-child) { border-bottom: 1px solid #f1f5f9; } .info-table th { padding: 14px 16px; background: #f8fafc; text-align: left; font-weight: 600; font-size: 14px; color: #64748b; width: 120px; } .info-table td { padding: 14px 16px; font-size: 15px; color: #0f172a; font-weight: 500; } .message-box { background: #f8fafc; border-left: 4px solid #4f46e5; padding: 24px; border-radius: 0 8px 8px 0; margin-bottom: 30px; white-space: pre-wrap; font-size: 15px; line-height: 1.6; color: #334155; } .footer { padding: 24px; text-align: center; font-size: 13px; color: #94a3b8; border-top: 1px solid #f1f5f9; background: #fafafa; } .badge { background: #e0e7ff; color: #4338ca; padding: 4px 10px; border-radius: 100px; font-size: 13px; font-weight: 600; display: inline-block; }</style></head><body><div class="container"><div class="header"><h1>New Lead Inquiry</h1><p>You have a new prospect from the landing page</p></div><div class="content"><div class="section-title">Contact Information</div><table class="info-table"><tr><th>Name</th><td>${escName}</td></tr><tr><th>Email</th><td><a href="mailto:${escEmail}" style="color: #4f46e5; text-decoration: none;">${escEmail}</a></td></tr><tr><th>Company</th><td>${escCompany}</td></tr><tr><th>Phone</th><td>${escPhone}</td></tr><tr><th>Plan</th><td><span class="badge">${escPlan}</span></td></tr></table><div class="section-title">Message Details</div><div class="message-box">${escMessage}</div></div><div class="footer">This inquiry was sent automatically from your PingOS website.</div></div></body></html>`;
+    const emailHtmlContent = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f5; margin: 0; padding: 40px 0; } .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); } .header { background: linear-gradient(135deg, #128c7e 0%, #075e54 100%); padding: 35px 20px; text-align: center; color: #ffffff; } .header h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; } .header p { margin: 10px 0 0 0; font-size: 15px; color: #e0e7ff; opacity: 0.9; } .content { padding: 40px 30px; color: #3f3f46; } .section-title { font-size: 12px; text-transform: uppercase; color: #94a3b8; font-weight: 700; margin-bottom: 16px; letter-spacing: 1px; } .info-table { border-collapse: collapse; width: 100%; margin-bottom: 35px; border: 1px solid #f1f5f9; border-radius: 8px; overflow: hidden; } .info-table tr:not(:last-child) { border-bottom: 1px solid #f1f5f9; } .info-table th { padding: 14px 16px; background: #f8fafc; text-align: left; font-weight: 600; font-size: 14px; color: #64748b; width: 120px; } .info-table td { padding: 14px 16px; font-size: 15px; color: #0f172a; font-weight: 500; } .message-box { background: #f8fafc; border-left: 4px solid #128c7e; padding: 24px; border-radius: 0 8px 8px 0; margin-bottom: 30px; white-space: pre-wrap; font-size: 15px; line-height: 1.6; color: #334155; } .footer { padding: 24px; text-align: center; font-size: 13px; color: #94a3b8; border-top: 1px solid #f1f5f9; background: #fafafa; } .badge { background: #d9fdd3; color: #075e54; padding: 4px 10px; border-radius: 100px; font-size: 13px; font-weight: 600; display: inline-block; }</style></head><body><div class="container"><div class="header"><h1>New Lead Inquiry</h1><p>You have a new prospect from the landing page</p></div><div class="content"><div class="section-title">Contact Information</div><table class="info-table"><tr><th>Name</th><td>${escName}</td></tr><tr><th>Email</th><td><a href="mailto:${escEmail}" style="color: #128c7e; text-decoration: none;">${escEmail}</a></td></tr><tr><th>Company</th><td>${escCompany}</td></tr><tr><th>Phone</th><td>${escPhone}</td></tr><tr><th>Plan</th><td><span class="badge">${escPlan}</span></td></tr></table><div class="section-title">Message Details</div><div class="message-box">${escMessage}</div></div><div class="footer">This inquiry was sent automatically from your PingOS website.</div></div></body></html>`;
 
-    // --- Sending email (safe, production-friendly) ---
-    // If SMTP env vars are provided, use nodemailer. Otherwise log to console (dev fallback).
+    // 10. Sending email
     const INQUIRY_EMAIL =
       process.env.INQUIRY_EMAIL || process.env.SMTP_USER || "sales@pingos.io";
 
@@ -293,7 +272,6 @@ export async function POST(req: NextRequest) {
         html: emailHtmlContent,
       });
     } else {
-      // Development fallback: log the email content so nothing breaks when SMTP isn't configured
       console.warn(
         "SMTP not configured — logging inquiry instead of sending email.",
       );
@@ -305,7 +283,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // --- Optional: send inquiry to external webhook (CRM) ---
+    // 11. Optional CRM Webhook
     const WEBHOOK_URL = process.env.WEBHOOK_URL;
     if (WEBHOOK_URL) {
       const payload = {
@@ -313,7 +291,7 @@ export async function POST(req: NextRequest) {
         email,
         company: company || null,
         phone: normalizedPhone ?? phone ?? null,
-        plan: planValue || null,
+        plan: plan || null,
         message: message || null,
         receivedAt: new Date().toISOString(),
         ip,
@@ -349,27 +327,6 @@ export async function POST(req: NextRequest) {
         console.error("Failed to send webhook to", WEBHOOK_URL, err);
       }
     }
-
-    // --- Option 2: Log to console (default for dev) ---
-    // console.log("=== NEW INQUIRY ===");
-    // console.log(emailBody);
-    // console.log("===================");
-
-    // --- Option 3: Send to an external email API like Resend, SendGrid, etc. ---
-    // const res = await fetch("https://api.resend.com/emails", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-    //   },
-    //   body: JSON.stringify({
-    //     from: "PingOS <onboarding@pingos.io>",
-    //     to: [process.env.INQUIRY_EMAIL || "sales@pingos.io"],
-    //     reply_to: email,
-    //     subject: emailSubject,
-    //     text: emailBody,
-    //   }),
-    // });
 
     return NextResponse.json(
       { success: true, message: "Inquiry submitted successfully!" },
